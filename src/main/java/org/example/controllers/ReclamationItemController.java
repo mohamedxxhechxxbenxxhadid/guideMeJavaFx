@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import org.example.models.Reclamation;
@@ -7,7 +8,7 @@ import org.example.models.Reclamation;
 public class ReclamationItemController {
 
     @FXML
-    private Label createdId;
+    private Label dateId;
 
     @FXML
     private Label descriptionId;
@@ -28,8 +29,18 @@ public class ReclamationItemController {
 
     public void  setData(Reclamation reclamation){
         this.reclamation = reclamation ;
+        dateId.setText(reclamation.getCreatedAt().toString());
+        descriptionId.setText(reclamation.getMessage());
+        emailId.setText(reclamation.getEmail());
         titleId.setText(reclamation.getTitre());
         numberId.setText(reclamation.getId().toString());
         nameId.setText(reclamation.getName());
+    }
+
+    public void DeleteItem(ActionEvent actionEvent) {
+        
+    }
+
+    public void SeeItemsDetails(ActionEvent actionEvent) {
     }
 }
