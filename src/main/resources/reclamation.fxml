@@ -14,32 +14,32 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <TextField id="name_id" layoutX="664.0" layoutY="120.0" prefHeight="39.0" prefWidth="423.0" promptText="Name">
+      <TextField fx:id="nameId" layoutX="664.0" layoutY="120.0" prefHeight="39.0" prefWidth="423.0" promptText="Name">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField id="phone_id" layoutX="660.0" layoutY="201.0" prefHeight="39.0" prefWidth="423.0" promptText="Phone Number">
+      <TextField fx:id="phoneId" layoutX="660.0" layoutY="202.0" prefHeight="39.0" prefWidth="423.0" promptText="Phone Number">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField id="email_id" layoutX="660.0" layoutY="291.0" prefHeight="39.0" prefWidth="423.0" promptText="Email">
+      <TextField fx:id="emailId" layoutX="660.0" layoutY="291.0" prefHeight="39.0" prefWidth="423.0" promptText="Email">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField id="title_id" layoutX="660.0" layoutY="381.0" prefHeight="39.0" prefWidth="423.0" promptText="Title">
+      <TextField fx:id="titleId" layoutX="660.0" layoutY="381.0" prefHeight="39.0" prefWidth="423.0" promptText="Title">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextArea id="description_id" layoutX="660.0" layoutY="447.0" prefHeight="177.0" prefWidth="423.0" promptText="Description ...">
+      <TextArea fx:id="descriptionId" layoutX="660.0" layoutY="447.0" prefHeight="177.0" prefWidth="423.0" promptText="Description ...">
          <font>
             <Font size="20.0" />
          </font>
       </TextArea>
-      <Button layoutX="778.0" layoutY="672.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="187.0" text="Send">
+      <Button layoutX="778.0" layoutY="672.0" mnemonicParsing="false" onAction="#AjouterReclamation" prefHeight="39.0" prefWidth="187.0" text="Send">
          <font>
             <Font size="20.0" />
          </font>
