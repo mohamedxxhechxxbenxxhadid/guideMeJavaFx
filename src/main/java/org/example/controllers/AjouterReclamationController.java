@@ -2,14 +2,17 @@ package org.example.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import org.example.models.Reclamation;
 import org.example.services.ServiceReclamation;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import java.awt.*;
+
+import java.io.IOException;
 import java.sql.SQLException;
 
-public class ReclamationController {
+public class AjouterReclamationController {
     ServiceReclamation sR = new ServiceReclamation();
 
     @FXML
@@ -48,6 +51,17 @@ public class ReclamationController {
 
     @FXML
     void AfficherReclamation() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showreclamation.fxml"));
+        try {
+            Parent root = loader.load();
+            ShowReclamationController sRC = loader.getController();
+            nameId.getScene().setRoot(root);
+
+
+        } catch (IOException e) {
+            System.out.println("affiche"+e.getMessage());
+        }
+
 
     }
 }
