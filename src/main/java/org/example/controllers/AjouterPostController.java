@@ -7,20 +7,29 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.example.models.PostImage;
+import org.example.services.ServicePost;
+import org.example.services.ServicePostImage;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.Set;
 
-public class AjouterPostController implements Initializable {
+public class AjouterPostController  {
 
-
+    Set<InputStream> setImages = new HashSet<>(); ;
     FileChooser fileChooser = new FileChooser();
     @FXML
     private TextArea descriptionId;
+
+    @FXML
+    private TextArea imageAreaId;
 
     @FXML
     private Button saveId;
@@ -31,18 +40,30 @@ public class AjouterPostController implements Initializable {
     @FXML
     private Button uploadId;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        fileChooser.setInitialDirectory(new File("/"));
-    }
-
     public void UploadImage(javafx.event.ActionEvent actionEvent) {
         System.out.println("function works");
-        File file = fileChooser.showOpenDialog(new Stage());
+        ServicePostImage sPI = new ServicePostImage();
+        ServicePost sP = new ServicePost();
         try{
-            Scanner scanner = new Scanner(file);
-            System.out.println(scanner);
-        }catch (FileNotFoundException e){
+            File file = fileChooser.showOpenDialog(new Stage());
+            InputStream in = new FileInputStream(file);
+            PostImage pI = new PostImage(sP.findPostById(12),in);
+            imageAreaId.appendText(file+"\n");
+            setImages.add(in);
+            System.out.println(setImages.size());
+            //sPI.add(pI);
+            try
+            {
+                Image picture = ImageIO.read(file);
+            }
+            catch (Exception e)
+            {
+                String workingDir = System.getProperty("user.dir");
+                System.out.println("Current working directory : " + workingDir);
+                e.printStackTrace();
+            }
+            System.out.println(file);
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

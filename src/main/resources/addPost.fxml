@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -26,27 +26,27 @@
       </Text>
       <TextField fx:id="titleId" layoutX="601.0" layoutY="120.0" prefHeight="43.0" prefWidth="546.0" />
       <TextArea fx:id="descriptionId" layoutX="600.0" layoutY="216.0" prefHeight="196.0" prefWidth="546.0" />
-      <VBox layoutX="604.0" layoutY="428.0" prefHeight="74.0" prefWidth="471.0">
-         <children>
-            <Button fx:id="uploadId" mnemonicParsing="false" onAction="#UploadImage" text="upload">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="20.0" top="10.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <Button layoutX="997.0" layoutY="634.0" mnemonicParsing="false" text="Add an image +">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
       <Button fx:id="saveId" layoutX="840.0" layoutY="718.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="131.0" text="Save">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <HBox layoutX="602.0" layoutY="431.0" prefHeight="160.0" prefWidth="546.0">
+         <children>
+            <Button fx:id="uploadId" mnemonicParsing="false" onAction="#UploadImage" text="upload">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="60.0" />
+               </HBox.margin>
+            </Button>
+            <TextArea fx:id="imageAreaId" prefHeight="200.0" prefWidth="200.0">
+               <HBox.margin>
+                  <Insets left="200.0" />
+               </HBox.margin>
+            </TextArea>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
