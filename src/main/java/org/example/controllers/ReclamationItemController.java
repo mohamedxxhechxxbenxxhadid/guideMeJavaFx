@@ -2,8 +2,14 @@ package org.example.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import org.example.models.Reclamation;
+import org.example.services.ServiceReclamation;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class ReclamationItemController {
 
@@ -27,6 +33,8 @@ public class ReclamationItemController {
 
     private Reclamation reclamation;
 
+    private ServiceReclamation sR ;
+
     public void  setData(Reclamation reclamation){
         this.reclamation = reclamation ;
         dateId.setText(reclamation.getCreatedAt().toString());
@@ -38,7 +46,18 @@ public class ReclamationItemController {
     }
 
     public void DeleteItem(ActionEvent actionEvent) {
-        
+        sR = new ServiceReclamation();
+        try{
+            sR.delete(reclamation);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showreclamation.fxml"));
+            Parent root = loader.load();
+            ShowReclamationController sRC = loader.getController();
+            nameId.getScene().setRoot(root);
+            sRC.Refresh();
+            System.out.println("delete works");
+        }catch (Exception e){
+            System.out.println("Delete item "+e.getMessage());
+        }
     }
 
     public void SeeItemsDetails(ActionEvent actionEvent) {
