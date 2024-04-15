@@ -89,7 +89,7 @@ public class AjouterPostController  {
                     imageBox.getChildren().add(imageButton);
                     imageBox.getChildren().add(imageShown);
                     imageButton.setId(file.toString());
-                    imageButton.setOnMouseClicked(event -> this.removePicture(event,imagesHbox,imageBox));
+                    imageButton.setOnMouseClicked(event -> this.removePicture(event,imagesHbox,imageBox,file));
                     imagesHbox.getChildren().add(imageBox);
                     //imageAreaId.getItems().add(arrayImages.get(arrayImages.size()-1)+"\n");
                     //changePicture(file);
@@ -105,9 +105,9 @@ public class AjouterPostController  {
         }
     }
     @FXML
-    public void removePicture(MouseEvent Event,HBox ImagesHbox,VBox imageBox) {
-        System.out.println("boom");
+    public void removePicture(MouseEvent Event,HBox ImagesHbox,VBox imageBox,File file) {
         ImagesHbox.getChildren().remove(imageBox);
+        arrayImages.remove(file);
     }
     @FXML
     public void removePicture(ActionEvent event) {
