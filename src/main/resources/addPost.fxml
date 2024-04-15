@@ -26,7 +26,7 @@
       </Text>
       <TextField fx:id="titleId" layoutX="601.0" layoutY="120.0" prefHeight="43.0" prefWidth="546.0" />
       <TextArea fx:id="descriptionId" layoutX="600.0" layoutY="216.0" prefHeight="196.0" prefWidth="546.0" />
-      <Button fx:id="saveId" layoutX="840.0" layoutY="718.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="131.0" text="Save">
+      <Button fx:id="saveId" layoutX="840.0" layoutY="718.0" mnemonicParsing="false" onAction="#savePost" prefHeight="35.0" prefWidth="131.0" text="Save">
          <font>
             <Font size="20.0" />
          </font>
