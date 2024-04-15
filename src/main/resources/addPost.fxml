@@ -2,10 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -31,22 +35,38 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <HBox layoutX="602.0" layoutY="431.0" prefHeight="160.0" prefWidth="546.0">
+      <Button fx:id="uploadId" layoutX="613.0" layoutY="665.0" mnemonicParsing="false" onAction="#UploadImage" text="upload">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <HBox layoutX="37.0" layoutY="400.0" prefHeight="225.0" prefWidth="546.0">
          <children>
-            <Button fx:id="uploadId" mnemonicParsing="false" onAction="#UploadImage" text="upload">
-               <font>
-                  <Font size="20.0" />
-               </font>
+            <VBox prefHeight="225.0" prefWidth="253.0">
+               <children>
+                  <Button fx:id="RemoveImage" mnemonicParsing="false" onAction="#removePicture" text="X">
+                     <VBox.margin>
+                        <Insets left="225.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ImageView fx:id="imageUploaded" fitHeight="196.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+            <ListView fx:id="imageAreaId" onMouseClicked="#activateRemove" prefHeight="225.0" prefWidth="246.0">
                <HBox.margin>
-                  <Insets left="20.0" top="60.0" />
+                  <Insets left="50.0" />
                </HBox.margin>
-            </Button>
-            <TextArea fx:id="imageAreaId" prefHeight="200.0" prefWidth="200.0">
-               <HBox.margin>
-                  <Insets left="200.0" />
-               </HBox.margin>
-            </TextArea>
+            </ListView>
          </children>
       </HBox>
+      <ScrollPane layoutX="600.0" layoutY="420.0" prefHeight="225.0" prefWidth="548.0">
+         <content>
+            <HBox fx:id="imagesHbox" prefHeight="213.0" prefWidth="546.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
