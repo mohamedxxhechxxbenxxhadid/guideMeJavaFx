@@ -28,27 +28,12 @@ public class AjouterPostController  {
     private ArrayList<File> arrayImages= new ArrayList<>(); ;
     private FileChooser fileChooser = new FileChooser();
 
-    private int sizeListView = 0;
 
-    @FXML
-    private Button RemoveImage;
     @FXML
     private TextArea descriptionId;
 
     @FXML
-    private ListView<String> imageAreaId;
-
-    @FXML
-    private Button saveId;
-
-    @FXML
     private TextField titleId;
-
-    @FXML
-    private Button uploadId;
-
-    @FXML
-    private ImageView imageUploaded;
 
     @FXML
     private HBox imagesHbox;
@@ -59,7 +44,7 @@ public class AjouterPostController  {
         post.setDescription(descriptionId.getText());
     }
     public void UploadImage(javafx.event.ActionEvent actionEvent) {
-        RemoveImage.setDisable(true);
+        System.out.println("boom working this button");
         String fileExtention ;
         ServicePostImage sPI = new ServicePostImage();
         ServicePost sP = new ServicePost();
@@ -109,47 +94,7 @@ public class AjouterPostController  {
         ImagesHbox.getChildren().remove(imageBox);
         arrayImages.remove(file);
     }
-    @FXML
-    public void removePicture(ActionEvent event) {
-        int selectedId = imageAreaId.getSelectionModel().getSelectedIndex();
-        imageAreaId.getItems().remove(selectedId);
-        String nameOfFile = imageAreaId.getItems().get(selectedId);
-        for (File fileIt : arrayImages) {
-            if(nameOfFile.equals(fileIt.toString())){
-                arrayImages.remove(fileIt);
-                changePicture(fileIt);
-                break;
-            }
-        }
-        changePicture();
-    }
-    @FXML
-    public void activateRemove(MouseEvent event) {
-        RemoveImage.setDisable(false);
-        changePicture();
-    }
-    public void changePicture(){
-        File file = null;
-        for (File fileIt : arrayImages) {
-            file = fileIt ;
-            break;
-        }
-        if(file!=null){
-            String imagePath = file.toURI().toString();
-            Image image = new Image(imagePath);
-            imageUploaded.setImage(image);
-        }
 
-    }
-
-    public void changePicture(File file){
-        if(file!=null){
-            String imagePath = file.toURI().toString();
-            Image image = new Image(imagePath);
-            imageUploaded.setImage(image);
-        }
-
-    }
     public static String getFileExtension(String fullName) {
         String fileName = new File(fullName).getName();
         int dotIndex = fileName.lastIndexOf('.');
