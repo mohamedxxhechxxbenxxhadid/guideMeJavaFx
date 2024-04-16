@@ -8,9 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.Parent;
+import org.example.models.Reclamation;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -20,17 +22,16 @@ public class HomeController implements Initializable {
     @FXML
     private Button changeToReclamation;
 
-    @FXML
-    private Text homeTitleId;
 
     @FXML
     private StackPane contentArea;
 
     @FXML
     void changeToPostsFunction(ActionEvent event) {
-        System.out.println("boom");
         try{
             Parent fxml = FXMLLoader.load(getClass().getResource("/addPost.fxml"));
+            fxml.prefWidth(contentArea.getWidth());
+            fxml.prefHeight(contentArea.getHeight());
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
         }catch (Exception e){
@@ -38,6 +39,19 @@ public class HomeController implements Initializable {
         }
 
     }
+    @FXML
+    void changeToReclamationFunction(ActionEvent event) {
+        try{
+            Parent fxml = FXMLLoader.load(getClass().getResource("/ajouterreclamation.fxml"));
+            fxml.prefWidth(contentArea.getWidth());
+            fxml.prefHeight(contentArea.getHeight());
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

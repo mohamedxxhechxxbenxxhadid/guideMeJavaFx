@@ -11,20 +11,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: F8F8F8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.HomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: F8F8F8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.HomeController">
    <left>
-      <Pane prefHeight="1080.0" prefWidth="422.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="1000.0" prefWidth="394.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutY="2.0" prefHeight="1082.0" prefWidth="422.0">
+            <VBox layoutY="2.0" prefHeight="1000.0" prefWidth="386.0">
                <children>
-                  <AnchorPane prefHeight="284.0" prefWidth="422.0" style="-fx-border-radius: 50; -fx-border-color: black;">
+                  <AnchorPane prefHeight="250.0" prefWidth="220.0" style="-fx-border-radius: 50; -fx-border-color: black; -fx-background-color: white; -fx-background-radius: 50;">
                      <children>
-                        <Text layoutX="91.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="170.7294921875">
+                        <Text layoutX="70.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="170.7294921875">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Text>
-                        <Text layoutX="124.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="88.7294921875">
+                        <Text layoutX="110.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="88.7294921875">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -34,7 +34,7 @@
                         <Insets left="40.0" right="40.0" top="40.0" />
                      </VBox.margin>
                   </AnchorPane>
-                  <VBox prefHeight="671.0" prefWidth="342.0" style="-fx-border-color: black; -fx-border-radius: 50; -fx-background-color: white;">
+                  <VBox prefHeight="601.0" prefWidth="342.0" style="-fx-border-color: black; -fx-border-radius: 50; -fx-background-color: white; -fx-background-radius: 50;">
                      <VBox.margin>
                         <Insets left="40.0" right="40.0" top="40.0" />
                      </VBox.margin>
@@ -44,28 +44,28 @@
                               <Font size="30.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="30.0" top="20.0" />
+                              <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Text>
                         <Line endX="146.2928924560547" endY="0.6213234066963196" startX="-100.0" strokeWidth="3.0">
                            <VBox.margin>
-                              <Insets left="35.0" />
+                              <Insets left="10.0" />
                            </VBox.margin>
                         </Line>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Posts">
+                        <Button fx:id="changeToPosts" mnemonicParsing="false" onAction="#changeToPostsFunction" style="-fx-background-color: white;" text="Posts">
                            <font>
                               <Font name="System Bold" size="35.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="40.0" top="20.0" />
+                              <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Reclamation">
+                        <Button fx:id="changeToReclamation" mnemonicParsing="false" onAction="#changeToReclamationFunction" style="-fx-background-color: white;" text="Reclamation">
                            <font>
                               <Font name="System Bold" size="35.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="40.0" top="20.0" />
+                              <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Button>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="190.7294921875">
@@ -73,12 +73,12 @@
                               <Font size="30.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="30.0" top="220.0" />
+                              <Insets left="10.0" top="220.0" />
                            </VBox.margin>
                         </Text>
                         <Line endX="146.2928924560547" endY="0.6213234066963196" startX="-100.0" strokeWidth="3.0">
                            <VBox.margin>
-                              <Insets left="30.0" />
+                              <Insets left="10.0" />
                            </VBox.margin>
                         </Line>
                      </children>
@@ -89,13 +89,13 @@
       </Pane>
    </left>
    <center>
-      <AnchorPane prefHeight="1080.0" prefWidth="1546.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="616.0" prefWidth="886.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="contentArea" prefHeight="1078.0" prefWidth="1542.0">
-               <padding>
-                  <Insets left="108.0" />
-               </padding></StackPane>
+            <StackPane fx:id="contentArea" layoutX="3.0" layoutY="75.0" prefHeight="852.0" prefWidth="1168.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 50; -fx-border-radius: 50;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="75.0" />
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </AnchorPane>
    </center>
 </BorderPane>
