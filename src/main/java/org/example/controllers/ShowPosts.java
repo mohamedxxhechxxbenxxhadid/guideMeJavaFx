@@ -39,20 +39,13 @@ public class ShowPosts implements Initializable {
                 PostItemcontroller pIC = fxmlLoader.getController();
                 pIC.setData(posts.get(i));
 
-                if(column == 4){
-                    column =1;
+                if(column == 2){
+                    column =0;
                     row++ ;
                 }
                 grid.add(anchorPane,column++,row);
                 //set grid width
-                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                grid.setMaxWidth(Region.USE_PREF_SIZE);
 
-                //set grid height
-                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                grid.setMaxHeight(Region.USE_PREF_SIZE);
 
                 GridPane.setMargin(anchorPane, new Insets(10));         }
         }catch (Exception e){
