@@ -154,8 +154,8 @@ public class Post {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public User getCreator() {

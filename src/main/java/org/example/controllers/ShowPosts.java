@@ -37,13 +37,13 @@ public class ShowPosts implements Initializable {
         int row = 0 ;
         try{
             List<Post> posts = sP.afficher() ;
-            for (int i=0;i<posts.size();i++){
+            for (Post post : posts){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/postitem.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 PostItemcontroller pIC = fxmlLoader.getController();
-                pIC.setData(posts.get(i));
+                pIC.setData(post);
 
                 if(column == 3){
                     column =0;
@@ -53,14 +53,14 @@ public class ShowPosts implements Initializable {
                 //set grid width
 
 
-                GridPane.setMargin(anchorPane, new Insets(10,60,10,10));         }
+                GridPane.setMargin(anchorPane, new Insets(10,60,10,10));
+            }
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("is it here " +e.getMessage());
         }
     }
     @FXML
     public void goToAddPost(ActionEvent event) {
-        System.out.println("this button is workiing buut ");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         try{
             Parent root = loader.load();

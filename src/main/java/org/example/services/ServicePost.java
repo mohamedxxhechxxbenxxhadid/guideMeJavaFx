@@ -174,5 +174,39 @@ public class ServicePost implements IServices<Post> {
         return null ;
     }
 
+    public Post getTheLastPost() throws SQLException{
+        String req = "select * from post ORDER BY id DESC LIMIT 1";
+        ste = con.createStatement();
+        ResultSet res =ste.executeQuery(req);
+        List<Post> comments = new ArrayList<>();
+        ServiceUser sUser = new ServiceUser() ;
+        User user ;
+        while (res.next()){
+            int id = res.getInt("id"); // Assuming 'id' is the name of the column in your database
+            int postId = res.getInt("post_id");
+            int creatorId = res.getInt("creator_id");
+            String title = res.getString("title");
+            String description = res.getString("description");
+            boolean approved = res.getBoolean("approved");
+            boolean bigPost = res.getBoolean("big_post");
+            int upVoteNum = res.getInt("up_vote_num");
+            int downVoteNum = res.getInt("down_vote_num");
+            LocalDateTime createdAt = res.getTimestamp("created_at").toLocalDateTime();
+            if (bigPost){
+                comments =getComment(id);
+            }else {
+                comments = null;
+            }
+            if (creatorId != 0){
+                user=sUser.findUserById(creatorId);
+            }else{
+                user=null;
+            }
+            // Create a Post object and add it to the list
+            return new Post(id,title, description,comments ,approved, bigPost, upVoteNum, downVoteNum, createdAt,user);
+
+        }
+        return null ;
+    }
 
 }

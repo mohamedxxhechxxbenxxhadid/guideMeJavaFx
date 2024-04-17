@@ -17,10 +17,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.models.Post;
 import org.example.models.PostImage;
+import org.example.models.User;
 import org.example.services.ServicePost;
 import org.example.services.ServicePostImage;
+import org.example.services.ServiceUser;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 public class AjouterPostController  {
@@ -39,12 +42,57 @@ public class AjouterPostController  {
     private HBox imagesHbox;
 
     public void savePost(javafx.event.ActionEvent actionEvent) {
+        ServiceUser sU = new ServiceUser();
+        User u = new User() ;
+        try{
+            u = sU.findUserById(1);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
         Post post = new Post();
         post.setTitle(titleId.getText());
         post.setDescription(descriptionId.getText());
+        post.setBigPost(true);
+        post.setApproved(false);
+        post.setUpVoteNum(0);
+        post.setDownVoteNum(0);
+        post.setCreator(u);
+        post.setCreatedAt();
+        ServicePost sP = new ServicePost();
+        try{
+            sP.add(post);
+            System.out.println("post is added");
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        if(arrayImages.isEmpty()){
+            System.out.println("empty array");
+        }else{
+            try{
+                post = sP.getTheLastPost() ;
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+            for(File file : arrayImages){
+                ServicePostImage sPI = new ServicePostImage();
+                try {
+                    InputStream in = new FileInputStream(file);
+                    PostImage postImage = new PostImage();
+                    postImage.setImage_blob(in);
+                    postImage.setPost(post);
+                    sPI.add(postImage);
+                    System.out.println("file"+in);
+                }catch (FileNotFoundException e){
+                    System.out.println(e.getMessage());
+                }catch (SQLException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        System.out.println(u);
+        System.out.println(post);
     }
     public void UploadImage(javafx.event.ActionEvent actionEvent) {
-        System.out.println("boom working this button");
         String fileExtention ;
         ServicePostImage sPI = new ServicePostImage();
         ServicePost sP = new ServicePost();
@@ -55,7 +103,7 @@ public class AjouterPostController  {
                 InputStream in = new FileInputStream(file);
                 PostImage pI = new PostImage(sP.findPostById(12),in);
                 if(arrayImages.contains(file)){
-                    System.out.println("it contains it ");
+                    System.out.println("it contains it this image");
                 }else{
                     arrayImages.add(file);
                     VBox imageBox = new VBox();
@@ -76,8 +124,7 @@ public class AjouterPostController  {
                     imageButton.setId(file.toString());
                     imageButton.setOnMouseClicked(event -> this.removePicture(event,imagesHbox,imageBox,file));
                     imagesHbox.getChildren().add(imageBox);
-                    //imageAreaId.getItems().add(arrayImages.get(arrayImages.size()-1)+"\n");
-                    //changePicture(file);
+
                 }
 
             }else{

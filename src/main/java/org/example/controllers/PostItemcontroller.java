@@ -30,7 +30,7 @@ public class PostItemcontroller {
         postTitleId.setText(post.getTitle());
         ArrayList<PostImage> postImages  = new ArrayList<>(post.getPostImages()) ;
         if(!postImages.isEmpty()){
-            InputStream blobImage = postImages.get(1).getImage_blob();
+            InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
             postImageId.setImage(image);
         }else {
