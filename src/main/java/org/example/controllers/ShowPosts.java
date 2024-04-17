@@ -1,9 +1,12 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -23,6 +26,9 @@ public class ShowPosts implements Initializable {
     @FXML
     private TextField searchTextId;
 
+    @FXML
+    private Button buttonAddPost;
+
     ServicePost sP = new ServicePost();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,7 +45,7 @@ public class ShowPosts implements Initializable {
                 PostItemcontroller pIC = fxmlLoader.getController();
                 pIC.setData(posts.get(i));
 
-                if(column == 2){
+                if(column == 3){
                     column =0;
                     row++ ;
                 }
@@ -47,9 +53,22 @@ public class ShowPosts implements Initializable {
                 //set grid width
 
 
-                GridPane.setMargin(anchorPane, new Insets(10));         }
+                GridPane.setMargin(anchorPane, new Insets(10,60,10,10));         }
         }catch (Exception e){
             System.out.println(e.getMessage());
+        }
+    }
+    @FXML
+    public void goToAddPost(ActionEvent event) {
+        System.out.println("this button is workiing buut ");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+        try{
+            Parent root = loader.load();
+            HomeController hC = loader.getController();
+            searchTextId.getScene().setRoot(root);
+            hC.changeToAddPostsFunction();
+        }catch (Exception e){
+
         }
     }
 }
