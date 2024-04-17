@@ -17,7 +17,7 @@
          <children>
             <VBox layoutY="2.0" prefHeight="1000.0" prefWidth="386.0">
                <children>
-                  <AnchorPane prefHeight="250.0" prefWidth="220.0" style="-fx-border-radius: 50; -fx-border-color: black; -fx-background-color: white; -fx-background-radius: 50;">
+                  <AnchorPane prefHeight="250.0" prefWidth="220.0" style="-fx-border-radius: 20; -fx-border-color: black; -fx-background-color: white; -fx-background-radius: 20;" styleClass="shadow-effect">
                      <children>
                         <Text layoutX="70.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="170.7294921875">
                            <font>
@@ -34,7 +34,7 @@
                         <Insets left="40.0" right="40.0" top="40.0" />
                      </VBox.margin>
                   </AnchorPane>
-                  <VBox prefHeight="601.0" prefWidth="342.0" style="-fx-border-color: black; -fx-border-radius: 50; -fx-background-color: white; -fx-background-radius: 50;">
+                  <VBox fx:id="generalId" prefHeight="601.0" prefWidth="342.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: white; -fx-background-radius: 20;" styleClass="shadow-effect">
                      <VBox.margin>
                         <Insets left="40.0" right="40.0" top="40.0" />
                      </VBox.margin>
@@ -91,7 +91,7 @@
    <center>
       <AnchorPane prefHeight="616.0" prefWidth="886.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="contentArea" layoutX="3.0" layoutY="75.0" prefHeight="852.0" prefWidth="1168.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 50; -fx-border-radius: 50;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="75.0" />
+            <StackPane fx:id="contentArea" layoutX="3.0" layoutY="75.0" prefHeight="852.0" prefWidth="1168.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="shadow-effect" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="75.0" />
          </children>
          <BorderPane.margin>
             <Insets />

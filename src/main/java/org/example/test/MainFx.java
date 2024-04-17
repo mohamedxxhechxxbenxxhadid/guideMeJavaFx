@@ -19,6 +19,11 @@ public class MainFx extends Application {
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root );
+            try{
+                scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
 
             primaryStage.setTitle("Gestion Personne");
             primaryStage.setScene(scene);

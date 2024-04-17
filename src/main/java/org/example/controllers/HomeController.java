@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.Parent;
 import org.example.models.Reclamation;
@@ -22,6 +25,8 @@ public class HomeController implements Initializable {
     @FXML
     private Button changeToReclamation;
 
+    @FXML
+    private VBox generalId;
 
     @FXML
     private StackPane contentArea;
@@ -29,13 +34,14 @@ public class HomeController implements Initializable {
     @FXML
     void changeToPostsFunction(ActionEvent event) {
         try{
-            Parent fxml = FXMLLoader.load(getClass().getResource("/addPost.fxml"));
+            Parent fxml = FXMLLoader.load(getClass().getResource("/showposts.fxml"));
             fxml.prefWidth(contentArea.getWidth());
             fxml.prefHeight(contentArea.getHeight());
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
         }catch (Exception e){
             System.out.println(e.getMessage());
+            System.out.println("not working");
         }
 
     }
@@ -54,6 +60,5 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

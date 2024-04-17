@@ -102,6 +102,8 @@ public class ServicePost implements IServices<Post> {
             LocalDateTime created = res.getTimestamp("created_at").toLocalDateTime();
 
             Post p = new Post(id,title,description,null,comments,approved,bigpost,upVote,downVote,created,creator);
+            ServicePostImage servicePostImage = new ServicePostImage();
+            p.setPostImages(servicePostImage.getPostImagesByPostId(p.getId()));
             posts.add(p);
         }
         return posts;
