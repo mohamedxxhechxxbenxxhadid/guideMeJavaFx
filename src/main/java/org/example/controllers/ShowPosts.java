@@ -68,7 +68,12 @@ public class ShowPosts implements Initializable {
             searchTextId.getScene().setRoot(root);
             hC.changeToAddPostsFunction();
         }catch (Exception e){
-
+            System.out.println(e.getMessage());
         }
     }
+    @FXML
+    public void postDetails(ActionEvent event) {
+
+    }
+
 }

@@ -26,9 +26,6 @@ public class ReclamationItemController {
     private Label nameId;
 
     @FXML
-    private Label numberId;
-
-    @FXML
     private Label titleId;
 
     private Reclamation reclamation;
@@ -41,7 +38,6 @@ public class ReclamationItemController {
         descriptionId.setText(reclamation.getMessage());
         emailId.setText(reclamation.getEmail());
         titleId.setText(reclamation.getTitre());
-        numberId.setText(reclamation.getId().toString());
         nameId.setText(reclamation.getName());
     }
 

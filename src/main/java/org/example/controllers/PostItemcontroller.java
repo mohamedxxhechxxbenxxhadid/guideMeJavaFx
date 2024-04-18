@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -44,4 +45,10 @@ public class PostItemcontroller {
             }
         }
     }
+    @FXML
+    void postDetails(ActionEvent event) {
+        System.out.println("=====>");
+
+    }
+
 }
