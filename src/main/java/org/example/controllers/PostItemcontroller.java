@@ -1,6 +1,9 @@
 package org.example.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -25,6 +28,9 @@ public class PostItemcontroller {
     @FXML
     private Text postTitleId;
 
+    @FXML
+    private Button detailsButton;
+
     Post post ;
     public void  setData(Post post){
         this.post = post ;
@@ -46,9 +52,18 @@ public class PostItemcontroller {
         }
     }
     @FXML
-    void postDetails(ActionEvent event) {
-        System.out.println("=====>");
-
+    void goToDetailsPost(ActionEvent event) {
+        System.out.println("this function is starting");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+        try{
+            Parent root = loader.load();
+            HomeController hC = loader.getController();
+            detailsButton.getScene().setRoot(root);
+            hC.changeToPostDeatils();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
+
 
 }

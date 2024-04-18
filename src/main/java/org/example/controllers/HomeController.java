@@ -79,4 +79,17 @@ public class HomeController implements Initializable {
         }
 
     }
+    public void changeToPostDeatils(){
+        System.out.println("this function also workss");
+        try{
+            Parent fxml = FXMLLoader.load(getClass().getResource("/postdetails.fxml"));
+            fxml.prefWidth(contentArea.getWidth());
+            fxml.prefHeight(contentArea.getHeight());
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+            System.out.println(contentArea);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -71,9 +71,6 @@ public class ShowPosts implements Initializable {
             System.out.println(e.getMessage());
         }
     }
-    @FXML
-    public void postDetails(ActionEvent event) {
 
-    }
 
 }

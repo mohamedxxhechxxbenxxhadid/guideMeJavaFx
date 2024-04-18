@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.controllers.PostDetailsController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="607.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.PostDetailsController">
+   <children>
+      <ImageView fx:id="postImage" fitHeight="335.0" fitWidth="637.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="338.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="206.7294921875" />
+   </children>
 </AnchorPane>
