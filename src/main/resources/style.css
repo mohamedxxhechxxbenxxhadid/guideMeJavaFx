@@ -1,3 +1,6 @@
 .shadow-effect {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 1, 1, 1, 4);
 }
+.roundedEdges{
+    -fx-border-radius: 50
+}

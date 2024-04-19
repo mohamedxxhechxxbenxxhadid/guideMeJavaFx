@@ -4,45 +4,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="888.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ShowPosts">
+<AnchorPane prefHeight="925.0" prefWidth="1280.0" style="-fx-background-color: #dadada;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ShowPosts">
    <children>
-      <HBox prefHeight="75.0" prefWidth="1173.0">
+      <HBox prefHeight="75.0" prefWidth="1280.0">
          <children>
-            <ImageView fitHeight="75.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@tnlgoo.png" />
-               </image>
-            </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="shadow-effect" text="Guide" wrappingWidth="86.0">
-               <font>
-                  <Font name="System Bold" size="26.0" />
-               </font>
-               <HBox.margin>
-                  <Insets top="20.0" />
-               </HBox.margin>
-            </Text>
-            <Text fill="#0072ef" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="shadow-effect" text="Me">
-               <font>
-                  <Font name="System Bold" size="26.0" />
-               </font>
-               <HBox.margin>
-                  <Insets top="20.0" />
-               </HBox.margin>
-            </Text>
-            <AnchorPane prefHeight="200.0" prefWidth="313.0">
+            <AnchorPane prefHeight="11.0" prefWidth="403.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="37.0" stroke="BLACK" strokeType="INSIDE" styleClass="shadow-effect" width="313.0" />
-                  <TextField fx:id="searchTextId" layoutX="51.0" layoutY="4.0" prefHeight="30.0" prefWidth="256.0" promptText="Search">
+                  <TextField fx:id="searchTextId" layoutX="6.0" layoutY="7.0" prefHeight="30.0" prefWidth="386.0" promptText="Search">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -55,16 +29,16 @@
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutX="460.0" layoutY="440.0" prefHeight="335.0" prefWidth="694.0" />
-      <ScrollPane layoutX="14.0" layoutY="76.0" prefHeight="759.0" prefWidth="1144.0">
+      <ScrollPane layoutX="14.0" layoutY="76.0" prefHeight="774.0" prefWidth="1251.0" style="-fx-background-color: #dadada;">
          <content>
-            <GridPane fx:id="grid" prefHeight="39.0" prefWidth="116.0">
+            <GridPane fx:id="grid" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #dadada;">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" />
                </rowConstraints>
             </GridPane>
          </content>
       </ScrollPane>
-      <Button fx:id="buttonAddPost" layoutX="916.0" layoutY="846.0" mnemonicParsing="false" onAction="#goToAddPost" prefHeight="37.0" prefWidth="236.0" text="write you own story ">
+      <Button fx:id="buttonAddPost" layoutX="541.0" layoutY="857.0" mnemonicParsing="false" onAction="#goToAddPost" prefHeight="37.0" prefWidth="236.0" text="write you own story ">
          <font>
             <Font size="17.0" />
          </font>

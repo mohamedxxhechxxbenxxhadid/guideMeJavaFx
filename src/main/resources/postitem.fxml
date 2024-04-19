@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,7 +9,11 @@
 
 <AnchorPane prefHeight="100.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.PostItemcontroller">
    <children>
-      <ImageView fx:id="postImageId" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow-effect" />
+      <ImageView fx:id="postImageId" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+         <styleClass>
+            <String fx:value="shadow-effect" />
+            <String fx:value="roundedEdges" />
+         </styleClass></ImageView>
       <Button fx:id="detailsButton" mnemonicParsing="false" onAction="#goToDetailsPost" opacity="0.0" prefHeight="200.0" prefWidth="300.0" />
       <Text fx:id="postTitleId" fill="WHITE" layoutX="121.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
          <font>
