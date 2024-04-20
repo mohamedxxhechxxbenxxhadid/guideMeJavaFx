@@ -50,7 +50,6 @@ public class PostItemcontroller {
             InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
             System.out.println("width="+image.getWidth() +"||||"+"height="+image.getHeight());
-            postImageId.setScaleY(1.185);
             postImageId.setImage(image);
         }else {
             try{

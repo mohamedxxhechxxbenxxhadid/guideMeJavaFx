@@ -27,6 +27,10 @@ import java.util.ResourceBundle;
 
 public class PostDetailsController implements Initializable {
 
+
+    @FXML
+    private Button nextImage;
+
     @FXML
     private Label postCreatedId;
 
@@ -42,9 +46,12 @@ public class PostDetailsController implements Initializable {
     @FXML
     private Label postTitleId;
 
+    @FXML
+    private Button previousImage;
 
     Post post ;
 
+    int currentImage;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -67,11 +74,13 @@ public class PostDetailsController implements Initializable {
         ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
         if(!postImages.isEmpty()){
             InputStream blobImage = postImages.get(0).getImage_blob();
+            currentImage = 0 ;
             Image image = new Image(blobImage);
             postImageId.setImage(image);
-            System.out.println(isCorrupted(blobImage));
             System.out.println("*****"+image.getException());
         }else {
+            previousImage.setDisable(true);
+            previousImage.setDisable(true);
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
                 InputStream in = new FileInputStream(pic);
@@ -83,28 +92,23 @@ public class PostDetailsController implements Initializable {
         }
 
     }
-    public boolean isCorrupted(InputStream inputStream) {
-        try {
-            // Attempt to read from the InputStream
-            byte[] buffer = new byte[1024];
-            int bytesRead = inputStream.read(buffer);
-
-            // Check for unexpected EOF (End of File)
-            if (bytesRead == -1) {
-                // EOF reached unexpectedly, indicating corruption
-                return true;
-            }
-
-            // Optional: Perform additional checks based on the read data
-
-            // No corruption detected
-            return false;
-        } catch (IOException e) {
-            // Exception occurred during read operation
-            // It may indicate corruption or other issues
-            e.printStackTrace();
-            return true; // Assume corrupted
+    @FXML
+    void goToNextImage(ActionEvent event) {
+        ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
+        if(postImages.size()-1==currentImage){
+            System.out.println("there is no more picture postDetailsController");
+        }else{
+            postImageId.setImage(new Image(postImages.get(currentImage+1).getImage_blob()));
         }
     }
 
+    @FXML
+    void goToPreviousImage(ActionEvent event) {
+        ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
+        if(currentImage ==0  ){
+            System.out.println("there is no more picture postDetailsController");
+        }else {
+            postImageId.setImage(new Image(postImages.get(currentImage-1).getImage_blob()));
+        }
+    }
 }
