@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.example.models.Post;
 import org.example.models.PostImage;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 
 public class PostItemcontroller {
 
+    @FXML
+    private Pane paneId;
     @FXML
     private Button detailsButton;
     @FXML
@@ -46,16 +49,12 @@ public class PostItemcontroller {
         if(!postImages.isEmpty()){
             InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
-            postImageId.setFitWidth(500); // Change 200 to your desired width
-            postImageId.setFitHeight(400);
             postImageId.setImage(image);
         }else {
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
                 InputStream in = new FileInputStream(pic);
                 Image image = new Image(in);
-                postImageId.setFitWidth(500); // Change 200 to your desired width
-                postImageId.setFitHeight(400);
                 postImageId.setImage(image);
             }catch (URISyntaxException| FileNotFoundException e ){
                 System.out.println(e.getMessage());

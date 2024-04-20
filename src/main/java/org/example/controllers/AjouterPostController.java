@@ -41,6 +41,8 @@ public class AjouterPostController  {
     @FXML
     private HBox imagesHbox;
 
+
+
     public void savePost(javafx.event.ActionEvent actionEvent) {
         ServiceUser sU = new ServiceUser();
         User u = new User() ;
@@ -61,7 +63,6 @@ public class AjouterPostController  {
         ServicePost sP = new ServicePost();
         try{
             sP.add(post);
-            System.out.println("post is added");
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }

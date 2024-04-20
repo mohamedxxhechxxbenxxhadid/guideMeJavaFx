@@ -5,26 +5,33 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.example.models.Post;
 import org.example.models.PostImage;
+import org.example.services.ServicePost;
+import org.example.services.ServicePostImage;
 import org.example.test.MainFx;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PostDetailsController implements Initializable {
-    Post post ;
+
+    @FXML
+    private Label postCreatedId;
+
+    @FXML
+    private Label postCreatorId;
 
     @FXML
     private Text postDescriptionId;
@@ -33,31 +40,37 @@ public class PostDetailsController implements Initializable {
     private ImageView postImageId;
 
     @FXML
-    private Text postTitleId;
+    private Label postTitleId;
 
-    @FXML
-    private Text creatorId;
 
-    @FXML
-    private Text postDateId;
+    Post post ;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
-
+    @FXML
     public void setData(Post post){
-        this.post = post ;
-        postTitleId.setText(post.getTitle());
-        creatorId.setText(post.getCreator().getFullName());
-        postDateId.setText(post.getCreatedAt().toString());
-        postDescriptionId.setText(post.getDescription());
-        System.out.println(post.getPostImages());
-        ArrayList<PostImage> postImages  = new ArrayList<>(post.getPostImages()) ;
+        ServicePost sP = new ServicePost();
+        ServicePostImage sPI = new ServicePostImage();
+        try {
+            this.post = sP.findPostById(post.getId()) ;
+            this.post.setPostImages(sPI.getPostImagesByPostId(post.getId()));
+        }catch (SQLException e){
+            System.out.println("============"+e.getMessage());
+        }
+        postTitleId.setText(this.post.getTitle());
+        postCreatorId.setText(this.post.getCreator().getFullName());
+        postCreatedId.setText(this.post.getCreatedAt().toString());
+        postDescriptionId.setText(this.post.getDescription());
+        System.out.println(this.post.getPostImages());
+        ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
         if(!postImages.isEmpty()){
             InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
             postImageId.setImage(image);
+            System.out.println(isCorrupted(blobImage));
+            System.out.println("*****"+image.getException());
         }else {
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
@@ -70,6 +83,28 @@ public class PostDetailsController implements Initializable {
         }
 
     }
+    public boolean isCorrupted(InputStream inputStream) {
+        try {
+            // Attempt to read from the InputStream
+            byte[] buffer = new byte[1024];
+            int bytesRead = inputStream.read(buffer);
 
+            // Check for unexpected EOF (End of File)
+            if (bytesRead == -1) {
+                // EOF reached unexpectedly, indicating corruption
+                return true;
+            }
+
+            // Optional: Perform additional checks based on the read data
+
+            // No corruption detected
+            return false;
+        } catch (IOException e) {
+            // Exception occurred during read operation
+            // It may indicate corruption or other issues
+            e.printStackTrace();
+            return true; // Assume corrupted
+        }
+    }
 
 }

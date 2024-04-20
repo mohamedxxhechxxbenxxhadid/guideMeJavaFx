@@ -10,3 +10,7 @@
 .shadow{
     -fx-effect:dropShadow(three-pass-box,rgba(0,0,0,0.2),10,0,0,10);
 }
+.back{
+    -fx-background-Image:url('./pict1.png');
+    -fx-background-size:cover;
+}

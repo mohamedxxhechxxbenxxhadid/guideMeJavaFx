@@ -53,7 +53,7 @@ public class ShowPosts implements Initializable {
                 grid.add(anchorPane,column++,row);
 
 
-                GridPane.setMargin(anchorPane, new Insets(150,60,10,10));
+                GridPane.setMargin(anchorPane, new Insets(0,150,50,0));
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
