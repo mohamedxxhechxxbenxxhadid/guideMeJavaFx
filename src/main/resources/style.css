@@ -4,3 +4,9 @@
 .roundedEdges{
     -fx-border-radius: 50
 }
+.gradient{
+    -fx-background-color: linear-gradient(to top,#222222,transparent);
+}
+.shadow{
+    -fx-effect:dropShadow(three-pass-box,rgba(0,0,0,0.2),10,0,0,10);
+}

@@ -11,11 +11,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.Parent;
+import org.example.models.Post;
 import org.example.models.Reclamation;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -79,15 +81,21 @@ public class HomeController implements Initializable {
         }
 
     }
-    public void changeToPostDeatils(){
-        System.out.println("this function also workss");
+    public void changeToPostDeatils(Post post){
         try{
-            Parent fxml = FXMLLoader.load(getClass().getResource("/postdetails.fxml"));
-            fxml.prefWidth(contentArea.getWidth());
-            fxml.prefHeight(contentArea.getHeight());
-            contentArea.getChildren().removeAll();
-            contentArea.getChildren().setAll(fxml);
-            System.out.println(contentArea);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/postdetails.fxml"));
+            Parent fxml = loader.load();
+            PostDetailsController pDC = loader.getController();
+            if (pDC != null) {
+                fxml.prefWidth(contentArea.getWidth());
+                fxml.prefHeight(contentArea.getHeight());
+                contentArea.getChildren().removeAll();
+                contentArea.getChildren().setAll(fxml);
+                pDC.setData(post);
+            } else {
+                System.out.println("Error: Could not get PostDetailsController");
+            }
+
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

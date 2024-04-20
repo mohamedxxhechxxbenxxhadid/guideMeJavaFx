@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -14,7 +15,6 @@ import javafx.fxml.FXML;
 import org.example.test.MainFx;
 
 import java.io.*;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.net.URISyntaxException;
@@ -23,28 +23,39 @@ import java.util.ArrayList;
 public class PostItemcontroller {
 
     @FXML
+    private Button detailsButton;
+    @FXML
+    private Label creatorId;
+
+    @FXML
+    private Label postDateId;
+
+    @FXML
     private ImageView postImageId;
 
     @FXML
-    private Text postTitleId;
-
-    @FXML
-    private Button detailsButton;
+    private Label postTitleId;
 
     Post post ;
     public void  setData(Post post){
         this.post = post ;
         postTitleId.setText(post.getTitle());
+        creatorId.setText(post.getCreator().getFullName());
+        postDateId.setText(post.getCreatedAt().toString());
         ArrayList<PostImage> postImages  = new ArrayList<>(post.getPostImages()) ;
         if(!postImages.isEmpty()){
             InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
+            postImageId.setFitWidth(500); // Change 200 to your desired width
+            postImageId.setFitHeight(400);
             postImageId.setImage(image);
         }else {
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
                 InputStream in = new FileInputStream(pic);
                 Image image = new Image(in);
+                postImageId.setFitWidth(500); // Change 200 to your desired width
+                postImageId.setFitHeight(400);
                 postImageId.setImage(image);
             }catch (URISyntaxException| FileNotFoundException e ){
                 System.out.println(e.getMessage());
@@ -53,13 +64,12 @@ public class PostItemcontroller {
     }
     @FXML
     void goToDetailsPost(ActionEvent event) {
-        System.out.println("this function is starting");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         try{
             Parent root = loader.load();
             HomeController hC = loader.getController();
             detailsButton.getScene().setRoot(root);
-            hC.changeToPostDeatils();
+            hC.changeToPostDeatils(post);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

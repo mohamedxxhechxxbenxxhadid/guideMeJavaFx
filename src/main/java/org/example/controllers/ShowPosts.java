@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import org.example.models.Post;
 import org.example.models.Reclamation;
@@ -40,23 +41,22 @@ public class ShowPosts implements Initializable {
             for (Post post : posts){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/postitem.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
+                Pane anchorPane = fxmlLoader.load();
 
                 PostItemcontroller pIC = fxmlLoader.getController();
                 pIC.setData(post);
 
-                if(column == 3){
+                if(column == 2){
                     column =0;
                     row++ ;
                 }
                 grid.add(anchorPane,column++,row);
-                //set grid width
 
 
-                GridPane.setMargin(anchorPane, new Insets(10,60,10,10));
+                GridPane.setMargin(anchorPane, new Insets(150,60,10,10));
             }
         }catch (Exception e){
-            System.out.println("is it here " +e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
     @FXML
