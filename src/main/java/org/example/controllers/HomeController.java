@@ -34,6 +34,9 @@ public class HomeController implements Initializable {
     private StackPane contentArea;
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
     @FXML
     void changeToPostsFunction(ActionEvent event) {
@@ -64,9 +67,7 @@ public class HomeController implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
+
     public void changeToAddPostsFunction() {
         try{
             Parent fxml = FXMLLoader.load(getClass().getResource("/addPost.fxml"));
@@ -99,5 +100,18 @@ public class HomeController implements Initializable {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }
+    public void changeToShowReclamationFunction() {
+        try{
+            Parent fxml = FXMLLoader.load(getClass().getResource("/showreclamation.fxml"));
+            fxml.prefWidth(contentArea.getWidth());
+            fxml.prefHeight(contentArea.getHeight());
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("not working");
+        }
+
     }
 }

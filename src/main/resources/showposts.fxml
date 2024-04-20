@@ -6,9 +6,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="878.0" prefWidth="1200.0" style="-fx-background-color: #dadada;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ShowPosts">
@@ -40,10 +40,10 @@
       <HBox alignment="CENTER" layoutX="460.0" layoutY="440.0" prefHeight="335.0" prefWidth="694.0" />
       <ScrollPane layoutX="10.0" layoutY="76.0" prefHeight="736.0" prefWidth="1187.0" style="-fx-background-color: #dadada;">
          <content>
-            <GridPane fx:id="grid" prefHeight="728.0" prefWidth="1175.0" style="-fx-background-color: #dadada;">
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
-               </rowConstraints>
+            <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #dadada;">
+               <columnConstraints>
+                  <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
             </GridPane>
          </content>
       </ScrollPane>

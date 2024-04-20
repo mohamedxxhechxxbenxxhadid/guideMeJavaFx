@@ -49,14 +49,13 @@ public class AjouterReclamationController {
         }
     }
 
-    @FXML
-    void AfficherReclamation() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showreclamation.fxml"));
+    public void AfficherReclamation() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         try {
             Parent root = loader.load();
-            ShowReclamationController sRC = loader.getController();
-            nameId.getScene().setRoot(root);
-
+            HomeController hC = loader.getController();
+            phoneId.getScene().setRoot(root);
+            hC.changeToShowReclamationFunction();
 
         } catch (IOException e) {
             System.out.println("affiche"+e.getMessage());

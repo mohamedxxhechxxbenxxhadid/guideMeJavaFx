@@ -35,7 +35,7 @@ public class ShowPosts implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("boom works pretty fine");
         int column = 1 ;
-        int row = 0 ;
+        int row = 1 ;
         try{
             List<Post> posts = sP.afficher() ;
             for (Post post : posts){
@@ -46,9 +46,9 @@ public class ShowPosts implements Initializable {
                 PostItemcontroller pIC = fxmlLoader.getController();
                 pIC.setData(post);
 
-                if(column == 2){
-                    column =0;
-                    row++ ;
+                if(column == 3){
+                    column =1;
+                    ++row ;
                 }
                 grid.add(anchorPane,column++,row);
 
