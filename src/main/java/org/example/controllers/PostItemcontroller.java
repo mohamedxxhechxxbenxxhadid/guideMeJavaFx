@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.example.models.Post;
@@ -39,6 +40,9 @@ public class PostItemcontroller {
     @FXML
     private Label postTitleId;
 
+    @FXML
+    private ImageView eyeId;
+
     Post post ;
     public void  setData(Post post){
         this.post = post ;
@@ -50,14 +54,21 @@ public class PostItemcontroller {
             InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
             System.out.println("width="+image.getWidth() +"||||"+"height="+image.getHeight());
-            postImageId.setImage(image);
+            ImageView img = new ImageView();
+            img.setFitWidth(450);
+            img.setFitHeight(300);
+            img.setImage(image);
+            paneId.getChildren().add(0,img);
         }else {
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
                 InputStream in = new FileInputStream(pic);
                 Image image = new Image(in);
-                postImageId.setImage(image);
-            }catch (URISyntaxException| FileNotFoundException e ){
+                ImageView img = new ImageView();
+                img.setFitWidth(450);
+                img.setFitHeight(300);
+                img.setImage(image);
+                paneId.getChildren().add(0,img);            }catch (URISyntaxException| FileNotFoundException e ){
                 System.out.println(e.getMessage());
             }
         }
@@ -74,6 +85,13 @@ public class PostItemcontroller {
             System.out.println(e.getMessage());
         }
     }
-
+    @FXML
+    void openEye(MouseEvent event) {
+        eyeId.setVisible(true);
+    }
+    @FXML
+    void closeEye(MouseEvent event) {
+        eyeId.setVisible(false);
+    }
 
 }

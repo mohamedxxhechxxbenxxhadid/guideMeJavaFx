@@ -5,11 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import org.example.models.Post;
 import org.example.models.Reclamation;
 import org.example.services.ServiceReclamation;
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class ReclamationItemController {
 
@@ -48,8 +46,8 @@ public class ReclamationItemController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/showreclamation.fxml"));
             Parent root = loader.load();
             ShowReclamationController sRC = loader.getController();
-            nameId.getScene().setRoot(root);
-            sRC.Refresh();
+            //nameId.getScene().setRoot(root);
+            sRC.Refresh(reclamation);
             System.out.println("delete works");
         }catch (Exception e){
             System.out.println("Delete item "+e.getMessage());

@@ -2,16 +2,15 @@ package org.example.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import org.example.models.Post;
 import org.example.models.PostImage;
 import org.example.services.ServicePost;
@@ -28,6 +27,8 @@ import java.util.ResourceBundle;
 public class PostDetailsController implements Initializable {
 
 
+    @FXML
+    private AnchorPane imageContainerId;
     @FXML
     private Button nextImage;
 
@@ -49,7 +50,11 @@ public class PostDetailsController implements Initializable {
     @FXML
     private Button previousImage;
 
+    @FXML
+    private GridPane commentContainerId;
+
     Post post ;
+    ImageView img = new ImageView();
 
     int currentImage;
     @Override
@@ -76,18 +81,46 @@ public class PostDetailsController implements Initializable {
             InputStream blobImage = postImages.get(0).getImage_blob();
             currentImage = 0 ;
             Image image = new Image(blobImage);
-            postImageId.setImage(image);
+            img.setFitHeight(574);
+            img.setFitWidth(672);
+            img.setImage(image);
+            imageContainerId.getChildren().add(0,img);
             System.out.println("*****"+image.getException());
         }else {
             previousImage.setDisable(true);
-            previousImage.setDisable(true);
+            nextImage.setDisable(true);
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
                 InputStream in = new FileInputStream(pic);
                 Image image = new Image(in);
-                postImageId.setImage(image);
+                img.setFitHeight(574);
+                img.setFitWidth(672);
+                img.setImage(image);
+                imageContainerId.getChildren().add(0,img);
             }catch (URISyntaxException | FileNotFoundException e ){
                 System.out.println(e.getMessage());
+            }
+        }
+        if(this.post.getComments().isEmpty()){
+            System.out.println("no comments");
+        }else{
+            ArrayList<Post> comments = new ArrayList<>(this.post.getComments()) ;
+            int column = 0 ;
+            int row = 0 ;
+            for(int i=0;i<comments.size();i++){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/commentItem.fxml"));
+                try {
+                    AnchorPane anchorPane = fxmlLoader.load();
+                    CommentItemController cIR = fxmlLoader.getController();
+                    cIR.setData(comments.get(i));
+
+                    commentContainerId.add(anchorPane,column,row++);
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+
+
             }
         }
 
@@ -98,7 +131,8 @@ public class PostDetailsController implements Initializable {
         if(postImages.size()-1==currentImage){
             System.out.println("there is no more picture postDetailsController");
         }else{
-            postImageId.setImage(new Image(postImages.get(currentImage+1).getImage_blob()));
+            currentImage++;
+            img.setImage(new Image(postImages.get(currentImage).getImage_blob()));
         }
     }
 
@@ -108,7 +142,9 @@ public class PostDetailsController implements Initializable {
         if(currentImage ==0  ){
             System.out.println("there is no more picture postDetailsController");
         }else {
-            postImageId.setImage(new Image(postImages.get(currentImage-1).getImage_blob()));
+            System.out.println(currentImage);
+            currentImage--;
+            img.setImage(new Image(postImages.get(currentImage).getImage_blob()));
         }
     }
 }

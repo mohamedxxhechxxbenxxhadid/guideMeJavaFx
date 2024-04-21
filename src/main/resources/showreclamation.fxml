@@ -27,7 +27,7 @@
             </ScrollPane>
          </children>
       </HBox>
-      <Text layoutX="497.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reclamation List" textAlignment="CENTER">
+      <Text fx:id="titleId" layoutX="497.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reclamation List" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>

@@ -1,12 +1,19 @@
 package org.example.controllers;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.WritableListValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import org.example.models.Reclamation;
 import org.example.services.ServiceReclamation;
 
@@ -17,14 +24,25 @@ import java.util.ResourceBundle;
 
 public class ShowReclamationController implements Initializable {
     ServiceReclamation sR = new ServiceReclamation();
+    ObservableList<Reclamation> reclamations ;
     @FXML
     private GridPane grid;
+    @FXML
+    private Text titleId;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int column = 1 ;
         int row = 0 ;
+
         try{
-            List<Reclamation> reclamations = sR.afficher() ;
+            List<Reclamation> reclamations1 = sR.afficher() ;
+            reclamations = FXCollections.observableList(reclamations1);
+            reclamations.addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    System.out.println("list is updated");
+                }
+            });
             for (int i=0;i<reclamations.size();i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/reclamationItem.fxml"));
@@ -54,10 +72,22 @@ public class ShowReclamationController implements Initializable {
         }
     }
 
-    public void Refresh() {
+    public void Refresh(Reclamation reclamation) {
         int column = 1 ;
         int row = 0 ;
+        this.reclamations.remove(reclamation);
+        System.out.println(this.reclamations.size());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         try{
+            Parent root = loader.load();
+            HomeController hC = loader.getController();
+            titleId.getScene().setRoot(root);
+            hC.changeToShowReclamationFunction();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        /*try{
+                System.out.println("aaaaaaaaa");
             List<Reclamation> reclamations = sR.afficher() ;
             for (int i=0;i<reclamations.size();i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -85,7 +115,7 @@ public class ShowReclamationController implements Initializable {
                 GridPane.setMargin(anchorPane, new Insets(10));         }
         }catch (Exception e){
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 
 }
