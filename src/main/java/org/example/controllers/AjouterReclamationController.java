@@ -40,7 +40,6 @@ public class AjouterReclamationController {
         reclamation.setTitre(titleId.getText());
         reclamation.setName(nameId.getText());
         reclamation.setCreatedAt();
-        System.out.println(reclamation);
         try{
             sR.add(reclamation);
             this.AfficherReclamation();

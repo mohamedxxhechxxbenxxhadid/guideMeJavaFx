@@ -60,7 +60,6 @@ public class HomeController implements Initializable {
             fxml.prefHeight(contentArea.getHeight());
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
-            System.out.println(contentArea);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -75,10 +74,8 @@ public class HomeController implements Initializable {
             fxml.prefHeight(contentArea.getHeight());
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
-            System.out.println(contentArea);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("not working changeToAddPostsFunction" );
         }
 
     }

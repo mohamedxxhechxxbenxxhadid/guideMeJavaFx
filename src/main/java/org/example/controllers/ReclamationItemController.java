@@ -40,15 +40,11 @@ public class ReclamationItemController {
     }
 
     public void DeleteItem(ActionEvent actionEvent) {
-        sR = new ServiceReclamation();
         try{
-            sR.delete(reclamation);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/showreclamation.fxml"));
             Parent root = loader.load();
             ShowReclamationController sRC = loader.getController();
-            //nameId.getScene().setRoot(root);
-            sRC.Refresh(reclamation);
-            System.out.println("delete works");
+            sRC.remove(reclamation);
         }catch (Exception e){
             System.out.println("Delete item "+e.getMessage());
         }
