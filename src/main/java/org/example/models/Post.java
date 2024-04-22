@@ -176,11 +176,12 @@ public class Post {
 
     @Override
     public String toString() {
+
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", post=" + post +
+                ", post=" + (post != null ? post.getId() : "null") +
                 ", comments=" + comments +
                 ", postImages=" + postImages +
                 ", approved=" + approved +

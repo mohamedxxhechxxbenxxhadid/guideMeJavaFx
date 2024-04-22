@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,8 +18,6 @@ import java.util.ArrayList;
 
 public class CommentItemController {
 
-    @FXML
-    private Button answearButtonId;
 
     @FXML
     private HBox commentBox;
@@ -41,8 +40,8 @@ public class CommentItemController {
         pDC.updateComment(this.post);
     }
     @FXML
-    void answearToComment(ActionEvent event) {
-
+    void deleteComment(ActionEvent event) {
+        pDC.deleteComment(this.post);
     }
     public void setData(Post post,PostDetailsController postDetailsController){
         this.post = post ;
@@ -58,8 +57,8 @@ public class CommentItemController {
                     InputStream blobImage = postImage.getImage_blob();
                     Image image = new Image(blobImage);
                     ImageView img = new ImageView();
-                    img.setFitHeight(50);
-                    img.setFitWidth(50);
+                    img.setFitHeight(100);
+                    img.setFitWidth(100);
                     img.setImage(image);
                     commentBox.getChildren().add(img);
                 }

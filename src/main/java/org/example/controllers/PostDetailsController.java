@@ -1,9 +1,14 @@
 package org.example.controllers;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -32,11 +37,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class PostDetailsController implements Initializable {
 
-
+    @FXML
+    private Label textEmpty;
     @FXML
     private TextArea Description;
 
@@ -79,7 +86,7 @@ public class PostDetailsController implements Initializable {
 
     @FXML
     private Button updateId;
-
+    public Post postDetails ;
     ArrayList<Post> comments;
     Post updatedComment ;
     Post post ;
@@ -90,12 +97,18 @@ public class PostDetailsController implements Initializable {
     int currentImage;
     boolean update = false ;
     ArrayList<PostImage> postImagesUpdate ;
+    ArrayList<PostImage> postImagesAdd =  new ArrayList<PostImage>() ;
+    ArrayList<PostImage> postImagesDelete = new ArrayList<PostImage>() ;
+    ObservableList commentList ;
+    boolean  followList = false ;
+    ArrayList<Image> images = new ArrayList<Image>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
     @FXML
     public void setData(Post post){
+        followList = true ;
         ServicePost sP = new ServicePost();
         ServicePostImage sPI = new ServicePostImage();
         try {
@@ -118,6 +131,9 @@ public class PostDetailsController implements Initializable {
             img.setFitWidth(565);
             img.setImage(image);
             imageContainerId.getChildren().add(0,img);
+            for (PostImage postImage : postImages){
+                images.add(new Image(postImage.getImage_blob()));
+            }
         }else {
             previousImage.setDisable(true);
             nextImage.setDisable(true);
@@ -137,6 +153,7 @@ public class PostDetailsController implements Initializable {
             System.out.println("no comments");
         }else{
             comments = new ArrayList<>(this.post.getComments()) ;
+            commentList = FXCollections.observableList(comments);
             int column = 0 ;
             int row = 0 ;
             for(int i=0;i<comments.size();i++){
@@ -155,31 +172,30 @@ public class PostDetailsController implements Initializable {
                     System.out.println(e.getMessage());
                 }
 
-
             }
+
+
         }
 
     }
     @FXML
     void goToNextImage(ActionEvent event) {
-        ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
-        if(postImages.size()-1==currentImage){
+        System.out.println(images);
+        if(images.size()-1==currentImage){
             System.out.println("there is no more picture postDetailsController");
         }else{
             currentImage++;
-            img.setImage(new Image(postImages.get(currentImage).getImage_blob()));
+            img.setImage(images.get(currentImage));
         }
     }
 
     @FXML
     void goToPreviousImage(ActionEvent event) {
-        ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
         if(currentImage ==0  ){
             System.out.println("there is no more picture postDetailsController");
         }else {
-            System.out.println(currentImage);
             currentImage--;
-            img.setImage(new Image(postImages.get(currentImage).getImage_blob()));
+            img.setImage(images.get(currentImage));
         }
     }
 
@@ -197,6 +213,7 @@ public class PostDetailsController implements Initializable {
                 if(arrayImages.contains(file)){
                     System.out.println("it contains it this image");
                 }else{
+
                     arrayImages.add(file);
                     VBox imageBox = new VBox();
                     Button imageButton = new Button();
@@ -216,7 +233,13 @@ public class PostDetailsController implements Initializable {
                     imageButton.setId(file.toString());
                     imageButton.setOnMouseClicked(event -> this.removePicture(event,imagesHbox,imageBox,file));
                     imagesHbox.getChildren().add(imageBox);
-
+                    if(update == true){
+                        PostImage p111 = new PostImage();
+                        p111.setPost(this.updatedComment);
+                        p111.setImage_blob(in);
+                        p111.setUrl(null);
+                        postImagesAdd.add(p111);
+                    }
                 }
 
             }else{
@@ -234,10 +257,10 @@ public class PostDetailsController implements Initializable {
         arrayImages.remove(file);
     }
     @FXML
-    public void removePictureBlob(MouseEvent Event, HBox ImagesHbox, VBox imageBox, InputStream blob) {
+    public void removePictureBlob(MouseEvent Event, HBox ImagesHbox, VBox imageBox, PostImage postImage) {
         ImagesHbox.getChildren().remove(imageBox);
-        arrayBlobImages.remove(blob);
-        for(post)
+        System.out.println(postImage);
+        postImagesDelete.add(postImage);
     }
 
     public static String getFileExtension(String fullName) {
@@ -305,6 +328,7 @@ public class PostDetailsController implements Initializable {
     @FXML
     void updateCommentGui(ActionEvent event) {
         this.updatedComment.setDescription(Description.getText());
+        this.updatedComment.setPost(this.post);
         ServicePost sP = new ServicePost();
         System.out.println(updatedComment);
         try {
@@ -312,17 +336,27 @@ public class PostDetailsController implements Initializable {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        for(InputStream inputStream : arrayBlobImages){
-            ServicePostImage sPI = new ServicePostImage();
-            try {
-                PostImage postImage = new PostImage();
-                postImage.setImage_blob(inputStream);
-                postImage.setPost(updatedComment);
-                sPI.add(postImage);
-            }catch (SQLException e){
-                System.out.println(e.getMessage());
+        if(!this.postImagesAdd.isEmpty()){
+            for(PostImage postImage: this.postImagesAdd){
+                ServicePostImage sPI = new ServicePostImage();
+                try {
+                    sPI.add(postImage);
+                }catch (SQLException e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
+        if(!this.postImagesDelete.isEmpty()){
+            for(PostImage postImage: this.postImagesDelete){
+                ServicePostImage sPI = new ServicePostImage();
+                try {
+                    sPI.delete(postImage);
+                }catch (SQLException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
     }
 
     public void updateComment(Post comment){
@@ -355,7 +389,8 @@ public class PostDetailsController implements Initializable {
                         imageBox.getChildren().add(imageButton);
                         imageBox.getChildren().add(imageShown);
                         imageButton.setId(postImage.toString());
-                        imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,blobImage));
+                        System.out.println(postImage);
+                        imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,postImage));
                         imagesHbox.getChildren().add(imageBox);
                     }
                 }
@@ -363,6 +398,22 @@ public class PostDetailsController implements Initializable {
                 System.out.println(e.getMessage());
             }
 
+        }
+    }
+    public void deleteComment(Post comment){
+        ServicePost sP = new ServicePost();
+        ServicePostImage sPI = new ServicePostImage();
+        try{
+            ArrayList<PostImage> postImages = new ArrayList<>(comment.getPostImages()) ;
+            if(!postImages.isEmpty()){
+                for(PostImage postImage : postImages){
+                    sPI.delete(postImage);
+                }
+            }
+            commentList.remove(comment);
+            sP.delete(comment);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }
