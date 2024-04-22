@@ -26,12 +26,15 @@ public class ReclamationItemController {
     @FXML
     private Label titleId;
 
+    public ShowReclamationController sRC ;
+
     private Reclamation reclamation;
 
     private ServiceReclamation sR ;
 
-    public void  setData(Reclamation reclamation){
+    public void  setData(Reclamation reclamation,ShowReclamationController sRC){
         this.reclamation = reclamation ;
+        this.sRC = sRC ;
         dateId.setText(reclamation.getCreatedAt().toString());
         descriptionId.setText(reclamation.getMessage());
         emailId.setText(reclamation.getEmail());
@@ -41,10 +44,7 @@ public class ReclamationItemController {
 
     public void DeleteItem(ActionEvent actionEvent) {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showreclamation.fxml"));
-            Parent root = loader.load();
-            ShowReclamationController sRC = loader.getController();
-            sRC.remove(reclamation);
+            this.sRC.remove(reclamation,this.sRC);
         }catch (Exception e){
             System.out.println("Delete item "+e.getMessage());
         }

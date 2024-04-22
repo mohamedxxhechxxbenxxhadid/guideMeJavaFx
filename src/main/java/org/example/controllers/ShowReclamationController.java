@@ -39,6 +39,7 @@ public class ShowReclamationController implements Initializable {
             reclamations1 = sR.afficher() ;
             reclamations = FXCollections.observableList(reclamations1);
             System.out.println(" reclaamtions =" +reclamations1.size());
+            this.Refresh();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -98,14 +99,13 @@ public class ShowReclamationController implements Initializable {
         int row = 0 ;
         grid.getChildren().clear();
         try{
-
             for (int i=0;i<reclamations.size();i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/reclamationItem.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 ReclamationItemController rIC = fxmlLoader.getController();
-                rIC.setData(reclamations.get(i));
+                rIC.setData(reclamations.get(i),this);
 
                 if(column == 4){
                     column =1;
@@ -127,7 +127,12 @@ public class ShowReclamationController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
-    public void  remove(Reclamation reclamation){
+    public void  remove(Reclamation reclamation ,ShowReclamationController sRC){
+        if (sRC == this){
+            System.out.println("true");
+        }else{
+            System.out.println(sRC + " == " + this );
+        }
         ServiceReclamation sR = new ServiceReclamation();
         try {
             sR.delete(reclamation);
