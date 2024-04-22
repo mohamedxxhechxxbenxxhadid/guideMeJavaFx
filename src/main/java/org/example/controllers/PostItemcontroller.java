@@ -53,7 +53,6 @@ public class PostItemcontroller {
         if(!postImages.isEmpty()){
             InputStream blobImage = postImages.get(0).getImage_blob();
             Image image = new Image(blobImage);
-            System.out.println("width="+image.getWidth() +"||||"+"height="+image.getHeight());
             ImageView img = new ImageView();
             img.setFitWidth(450);
             img.setFitHeight(300);
