@@ -45,56 +45,12 @@ public class ShowReclamationController implements Initializable {
         }
 
         reclamations.addListener((javafx.beans.Observable observable)->{
-            System.out.println("list is changed");
             this.Refresh();
         });
 
     }
 
     public void Refresh() {
-        /*int column = 1 ;
-        int row = 0 ;
-        this.reclamations.remove(reclamation);
-        System.out.println(this.reclamations.size());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-        try{
-            Parent root = loader.load();
-            HomeController hC = loader.getController();
-            titleId.getScene().setRoot(root);
-            hC.changeToShowReclamationFunction();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        try{
-                System.out.println("aaaaaaaaa");
-            List<Reclamation> reclamations = sR.afficher() ;
-            for (int i=0;i<reclamations.size();i++){
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/reclamationItem.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-
-                ReclamationItemController rIC = fxmlLoader.getController();
-                rIC.setData(reclamations.get(i));
-
-                if(column == 4){
-                    column =1;
-                    row++ ;
-                }
-                grid.add(anchorPane,column++,row);
-                //set grid width
-                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                grid.setMaxWidth(Region.USE_PREF_SIZE);
-
-                //set grid height
-                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                grid.setMaxHeight(Region.USE_PREF_SIZE);
-
-                GridPane.setMargin(anchorPane, new Insets(10));         }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }*/
         int column = 1 ;
         int row = 0 ;
         grid.getChildren().clear();

@@ -39,7 +39,7 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void changeToPostsFunction(ActionEvent event) {
+    public void changeToPostsFunction(ActionEvent event) {
         try{
             Parent fxml = FXMLLoader.load(getClass().getResource("/showposts.fxml"));
             fxml.prefWidth(contentArea.getWidth());

@@ -12,7 +12,7 @@
    <children>
       <HBox fx:id="commentBox" prefHeight="116.0" prefWidth="529.0">
          <children>
-            <VBox prefHeight="101.0" prefWidth="524.0">
+            <VBox prefHeight="101.0" prefWidth="524.0" stylesheets="@style.css">
                <children>
                   <Label fx:id="usernameId" text="Label" />
                   <Text fx:id="descriptionId" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="241.7294921875">

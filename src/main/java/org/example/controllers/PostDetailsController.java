@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,12 +44,16 @@ import java.util.ResourceBundle;
 public class PostDetailsController implements Initializable {
 
     @FXML
-    private Label textEmpty;
-    @FXML
     private TextArea Description;
 
     @FXML
     private GridPane commentContainerId;
+
+    @FXML
+    private Button deleteButtonPostId;
+
+    @FXML
+    private Button editPostButton;
 
     @FXML
     private AnchorPane imageContainerId;
@@ -78,16 +83,19 @@ public class PostDetailsController implements Initializable {
     private Button previousImage;
 
     @FXML
+    private Button returnToCommentId;
+
+    @FXML
     private Button saveId;
+
+    @FXML
+    private Button updateId;
 
     @FXML
     private Button uploadId;
 
-
-    @FXML
-    private Button updateId;
     public Post postDetails ;
-    ArrayList<Post> comments;
+    ArrayList<Post> comments = new ArrayList<Post>();
     Post updatedComment ;
     Post post ;
     ImageView img = new ImageView();
@@ -99,9 +107,11 @@ public class PostDetailsController implements Initializable {
     ArrayList<PostImage> postImagesUpdate ;
     ArrayList<PostImage> postImagesAdd =  new ArrayList<PostImage>() ;
     ArrayList<PostImage> postImagesDelete = new ArrayList<PostImage>() ;
-    ObservableList commentList ;
+    ObservableList<Post> commentList =  FXCollections.observableList(comments); ;
     boolean  followList = false ;
     ArrayList<Image> images = new ArrayList<Image>();
+    ServicePost sP = new ServicePost();
+    ServicePostImage sPI = new ServicePostImage();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -166,6 +176,42 @@ public class PostDetailsController implements Initializable {
                     AnchorPane anchorPane = fxmlLoader.load();
                     CommentItemController cIR = fxmlLoader.getController();
                     cIR.setData(comments.get(i),this);
+
+                    commentContainerId.add(anchorPane,column,row++);
+                }catch (IOException | SQLException e){
+                    System.out.println(e.getMessage());
+                }
+
+            }
+
+
+        }
+        commentList.addListener((javafx.beans.Observable observable)->{
+            this.setData();
+        });
+
+    }
+    @FXML
+    public void setData(){
+        System.out.println("11111");
+        commentContainerId.getChildren().clear();
+        System.out.println(commentContainerId.getChildren());
+        ServicePostImage sPI = new ServicePostImage() ;
+        if(this.post.getComments().isEmpty()){
+            System.out.println("no comments");
+        }else{
+            int column = 0 ;
+            int row = 0 ;
+            for(int i=0;i<commentList.size();i++){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/commentItem.fxml"));
+                try {
+                    for (Post comment:commentList){
+                        comment.setPostImages(sPI.getPostImagesByPostId(comment.getId()));
+                    }
+                    AnchorPane anchorPane = fxmlLoader.load();
+                    CommentItemController cIR = fxmlLoader.getController();
+                    cIR.setData(commentList.get(i),this);
 
                     commentContainerId.add(anchorPane,column,row++);
                 }catch (IOException | SQLException e){
@@ -250,6 +296,14 @@ public class PostDetailsController implements Initializable {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+
+    }
+    @FXML
+    public void returnToComment(ActionEvent event) {
+        saveId.setVisible(true);
+        updateId.setVisible(false);
+        Description.setText("");
+        imagesHbox.getChildren().clear();
     }
     @FXML
     public void removePicture(MouseEvent Event, HBox ImagesHbox, VBox imageBox, File file) {
@@ -324,9 +378,11 @@ public class PostDetailsController implements Initializable {
                 }
             }
         }
+        commentList.add(comment);
     }
     @FXML
     void updateCommentGui(ActionEvent event) {
+        Post oldComment = updatedComment ;
         this.updatedComment.setDescription(Description.getText());
         this.updatedComment.setPost(this.post);
         ServicePost sP = new ServicePost();
@@ -356,7 +412,8 @@ public class PostDetailsController implements Initializable {
                 }
             }
         }
-
+        int placeOfOldComment = commentList.indexOf(oldComment);
+        commentList.set(placeOfOldComment,updatedComment);
     }
 
     public void updateComment(Post comment){
@@ -401,8 +458,7 @@ public class PostDetailsController implements Initializable {
         }
     }
     public void deleteComment(Post comment){
-        ServicePost sP = new ServicePost();
-        ServicePostImage sPI = new ServicePostImage();
+
         try{
             ArrayList<PostImage> postImages = new ArrayList<>(comment.getPostImages()) ;
             if(!postImages.isEmpty()){
@@ -410,10 +466,40 @@ public class PostDetailsController implements Initializable {
                     sPI.delete(postImage);
                 }
             }
-            commentList.remove(comment);
             sP.delete(comment);
+            commentList.remove(comment);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
+    @FXML
+    public void deletePost(ActionEvent event) {
+        try{
+            ArrayList<PostImage> postImages = new ArrayList<>(this.post.getPostImages()) ;
+            if(!postImages.isEmpty()){
+                for(PostImage postImage : postImages){
+                    sPI.delete(postImage);
+                }
+            }
+            sP.delete(this.post);
+            commentList.remove(this.post);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+        try{
+            Parent root = loader.load();
+            HomeController hC = loader.getController();
+            Description.getScene().setRoot(root);
+            hC.changeToPostsFunction(event);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    void editPostFunction(ActionEvent event) {
+
+    }
+
 }

@@ -75,7 +75,7 @@ public class ServicePost implements IServices<Post> {
         ServiceUser sUser = new ServiceUser() ;
         List<Post> posts = new ArrayList<>();
         List<Post> comments = new ArrayList<>();
-        String req = "select * from post";
+        String req = "select * from post where big_post = 1";
         ste = con.createStatement();
         ResultSet res =ste.executeQuery(req);
         User creator ;
