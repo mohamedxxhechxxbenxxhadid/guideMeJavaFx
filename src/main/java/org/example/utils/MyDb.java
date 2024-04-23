@@ -7,7 +7,7 @@ public class MyDb {
 
     public final String USERNAME = "root";
     public final String PWD = "";
-    public final String URL = "jdbc:mysql://localhost:3306/pidevSymfony11";
+    public final String URL = "jdbc:mysql://localhost:3306/pidevSymfony1";
 
     private Connection con;
 
@@ -39,5 +39,7 @@ public class MyDb {
         return instance;
     }
 
-
+  /*  public MyDb() {
+        // Constructor logic
+    } */
 }

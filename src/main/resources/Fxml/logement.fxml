@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1198.0" styleClass="gradient-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LogementController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="logementScene" mnemonicParsing="false" onAction="#OnSwitchBack" text="Back" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="390.0" text="Admin Dashboard" textFill="#edf1f0">
+               <font>
+                  <Font name="Barlow Condensed Medium" size="30.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <ImageView fitHeight="63.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="53.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="290.0" spacing="20.0" styleClass="container" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
+                     <font>
+                        <Font name="Barlow Condensed Medium" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie" />
+                  <ComboBox fx:id="categorieComboBox" layoutX="14.0" layoutY="78.0" onAction="#populateComboBox" prefWidth="150.0" />
+                  <Text layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du Logement" wrappingWidth="122.13671875" />
+                  <Text layoutX="20.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+                  <TextArea fx:id="tfDescription" layoutX="14.0" layoutY="183.0" prefHeight="95.0" prefWidth="183.0" />
+                  <TextField fx:id="tfNom" layoutX="15.0" layoutY="133.0" />
+                  <Text layoutX="17.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="44.306640625" />
+                  <TextField fx:id="tfPrice" layoutX="26.0" layoutY="324.0" />
+                  <Text layoutX="12.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place" />
+                  <TextField fx:id="tfPlace" layoutX="15.0" layoutY="388.0" />
+                  <Button layoutX="24.0" layoutY="440.0" mnemonicParsing="false" onAction="#addLogement" text="ADD" />
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

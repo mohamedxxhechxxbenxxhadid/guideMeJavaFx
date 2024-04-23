@@ -30,6 +30,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>21.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <!-- Build configuration -->
     <build>
@@ -45,7 +51,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>
-                        org.example.test.Main
+                        org.example.test.MainFx
                     </mainClass>
                 </configuration>
             </plugin>

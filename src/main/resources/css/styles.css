@@ -1,0 +1,19 @@
+.gradient-background{
+   -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0080FF, #00AEC8 , #9CC2D5);
+}
+.line-color {
+   -fx-background-color: #C9DDDE ;
+}
+.container{
+   -fx-background-color: rgba(255,255,255,0.2);
+   -fx-background-radius: 10;
+}
+.shadow {
+   -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.2),10.0, 0.0, 0.0, 10.0);
+}
+.transparent-button {
+   -fx-background-color: transparent;
+   -fx-text-fill: #edf1f0; /* Set text color */
+   -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.2),10.0, 0.0, 0.0, 10.0); /* Add shadow effect */
+   /* Add any other styling properties as needed */
+}
