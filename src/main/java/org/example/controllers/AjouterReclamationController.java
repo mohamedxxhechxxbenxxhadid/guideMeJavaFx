@@ -48,11 +48,11 @@ public class AjouterReclamationController {
     @FXML
     private Label titleLabelId;
 
-    boolean nameB = false;
-    boolean phoneB = false ;
-    boolean emailB = false ;
-    boolean titleB = false ;
-    boolean descriptionB = false ;
+    boolean nameB = true;
+    boolean phoneB = true ;
+    boolean emailB = true ;
+    boolean titleB = true ;
+    boolean descriptionB = true ;
 
     @FXML
     void AjouterReclamation(ActionEvent event) {
@@ -66,15 +66,20 @@ public class AjouterReclamationController {
                 }
             }));
         }
-        if(phoneId.getText().isBlank() || this.validateNumber(this.phoneId.getText())){
+        if(phoneId.getText().isBlank() || !this.validateNumber(this.phoneId.getText())){
             phoneNumberId.setVisible(true);
             phoneB = false ;
-            phoneId.textProperty().addListener(((observable, oldValue, newValue) -> {
+            /*phoneId.textProperty().addListener(((observable, oldValue, newValue) -> {
+                System.out.println("oldValue = " + oldValue);
                 if (!oldValue.isBlank() && this.validateNumber(oldValue)) {
+                    System.out.println("22222222222");
                     phoneNumberId.setVisible(false);
                     phoneB = true ;
                 }
-            }));
+            }));*/
+        }else {
+            phoneNumberId.setVisible(false);
+            phoneB = true ;
         }
         if(nameId.getText().isBlank()){
             nameLabelId.setVisible(true);
@@ -88,7 +93,7 @@ public class AjouterReclamationController {
         }
         if(titleId.getText().isBlank()){
             titleLabelId.setVisible(true);
-            titleB = true ;
+            titleB = false ;
             titleId.textProperty().addListener(((observable, oldValue, newValue) -> {
                 if (!oldValue.isBlank() ) {
                     titleLabelId.setVisible(false);
@@ -98,7 +103,7 @@ public class AjouterReclamationController {
         }
         if(descriptionId.getText().isBlank()){
             descriptionLabelId.setVisible(true);
-            descriptionB = true ;
+            descriptionB = false ;
             descriptionId.textProperty().addListener(((observable, oldValue, newValue) -> {
                 if (!oldValue.isBlank() ) {
                     descriptionLabelId.setVisible(false);
@@ -106,6 +111,7 @@ public class AjouterReclamationController {
                 }
             }));
         }
+
         if(phoneB && emailB && descriptionB && titleB && nameB){
             Reclamation reclamation = new Reclamation();
             reclamation.setEmail(emailId.getText());
@@ -137,13 +143,15 @@ public class AjouterReclamationController {
         }
     }
     public  boolean validateNumber(String input) {
-        if (input != null && input.length() == 12) {
+        if (input != null && input.length() == 13) {
             if (input.startsWith("00216")) {
                 for (int i = 5; i < input.length(); i++) {
+                    System.out.println(input.charAt(i));
                     if (!Character.isDigit(input.charAt(i))) {
                         return false;
                     }
                 }
+                System.out.println("11111");
                 return true;
             }
         }
