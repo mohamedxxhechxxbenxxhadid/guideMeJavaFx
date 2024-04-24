@@ -24,7 +24,7 @@
       <ImageView fx:id="postImageId" fitHeight="60.0" fitWidth="90.0" layoutX="349.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="nextImage" layoutX="439.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToNextImage" text="&gt;" />
       <Button fx:id="previousImage" layoutX="101.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToPreviousImage" text="&lt;" />
-      <ScrollPane layoutX="677.0" layoutY="64.0" prefHeight="462.0" prefWidth="541.0">
+      <ScrollPane layoutX="677.0" layoutY="64.0" prefHeight="391.0" prefWidth="541.0">
          <content>
             <GridPane fx:id="commentContainerId" prefHeight="2.0" prefWidth="10.0">
               <columnConstraints>
@@ -34,8 +34,8 @@
          </content>
       </ScrollPane>
       <AnchorPane fx:id="imageContainerId" layoutX="35.0" layoutY="44.0" prefHeight="373.0" prefWidth="565.0" />
-      <TextArea fx:id="Description" layoutX="677.0" layoutY="614.0" prefHeight="74.0" prefWidth="541.0" promptText="Add a comment" />
-      <ScrollPane layoutX="677.0" layoutY="690.0" prefHeight="102.0" prefWidth="541.0">
+      <TextArea fx:id="Description" layoutX="677.0" layoutY="544.0" prefHeight="74.0" prefWidth="541.0" promptText="Add a comment" />
+      <ScrollPane layoutX="677.0" layoutY="651.0" prefHeight="102.0" prefWidth="541.0">
          <content>
             <HBox fx:id="imagesHbox" prefHeight="99.0" prefWidth="535.0" style="-fx-background-color: white;" />
          </content>
@@ -55,13 +55,15 @@
             <Font size="10.0" />
          </font>
       </Button>
-      <Button fx:id="returnToCommentId" layoutX="1015.0" layoutY="821.0" mnemonicParsing="false" onAction="#returnToComment" text="x">
+      <Button fx:id="returnToCommentId" layoutX="1014.0" layoutY="792.0" mnemonicParsing="false" onAction="#returnToComment" text="x">
          <font>
             <Font size="10.0" />
          </font>
       </Button>
-      <TextField layoutX="677.0" layoutY="566.0" prefHeight="24.0" prefWidth="541.0" style="-fx-background-color: white;" visible="false" />
+      <TextField fx:id="titleEditFieldId" layoutX="677.0" layoutY="494.0" prefHeight="24.0" prefWidth="541.0" style="-fx-background-color: white;" visible="false" />
       <Button fx:id="deleteButtonPostId" layoutX="1191.0" layoutY="17.0" mnemonicParsing="false" onAction="#deletePost" style="-fx-background-color: red;" text="X" />
       <Button fx:id="editPostButton" layoutX="48.0" layoutY="829.0" mnemonicParsing="false" onAction="#editPostFunction" text="Edit Post" />
+      <Label fx:id="blankDescriptionId" layoutX="686.0" layoutY="628.0" prefHeight="16.0" prefWidth="292.0" text="This field should not be blank" textFill="RED" visible="false" />
+      <Button fx:id="donePostId" layoutX="903.0" layoutY="819.0" mnemonicParsing="false" onAction="#updatePost" prefHeight="24.0" prefWidth="96.0" text="done" visible="false" />
    </children>
 </AnchorPane>

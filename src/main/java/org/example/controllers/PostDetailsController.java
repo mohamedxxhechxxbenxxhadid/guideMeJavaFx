@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -43,14 +40,22 @@ import java.util.ResourceBundle;
 
 public class PostDetailsController implements Initializable {
 
+
+
     @FXML
     private TextArea Description;
+
+    @FXML
+    private Label blankDescriptionId;
 
     @FXML
     private GridPane commentContainerId;
 
     @FXML
     private Button deleteButtonPostId;
+
+    @FXML
+    private Button donePostId;
 
     @FXML
     private Button editPostButton;
@@ -89,10 +94,14 @@ public class PostDetailsController implements Initializable {
     private Button saveId;
 
     @FXML
+    private TextField titleEditFieldId;
+
+    @FXML
     private Button updateId;
 
     @FXML
     private Button uploadId;
+
 
     public Post postDetails ;
     ArrayList<Post> comments = new ArrayList<Post>();
@@ -131,7 +140,6 @@ public class PostDetailsController implements Initializable {
         postCreatorId.setText(this.post.getCreator().getFullName());
         postCreatedId.setText(this.post.getCreatedAt().toString());
         postDescriptionId.setText(this.post.getDescription());
-        System.out.println(this.post.getPostImages());
         ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
         if(!postImages.isEmpty()){
             InputStream blobImage = postImages.get(0).getImage_blob();
@@ -160,13 +168,13 @@ public class PostDetailsController implements Initializable {
             }
         }
         if(this.post.getComments().isEmpty()){
-            System.out.println("no comments");
+            System.out.println("no comments"+commentList.size());
         }else{
             comments = new ArrayList<>(this.post.getComments()) ;
             commentList = FXCollections.observableList(comments);
             int column = 0 ;
             int row = 0 ;
-            for(int i=0;i<comments.size();i++){
+            for(int i=0 ;i<comments.size();i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/commentItem.fxml"));
                 try {
@@ -190,14 +198,13 @@ public class PostDetailsController implements Initializable {
             this.setData();
         });
 
+
     }
     @FXML
     public void setData(){
-        System.out.println("11111");
         commentContainerId.getChildren().clear();
-        System.out.println(commentContainerId.getChildren());
         ServicePostImage sPI = new ServicePostImage() ;
-        if(this.post.getComments().isEmpty()){
+        if(commentList.isEmpty()){
             System.out.println("no comments");
         }else{
             int column = 0 ;
@@ -226,7 +233,6 @@ public class PostDetailsController implements Initializable {
     }
     @FXML
     void goToNextImage(ActionEvent event) {
-        System.out.println(images);
         if(images.size()-1==currentImage){
             System.out.println("there is no more picture postDetailsController");
         }else{
@@ -313,7 +319,6 @@ public class PostDetailsController implements Initializable {
     @FXML
     public void removePictureBlob(MouseEvent Event, HBox ImagesHbox, VBox imageBox, PostImage postImage) {
         ImagesHbox.getChildren().remove(imageBox);
-        System.out.println(postImage);
         postImagesDelete.add(postImage);
     }
 
@@ -331,54 +336,63 @@ public class PostDetailsController implements Initializable {
     }
     @FXML
     public void saveComment(javafx.event.ActionEvent actionEvent) {
-        ServiceUser sU = new ServiceUser();
-        User u = new User() ;
-        try{
-            u = sU.findUserById(1);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        Post comment = new Post();
-        comment.setTitle("C");
-        comment.setDescription(Description.getText());
-        comment.setPost(this.post);
-        comment.setBigPost(false);
-        comment.setApproved(true);
-        comment.setUpVoteNum(0);
-        comment.setDownVoteNum(0);
-        comment.setCreator(u);
-        comment.setCreatedAt();
-        ServicePost sP = new ServicePost();
-        try{
-            sP.add(comment);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        if(arrayImages.isEmpty()){
-            System.out.println("empty array");
+        if(Description.getText().isBlank()){
+            blankDescriptionId.setVisible(true);
+            Description.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if(!oldValue.isBlank()){
+                    blankDescriptionId.setVisible(false);
+                }
+            }));
         }else{
+            ServiceUser sU = new ServiceUser();
+            User u = new User() ;
             try{
-                comment = sP.getTheLastPost() ;
+                u = sU.findUserById(1);
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
-            for(File file : arrayImages){
-                ServicePostImage sPI = new ServicePostImage();
-                try {
-                    InputStream in = new FileInputStream(file);
-                    PostImage postImage = new PostImage();
-                    postImage.setImage_blob(in);
-                    postImage.setPost(comment);
-                    sPI.add(postImage);
-                    System.out.println("file"+in);
-                }catch (FileNotFoundException e){
-                    System.out.println(e.getMessage());
+            Post comment = new Post();
+            comment.setTitle("C");
+            comment.setDescription(Description.getText());
+            comment.setPost(this.post);
+            comment.setBigPost(false);
+            comment.setApproved(true);
+            comment.setUpVoteNum(0);
+            comment.setDownVoteNum(0);
+            comment.setCreator(u);
+            comment.setCreatedAt();
+            ServicePost sP = new ServicePost();
+            try{
+                sP.add(comment);
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+            if(arrayImages.isEmpty()){
+                System.out.println("empty array");
+            }else{
+                try{
+                    comment = sP.getTheLastPost() ;
                 }catch (SQLException e){
                     System.out.println(e.getMessage());
                 }
+                for(File file : arrayImages){
+                    ServicePostImage sPI = new ServicePostImage();
+                    try {
+                        InputStream in = new FileInputStream(file);
+                        PostImage postImage = new PostImage();
+                        postImage.setImage_blob(in);
+                        postImage.setPost(comment);
+                        sPI.add(postImage);
+                    }catch (FileNotFoundException e){
+                        System.out.println(e.getMessage());
+                    }catch (SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
+            commentList.add(comment);
         }
-        commentList.add(comment);
+
     }
     @FXML
     void updateCommentGui(ActionEvent event) {
@@ -386,7 +400,6 @@ public class PostDetailsController implements Initializable {
         this.updatedComment.setDescription(Description.getText());
         this.updatedComment.setPost(this.post);
         ServicePost sP = new ServicePost();
-        System.out.println(updatedComment);
         try {
             sP.update(this.updatedComment);
         }catch (SQLException e){
@@ -446,7 +459,6 @@ public class PostDetailsController implements Initializable {
                         imageBox.getChildren().add(imageButton);
                         imageBox.getChildren().add(imageShown);
                         imageButton.setId(postImage.toString());
-                        System.out.println(postImage);
                         imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,postImage));
                         imagesHbox.getChildren().add(imageBox);
                     }
@@ -474,6 +486,26 @@ public class PostDetailsController implements Initializable {
     }
     @FXML
     public void deletePost(ActionEvent event) {
+        commentList = FXCollections.observableList(comments);
+        if(!commentList.isEmpty()){
+            for(Post comment : commentList){
+                System.out.println("===================");
+                System.out.println(comment);
+                System.out.println("===================");
+                try{
+                    ArrayList<PostImage> postImagesComment = new ArrayList<>(comment.getPostImages()) ;
+                    if(!postImagesComment.isEmpty()){
+                        for(PostImage postImage :postImagesComment){
+                            sPI.delete(postImage);
+                        }
+                    }
+                    sP.delete(comment);
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
         try{
             ArrayList<PostImage> postImages = new ArrayList<>(this.post.getPostImages()) ;
             if(!postImages.isEmpty()){
@@ -482,7 +514,6 @@ public class PostDetailsController implements Initializable {
                 }
             }
             sP.delete(this.post);
-            commentList.remove(this.post);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -499,7 +530,24 @@ public class PostDetailsController implements Initializable {
 
     @FXML
     void editPostFunction(ActionEvent event) {
-
+        titleEditFieldId.setVisible(true);
+        Description.setPromptText("update Post");
+        saveId.setVisible(false);
+        updateId.setVisible(false);
+        donePostId.setVisible(true);
+    }
+    @FXML
+    void updatePost(ActionEvent event) {
+        if(Description.getText().isBlank()){
+            blankDescriptionId.setVisible(true);
+            Description.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if(!oldValue.isBlank()){
+                    blankDescriptionId.setVisible(false);
+                }
+            }));
+        }else{
+            this.post.setDescription(Description.getText());
+        }
     }
 
 }
