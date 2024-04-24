@@ -121,6 +121,7 @@ public class PostDetailsController implements Initializable {
     ArrayList<Image> images = new ArrayList<Image>();
     ServicePost sP = new ServicePost();
     ServicePostImage sPI = new ServicePostImage();
+    boolean updatePost = false ;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -285,12 +286,22 @@ public class PostDetailsController implements Initializable {
                     imageButton.setId(file.toString());
                     imageButton.setOnMouseClicked(event -> this.removePicture(event,imagesHbox,imageBox,file));
                     imagesHbox.getChildren().add(imageBox);
+                    System.out.println("111111111111111111111111111111111111111111111");
                     if(update == true){
                         PostImage p111 = new PostImage();
                         p111.setPost(this.updatedComment);
                         p111.setImage_blob(in);
                         p111.setUrl(null);
                         postImagesAdd.add(p111);
+                        System.out.println("111111111111111111111111111111111111111111111");
+                    }
+                    if(updatePost == true){
+                        PostImage p111 = new PostImage();
+                        p111.setPost(this.post);
+                        p111.setImage_blob(in);
+                        p111.setUrl(null);
+                        postImagesAdd.add(p111);
+                        System.out.println("111111111111111111111111111111111111111111111");
                     }
                 }
 
@@ -319,6 +330,7 @@ public class PostDetailsController implements Initializable {
     @FXML
     public void removePictureBlob(MouseEvent Event, HBox ImagesHbox, VBox imageBox, PostImage postImage) {
         ImagesHbox.getChildren().remove(imageBox);
+        System.out.println("removePi");
         postImagesDelete.add(postImage);
     }
 
@@ -463,6 +475,7 @@ public class PostDetailsController implements Initializable {
                         imageButton.setId(postImage.toString());
                         imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,postImage));
                         imagesHbox.getChildren().add(imageBox);
+
                     }
                 }
             }catch (Exception e){
@@ -536,6 +549,7 @@ public class PostDetailsController implements Initializable {
 
     @FXML
     void editPostFunction(ActionEvent event) {
+        this.updatePost = true;
         titleEditFieldId.setVisible(true);
         Description.setPromptText("update Post");
         saveId.setVisible(false);
