@@ -69,7 +69,7 @@
                               <Insets left="27.0" top="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="changeToReclamation" mnemonicParsing="false" onAction="#changeToReclamationFunction" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: white;" text="Reclamation" textFill="#0073ed">
+                        <Button fx:id="changeToReclamation" mnemonicParsing="false" onAction="#changeToReclamationFunction" prefHeight="59.0" prefWidth="174.0" style="-fx-background-color: white;" text="Reclamation" textFill="#0073ed">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

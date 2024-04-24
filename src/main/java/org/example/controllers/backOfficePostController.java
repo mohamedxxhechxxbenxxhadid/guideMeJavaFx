@@ -9,10 +9,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.models.Post;
+import org.example.models.PostImage;
 import org.example.services.ServicePost;
+import org.example.services.ServicePostImage;
 
 import java.net.URL;
+import java.sql.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,6 +49,7 @@ public class backOfficePostController implements Initializable {
 
     ObservableList<Post> posts ;
     ServicePost sP = new ServicePost();
+    ServicePostImage sPI = new ServicePostImage();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         approvedId.setCellValueFactory(new PropertyValueFactory<>("approved"));
@@ -79,6 +84,14 @@ public class backOfficePostController implements Initializable {
     @FXML
     void deletePost(ActionEvent event) {
         try{
+            ArrayList<PostImage> postImages = new ArrayList<>(sPI.getPostImagesByPostId(tableViewid.getSelectionModel().getSelectedItem().getId()));
+            for (PostImage p : postImages){
+                sPI.delete(p);
+            }
+            ArrayList<Post> comments = new ArrayList<>(sP.getComment(tableViewid.getSelectionModel().getSelectedItem().getId()));
+            for (Post comment:comments){
+                sP.delete(comment);
+            }
             sP.delete(tableViewid.getSelectionModel().getSelectedItem());
             posts.remove(tableViewid.getSelectionModel().getSelectedItem());
         }catch (SQLException e){
