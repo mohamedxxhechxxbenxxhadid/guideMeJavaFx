@@ -10,7 +10,8 @@ public class Logement {
     private int categorieId;
 
     // Constructor
-    public Logement(String nom, String description, String place, int prix, int categorieId) {
+    public Logement(int id,String nom, String description, String place, int prix, int categorieId) {
+        this.id = id;
         this.nom = nom;
         this.description = description;
         this.place = place;
@@ -36,6 +37,7 @@ public class Logement {
     public int getCategorieId() {
         return categorieId;
     }
+    public void setCategorieId(int categorieId) {this.categorieId = categorieId;}
     public String getNom() {
         return nom;
     }
@@ -70,13 +72,11 @@ public class Logement {
 
     @Override
     public String toString() {
-        return "Logement{" +
-                "id=" + id +
-                ", categorie=" + categorie +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                ", place='" + place + '\'' +
-                ", prix=" + prix +
-                '}';
+        return "Nom: " + nom + "\n" +
+                "Description: " + description + "\n" +
+                "Place: " + place + "\n" +
+                "Prix: " + prix;
     }
+
+
 }

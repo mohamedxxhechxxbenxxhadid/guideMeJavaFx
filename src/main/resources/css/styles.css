@@ -17,3 +17,10 @@
    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.2),10.0, 0.0, 0.0, 10.0); /* Add shadow effect */
    /* Add any other styling properties as needed */
 }
+.home-background{
+   -fx-background-color: #0A4964;
+}
+.border-buttom{
+   -fx-border-width: 0 0 2 0;
+   -fx-border-color: #676767;
+}

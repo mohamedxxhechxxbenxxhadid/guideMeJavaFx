@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="home-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="125.0" prefWidth="200.0" styleClass="border-buttom" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="57.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Pane prefHeight="125.0" prefWidth="160.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="125.0" prefWidth="124.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-hôtel-4-étoiles-50.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="40.0" prefWidth="80.0" text="Logements" textFill="#4b7eb6">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-monter-dans-le-bus-50.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="40.0" prefWidth="80.0" text="Transports" textFill="#0080ff">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="534.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-bavarder-48.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="40.0" prefWidth="98.0" text="Reclamations" textFill="#0080ff">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="658.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-evénement-accepté-provisoirement-50.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="80.0" text="Events" textFill="#0080ff">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Pane prefHeight="125.0" prefWidth="250.0" HBox.hgrow="ALWAYS" />
+            <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="125.0" prefWidth="31.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-notifications-64.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="1074.0" layoutY="10.0" prefHeight="125.0" prefWidth="31.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-chercher-50.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="#0b4a63" radius="4.0" stroke="#0a4964" strokeType="INSIDE" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <padding>
+      <Insets left="23.0" right="20.0" top="23.0" />
+   </padding>
+</BorderPane>
