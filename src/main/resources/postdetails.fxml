@@ -65,5 +65,6 @@
       <Button fx:id="editPostButton" layoutX="48.0" layoutY="829.0" mnemonicParsing="false" onAction="#editPostFunction" text="Edit Post" />
       <Label fx:id="blankDescriptionId" layoutX="686.0" layoutY="628.0" prefHeight="16.0" prefWidth="292.0" text="This field should not be blank" textFill="RED" visible="false" />
       <Button fx:id="donePostId" layoutX="903.0" layoutY="819.0" mnemonicParsing="false" onAction="#updatePost" prefHeight="24.0" prefWidth="96.0" text="done" visible="false" />
+      <Label fx:id="blankTitleId" layoutX="679.0" layoutY="518.0" prefHeight="16.0" prefWidth="501.0" text="This Field should not be empty" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

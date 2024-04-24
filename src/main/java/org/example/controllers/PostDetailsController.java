@@ -435,8 +435,10 @@ public class PostDetailsController implements Initializable {
         this.update = true ;
         updateId.setVisible(true);
         saveId.setVisible(false);
+        donePostId.setVisible(false);
         ServicePostImage sPI = new ServicePostImage();
         if(comment.getPostImages()!= null){
+            imagesHbox.getChildren().clear();
             try {
                 this.postImagesUpdate = new ArrayList<>(sPI.getPostImagesByPostId(comment.getId())) ;
                 if(postImagesUpdate.isEmpty()){
@@ -467,8 +469,12 @@ public class PostDetailsController implements Initializable {
                 System.out.println(e.getMessage());
             }
 
+        }else {
+            imagesHbox.getChildren().clear();
+
         }
     }
+
     public void deleteComment(Post comment){
 
         try{
@@ -535,19 +541,94 @@ public class PostDetailsController implements Initializable {
         saveId.setVisible(false);
         updateId.setVisible(false);
         donePostId.setVisible(true);
+        Description.setText(this.post.getDescription());
+        titleEditFieldId.setText(this.post.getTitle());
+        updatePostImages();
     }
     @FXML
     void updatePost(ActionEvent event) {
-        if(Description.getText().isBlank()){
+        if(Description.getText().isBlank()) {
             blankDescriptionId.setVisible(true);
             Description.textProperty().addListener(((observable, oldValue, newValue) -> {
-                if(!oldValue.isBlank()){
+                if (!oldValue.isBlank()) {
                     blankDescriptionId.setVisible(false);
+                }
+            }));
+        }else if (titleEditFieldId.getText().isBlank()){
+            titleEditFieldId.setVisible(true);
+            titleEditFieldId.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!oldValue.isBlank()) {
+                    titleEditFieldId.setVisible(false);
                 }
             }));
         }else{
             this.post.setDescription(Description.getText());
+            this.post.setTitle(titleEditFieldId.getText());
+            ServicePost sP = new ServicePost();
+            try {
+                sP.update(this.post);
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+            if(!this.postImagesAdd.isEmpty()){
+                for(PostImage postImage: this.postImagesAdd){
+                    ServicePostImage sPI = new ServicePostImage();
+                    try {
+                        sPI.add(postImage);
+                    }catch (SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            if(!this.postImagesDelete.isEmpty()){
+                for(PostImage postImage: this.postImagesDelete){
+                    ServicePostImage sPI = new ServicePostImage();
+                    try {
+                        sPI.delete(postImage);
+                    }catch (SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
         }
     }
+    public void  updatePostImages(){
+        ServicePostImage sPI = new ServicePostImage();
+        if(this.post.getPostImages()!= null){
+            imagesHbox.getChildren().clear();
+            try {
+                this.postImagesUpdate = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId())) ;
+                if(postImagesUpdate.isEmpty()){
+                    System.out.println("Post with no pictures");
+                }else {
+                    for (PostImage postImage : postImagesUpdate){
+                        VBox imageBox = new VBox();
+                        Button imageButton = new Button();
+                        imageButton.setText("X");
+                        imageButton.setPrefWidth(20);
+                        imageButton.setPrefHeight(20);
+                        imageBox.setPrefWidth(140);
+                        imageBox.setPrefHeight(140);
+                        ImageView imageShown = new ImageView();
+                        InputStream blobImage = postImage.getImage_blob();
+                        Image image = new Image(blobImage);
+                        imageShown.setImage(image);
+                        imageShown.setFitWidth(100);
+                        imageShown.setFitHeight(100);
+                        imageBox.getChildren().add(imageButton);
+                        imageBox.getChildren().add(imageShown);
+                        imageButton.setId(postImage.toString());
+                        imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,postImage));
+                        imagesHbox.getChildren().add(imageBox);
+                    }
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
 
+        }else {
+            imagesHbox.getChildren().clear();
+
+        }
+    }
 }
