@@ -52,10 +52,10 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label layoutX="85.0" layoutY="187.0" prefHeight="20.0" prefWidth="388.0" text="Name should not be empty" textFill="RED" />
-      <Label layoutX="86.0" layoutY="270.0" prefHeight="20.0" prefWidth="388.0" text="Phone Number should be 00216..." textFill="RED" />
-      <Label layoutX="85.0" layoutY="362.0" prefHeight="20.0" prefWidth="388.0" text="Email should be example@*.com" textFill="RED" />
-      <Label layoutX="91.0" layoutY="441.0" prefHeight="20.0" prefWidth="388.0" text="Title should not be empty" textFill="RED" />
-      <Label layoutX="91.0" layoutY="660.0" prefHeight="20.0" prefWidth="388.0" text="Description should not be empty" textFill="RED" />
+      <Label fx:id="nameLabelId" layoutX="85.0" layoutY="187.0" prefHeight="20.0" prefWidth="388.0" text="Name should not be empty" textFill="RED" visible="false" />
+      <Label fx:id="phoneNumberId" layoutX="86.0" layoutY="270.0" prefHeight="20.0" prefWidth="388.0" text="Phone Number should be 00216..." textFill="RED" visible="false" />
+      <Label fx:id="emailLabelId" layoutX="85.0" layoutY="362.0" prefHeight="20.0" prefWidth="388.0" text="Email should be example@*.com" textFill="RED" visible="false" />
+      <Label fx:id="titleLabelId" layoutX="91.0" layoutY="441.0" prefHeight="20.0" prefWidth="388.0" text="Title should not be empty" textFill="RED" visible="false" />
+      <Label fx:id="descriptionLabelId" layoutX="91.0" layoutY="660.0" prefHeight="20.0" prefWidth="388.0" text="Description should not be empty" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

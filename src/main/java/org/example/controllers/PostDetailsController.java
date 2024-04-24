@@ -40,13 +40,14 @@ import java.util.ResourceBundle;
 
 public class PostDetailsController implements Initializable {
 
-
-
     @FXML
     private TextArea Description;
 
     @FXML
     private Label blankDescriptionId;
+
+    @FXML
+    private Label blankTitleId;
 
     @FXML
     private GridPane commentContainerId;
@@ -244,10 +245,17 @@ public class PostDetailsController implements Initializable {
 
     @FXML
     void goToPreviousImage(ActionEvent event) {
-        if(currentImage ==0  ){
-            System.out.println("there is no more picture postDetailsController");
+        currentImage--;
+        if(currentImage <=0  ){
+            try {
+                ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
+                Image image = new Image(firstPostImage.get(0).getImage_blob());
+                img.setImage(image);
+                System.out.println("there is no more picture postDetailsController");
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
         }else {
-            currentImage--;
             img.setImage(images.get(currentImage));
         }
     }
@@ -408,84 +416,120 @@ public class PostDetailsController implements Initializable {
     }
     @FXML
     void updateCommentGui(ActionEvent event) {
-        Post oldComment = updatedComment ;
-        this.updatedComment.setDescription(Description.getText());
-        this.updatedComment.setPost(this.post);
-        ServicePost sP = new ServicePost();
-        try {
-            sP.update(this.updatedComment);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        if(!this.postImagesAdd.isEmpty()){
-            for(PostImage postImage: this.postImagesAdd){
-                ServicePostImage sPI = new ServicePostImage();
-                try {
-                    sPI.add(postImage);
-                }catch (SQLException e){
-                    System.out.println(e.getMessage());
+
+        if(Description.getText().isBlank()){
+            blankDescriptionId.setVisible(true);
+            Description.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!oldValue.isBlank()) {
+                    blankDescriptionId.setVisible(false);
+                }
+            }));
+        }else{
+            blankDescriptionId.setVisible(false);
+            Post oldComment = updatedComment ;
+            this.updatedComment.setDescription(Description.getText());
+            this.updatedComment.setPost(this.post);
+            ServicePost sP = new ServicePost();
+            try {
+                sP.update(this.updatedComment);
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+            if(!this.postImagesAdd.isEmpty()){
+                for(PostImage postImage: this.postImagesAdd){
+                    ServicePostImage sPI = new ServicePostImage();
+                    try {
+                        sPI.add(postImage);
+                    }catch (SQLException e){
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
-        }
-        if(!this.postImagesDelete.isEmpty()){
-            for(PostImage postImage: this.postImagesDelete){
-                ServicePostImage sPI = new ServicePostImage();
-                try {
-                    sPI.delete(postImage);
-                }catch (SQLException e){
-                    System.out.println(e.getMessage());
+            if(!this.postImagesDelete.isEmpty()){
+                for(PostImage postImage: this.postImagesDelete){
+                    ServicePostImage sPI = new ServicePostImage();
+                    try {
+                        sPI.delete(postImage);
+                    }catch (SQLException e){
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
+            int placeOfOldComment = commentList.indexOf(oldComment);
+            commentList.set(placeOfOldComment,updatedComment);
+            Description.setText("");
+            updateId.setVisible(false);
+            saveId.setVisible(true);
+            returnToCommentId.setVisible(false);
         }
-        int placeOfOldComment = commentList.indexOf(oldComment);
-        commentList.set(placeOfOldComment,updatedComment);
+
     }
 
     public void updateComment(Post comment){
-        this.updatedComment = comment ;
-        Description.setText(comment.getDescription());
-        this.update = true ;
-        updateId.setVisible(true);
-        saveId.setVisible(false);
-        donePostId.setVisible(false);
-        ServicePostImage sPI = new ServicePostImage();
-        if(comment.getPostImages()!= null){
-            imagesHbox.getChildren().clear();
-            try {
-                this.postImagesUpdate = new ArrayList<>(sPI.getPostImagesByPostId(comment.getId())) ;
-                if(postImagesUpdate.isEmpty()){
-                    System.out.println("Comment with no pictures");
-                }else {
-                    for (PostImage postImage : postImagesUpdate){
-                        VBox imageBox = new VBox();
-                        Button imageButton = new Button();
-                        imageButton.setText("X");
-                        imageButton.setPrefWidth(20);
-                        imageButton.setPrefHeight(20);
-                        imageBox.setPrefWidth(140);
-                        imageBox.setPrefHeight(140);
-                        ImageView imageShown = new ImageView();
-                        InputStream blobImage = postImage.getImage_blob();
-                        Image image = new Image(blobImage);
-                        imageShown.setImage(image);
-                        imageShown.setFitWidth(100);
-                        imageShown.setFitHeight(100);
-                        imageBox.getChildren().add(imageButton);
-                        imageBox.getChildren().add(imageShown);
-                        imageButton.setId(postImage.toString());
-                        imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,postImage));
-                        imagesHbox.getChildren().add(imageBox);
-
-                    }
+        if(Description.getText().isBlank()) {
+            blankDescriptionId.setVisible(true);
+            Description.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!oldValue.isBlank()) {
+                    blankDescriptionId.setVisible(false);
                 }
-            }catch (Exception e){
-                System.out.println(e.getMessage());
+            }));
+        }else if (titleEditFieldId.getText().isBlank()){
+            titleEditFieldId.setVisible(true);
+            titleEditFieldId.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!oldValue.isBlank()) {
+                    titleEditFieldId.setVisible(false);
+                }
+            }));
+        }else{
+            blankTitleId.setVisible(false);
+            blankDescriptionId.setVisible(false);
+            this.updatedComment = comment ;
+            Description.setText(comment.getDescription());
+            this.update = true ;
+            this.updatePost = false;
+            updateId.setVisible(true);
+            saveId.setVisible(false);
+            donePostId.setVisible(false);
+            ServicePostImage sPI = new ServicePostImage();
+            if(comment.getPostImages()!= null){
+                imagesHbox.getChildren().clear();
+                try {
+                    this.postImagesUpdate = new ArrayList<>(sPI.getPostImagesByPostId(comment.getId())) ;
+                    if(postImagesUpdate.isEmpty()){
+                        System.out.println("Comment with no pictures");
+                    }else {
+                        for (PostImage postImage : postImagesUpdate){
+                            VBox imageBox = new VBox();
+                            Button imageButton = new Button();
+                            imageButton.setText("X");
+                            imageButton.setPrefWidth(20);
+                            imageButton.setPrefHeight(20);
+                            imageBox.setPrefWidth(140);
+                            imageBox.setPrefHeight(140);
+                            ImageView imageShown = new ImageView();
+                            InputStream blobImage = postImage.getImage_blob();
+                            Image image = new Image(blobImage);
+                            imageShown.setImage(image);
+                            imageShown.setFitWidth(100);
+                            imageShown.setFitHeight(100);
+                            imageBox.getChildren().add(imageButton);
+                            imageBox.getChildren().add(imageShown);
+                            imageButton.setId(postImage.toString());
+                            imageButton.setOnMouseClicked(event -> this.removePictureBlob(event,imagesHbox,imageBox,postImage));
+                            imagesHbox.getChildren().add(imageBox);
+
+                        }
+                    }
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+
+            }else {
+                imagesHbox.getChildren().clear();
+
             }
-
-        }else {
-            imagesHbox.getChildren().clear();
-
         }
+
     }
 
     public void deleteComment(Post comment){
@@ -508,9 +552,6 @@ public class PostDetailsController implements Initializable {
         commentList = FXCollections.observableList(comments);
         if(!commentList.isEmpty()){
             for(Post comment : commentList){
-                System.out.println("===================");
-                System.out.println(comment);
-                System.out.println("===================");
                 try{
                     ArrayList<PostImage> postImagesComment = new ArrayList<>(comment.getPostImages()) ;
                     if(!postImagesComment.isEmpty()){
@@ -550,6 +591,7 @@ public class PostDetailsController implements Initializable {
     @FXML
     void editPostFunction(ActionEvent event) {
         this.updatePost = true;
+        this.update = false ;
         titleEditFieldId.setVisible(true);
         Description.setPromptText("update Post");
         saveId.setVisible(false);
@@ -605,6 +647,13 @@ public class PostDetailsController implements Initializable {
                 }
             }
         }
+        Description.setText("");
+        titleEditFieldId.setVisible(false);
+        imagesHbox.getChildren().clear();
+        donePostId.setVisible(false);
+        saveId.setVisible(true);
+        returnToCommentId.setVisible(false);
+        setData(this.post);
     }
     public void  updatePostImages(){
         ServicePostImage sPI = new ServicePostImage();

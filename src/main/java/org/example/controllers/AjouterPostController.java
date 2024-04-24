@@ -2,7 +2,9 @@ package org.example.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -36,62 +38,99 @@ public class AjouterPostController  {
     private TextArea descriptionId;
 
     @FXML
-    private TextField titleId;
+    private Label descriptionLabelId;
 
     @FXML
     private HBox imagesHbox;
 
+    @FXML
+    private Button saveId;
+
+    @FXML
+    private Label textLabelId;
+
+    @FXML
+    private TextField titleId;
+
+    @FXML
+    private Button uploadId;
+
+
 
 
     public void savePost(javafx.event.ActionEvent actionEvent) {
-        ServiceUser sU = new ServiceUser();
-        User u = new User() ;
-        try{
-            u = sU.findUserById(1);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        Post post = new Post();
-        post.setTitle(titleId.getText());
-        post.setDescription(descriptionId.getText());
-        post.setBigPost(true);
-        post.setApproved(false);
-        post.setUpVoteNum(0);
-        post.setDownVoteNum(0);
-        post.setCreator(u);
-        post.setCreatedAt();
-        ServicePost sP = new ServicePost();
-        try{
-            sP.add(post);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        if(arrayImages.isEmpty()){
-            System.out.println("empty array");
-        }else{
+        if (titleId.getText().isBlank()){
+            textLabelId.setVisible(true);
+            textLabelId.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!oldValue.isBlank()) {
+                    textLabelId.setVisible(false);
+                }
+            }));
+        }else if (descriptionId.getText().isBlank()){
+            descriptionLabelId.setVisible(true);
+            descriptionLabelId.textProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!oldValue.isBlank()) {
+                    descriptionLabelId.setVisible(false);
+                }
+            }));
+        }else {
+            ServiceUser sU = new ServiceUser();
+            User u = new User() ;
             try{
-                post = sP.getTheLastPost() ;
+                u = sU.findUserById(1);
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
-            for(File file : arrayImages){
-                ServicePostImage sPI = new ServicePostImage();
-                try {
-                    InputStream in = new FileInputStream(file);
-                    PostImage postImage = new PostImage();
-                    postImage.setImage_blob(in);
-                    postImage.setPost(post);
-                    sPI.add(postImage);
-                    System.out.println("file"+in);
-                }catch (FileNotFoundException e){
-                    System.out.println(e.getMessage());
+            Post post = new Post();
+            post.setTitle(titleId.getText());
+            post.setDescription(descriptionId.getText());
+            post.setBigPost(true);
+            post.setApproved(false);
+            post.setUpVoteNum(0);
+            post.setDownVoteNum(0);
+            post.setCreator(u);
+            post.setCreatedAt();
+            ServicePost sP = new ServicePost();
+            try{
+                sP.add(post);
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+            if(arrayImages.isEmpty()){
+                System.out.println("empty array");
+            }else{
+                try{
+                    post = sP.getTheLastPost() ;
                 }catch (SQLException e){
                     System.out.println(e.getMessage());
                 }
+                for(File file : arrayImages){
+                    ServicePostImage sPI = new ServicePostImage();
+                    try {
+                        InputStream in = new FileInputStream(file);
+                        PostImage postImage = new PostImage();
+                        postImage.setImage_blob(in);
+                        postImage.setPost(post);
+                        sPI.add(postImage);
+                        System.out.println("file"+in);
+                    }catch (FileNotFoundException e){
+                        System.out.println(e.getMessage());
+                    }catch (SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+            try{
+                Parent root = loader.load();
+                HomeController hC = loader.getController();
+                textLabelId.getScene().setRoot(root);
+                hC.changeToPostsFunction(actionEvent);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
-        System.out.println(u);
-        System.out.println(post);
+
     }
     public void UploadImage(javafx.event.ActionEvent actionEvent) {
         String fileExtention ;

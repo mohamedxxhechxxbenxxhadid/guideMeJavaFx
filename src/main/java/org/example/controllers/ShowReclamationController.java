@@ -38,7 +38,6 @@ public class ShowReclamationController implements Initializable {
         try {
             reclamations1 = sR.afficher() ;
             reclamations = FXCollections.observableList(reclamations1);
-            System.out.println(" reclaamtions =" +reclamations1.size());
             this.Refresh();
         } catch (Exception e) {
             System.out.println(e.getMessage());
