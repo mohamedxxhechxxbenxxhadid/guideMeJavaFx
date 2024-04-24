@@ -80,7 +80,7 @@
                      </VBox.margin>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="206.0" style="-fx-background-radius: 20; -fx-background-color: #0073ed;" text="Go To profile" textFill="#dadada">
+                  <Button fx:id="backId" mnemonicParsing="false" onAction="#changeToBackShowPosts" prefHeight="60.0" prefWidth="206.0" style="-fx-background-radius: 20; -fx-background-color: #0073ed;" text="Go To profile" textFill="#dadada">
                      <VBox.margin>
                         <Insets left="40.0" top="400.0" />
                      </VBox.margin>

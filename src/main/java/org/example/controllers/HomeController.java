@@ -111,4 +111,18 @@ public class HomeController implements Initializable {
         }
 
     }
+    @FXML
+    public void changeToBackShowPosts() {
+        try{
+            Parent fxml = FXMLLoader.load(getClass().getResource("/backOfficePostController.fxml"));
+            fxml.prefWidth(contentArea.getWidth());
+            fxml.prefHeight(contentArea.getHeight());
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("not working");
+        }
+
+    }
 }

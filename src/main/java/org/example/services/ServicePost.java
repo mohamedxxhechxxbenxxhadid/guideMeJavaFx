@@ -75,6 +75,43 @@ public class ServicePost implements IServices<Post> {
         ServiceUser sUser = new ServiceUser() ;
         List<Post> posts = new ArrayList<>();
         List<Post> comments = new ArrayList<>();
+        String req = "select * from post where big_post = 1 AND approved = 1 ;";
+        ste = con.createStatement();
+        ResultSet res =ste.executeQuery(req);
+        User creator ;
+        while (res.next()){
+            int postid =res.getInt(2);
+            int creatorid = res.getInt(3);
+            if (creatorid != 0 ){
+                creator = sUser.findUserById(creatorid);
+            }else{
+                creator = null ;
+            }
+            int id = res.getInt(1);
+            String title  =res.getString(4);
+            String description =res.getString(5);
+            boolean approved =res.getBoolean(6);
+            boolean bigpost =res.getBoolean(7);
+            int downVote = res.getInt(8);
+            int upVote = res.getInt(9);
+            if (bigpost){
+                comments =getComment(id);
+            }else {
+                comments = null;
+            }
+            LocalDateTime created = res.getTimestamp("created_at").toLocalDateTime();
+
+            Post p = new Post(id,title,description,null,comments,approved,bigpost,upVote,downVote,created,creator);
+            ServicePostImage servicePostImage = new ServicePostImage();
+            p.setPostImages(servicePostImage.getPostImagesByPostId(p.getId()));
+            posts.add(p);
+        }
+        return posts;
+    }
+    public List<Post> afficherBack() throws SQLException {
+        ServiceUser sUser = new ServiceUser() ;
+        List<Post> posts = new ArrayList<>();
+        List<Post> comments = new ArrayList<>();
         String req = "select * from post where big_post = 1";
         ste = con.createStatement();
         ResultSet res =ste.executeQuery(req);
