@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="home-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="home-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.UserController">
    <top>
       <HBox prefHeight="125.0" prefWidth="200.0" styleClass="border-buttom" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -37,7 +40,7 @@
                         <Image url="@../images/icons8-hôtel-4-étoiles-50.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="40.0" prefWidth="80.0" text="Logements" textFill="#4b7eb6">
+                  <Label prefHeight="40.0" prefWidth="80.0" text="Logements" textFill="#0080ff">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -94,7 +97,7 @@
                         <Image url="@../images/icons8-notifications-64.png" />
                      </image>
                   </ImageView>
-                  <Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#0080ff" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="1074.0" layoutY="10.0" prefHeight="125.0" prefWidth="31.0">
@@ -104,7 +107,7 @@
                         <Image url="@../images/icons8-chercher-50.png" />
                      </image>
                   </ImageView>
-                  <Circle fill="#0b4a63" radius="4.0" stroke="#0a4964" strokeType="INSIDE" />
+                  <Circle fill="#0080ff" radius="4.0" stroke="#0080ff" strokeType="INSIDE" />
                </children>
             </VBox>
          </children>
@@ -113,4 +116,46 @@
    <padding>
       <Insets left="23.0" right="20.0" top="23.0" />
    </padding>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="225.0">
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="170.0" text="Traveling" textFill="#0080ff">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="110.0" layoutY="31.0" prefHeight="9.0" prefWidth="170.0" text="11 posts" textFill="#0080ff">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" styleClass="bottom" stylesheets="@../css/styles.css" text="Filter">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </HBox>
+            <ScrollPane prefHeight="568.0" prefWidth="200.0" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS">
+               <content>
+                  <GridPane fx:id="logementGrid" prefHeight="0.0" prefWidth="0.0" styleClass="home-background" stylesheets="@../css/styles.css">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>
