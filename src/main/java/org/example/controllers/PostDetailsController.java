@@ -473,13 +473,6 @@ public class PostDetailsController implements Initializable {
                     blankDescriptionId.setVisible(false);
                 }
             }));
-        }else if (titleEditFieldId.getText().isBlank()){
-            titleEditFieldId.setVisible(true);
-            titleEditFieldId.textProperty().addListener(((observable, oldValue, newValue) -> {
-                if (!oldValue.isBlank()) {
-                    titleEditFieldId.setVisible(false);
-                }
-            }));
         }else{
             blankTitleId.setVisible(false);
             blankDescriptionId.setVisible(false);
