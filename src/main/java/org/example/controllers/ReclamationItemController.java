@@ -4,13 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.example.models.Post;
 import org.example.models.Reclamation;
 import org.example.services.ServiceReclamation;
 
-public class ReclamationItemController {
+import java.io.IOException;
 
+public class ReclamationItemController {
+    @FXML
+    private Button answearButtonId;
     @FXML
     private Label dateId;
 
@@ -50,6 +57,31 @@ public class ReclamationItemController {
         }
     }
 
-    public void SeeItemsDetails(ActionEvent actionEvent) {
+    @FXML
+    void goToAnswearPage(ActionEvent event) {
+        Stage newStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/answear.fxml"));
+        try {
+            Parent root = loader.load();
+            AnswearController aC = loader.getController();
+            aC.reclamation = this.reclamation ;
+            aC.rC = this.sRC ;
+            aC.rIC = this ;
+            Scene scene = new Scene(root );
+            try{
+                scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+
+            newStage.setTitle(reclamation.getTitre());
+            newStage .setScene(scene);
+            newStage.show();
+
+
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
