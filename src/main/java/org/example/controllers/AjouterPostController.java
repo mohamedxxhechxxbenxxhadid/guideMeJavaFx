@@ -1,8 +1,8 @@
 package org.example.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -12,9 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.models.Post;
@@ -23,8 +25,10 @@ import org.example.models.User;
 import org.example.services.ServicePost;
 import org.example.services.ServicePostImage;
 import org.example.services.ServiceUser;
+import org.example.utils.SentimentAnalysis;
 
 import java.io.*;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -55,8 +59,7 @@ public class AjouterPostController  {
     @FXML
     private Button uploadId;
 
-
-
+    private boolean loading=false ;
 
     public void savePost(javafx.event.ActionEvent actionEvent) {
         if (titleId.getText().isBlank()){
@@ -73,6 +76,11 @@ public class AjouterPostController  {
                     descriptionLabelId.setVisible(false);
                 }
             }));
+        }else if(SentimentAnalysis.sentimentType(descriptionId.getText(),this) <0){
+            this.setLoading(false);
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            showNegativePopup("Your Description has a negative meaning please try to be more" +
+                    " positive",stage);
         }else {
             ServiceUser sU = new ServiceUser();
             User u = new User() ;
@@ -193,6 +201,29 @@ public class AjouterPostController  {
         alert.setHeaderText("An error has occured");
         alert.setContentText(message);//ww  w . j  a  va2s  .  co  m
         alert.show();
+    }
+    public void showNegativePopup(String message,Stage stage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(message);//ww  w . j  a  va2s  .  co  m
+        alert.show();
+    }
+    public void disableAll(){
+        descriptionId.setDisable(this.loading);
+        titleId.setDisable(this.loading);
+        saveId.setDisable(this.loading);
+        uploadId.setDisable(this.loading);
+    }
+    public boolean isLoading() {
+        return loading;
+    }
+
+    public void setLoading(boolean loading) {
+        if (this.loading != loading) {
+            this.loading = loading;
+            // Call your function here
+            disableAll();
+        }
     }
 
 
