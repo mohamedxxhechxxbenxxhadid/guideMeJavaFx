@@ -172,7 +172,7 @@ public class LogementController {
         if (textField.getText().isEmpty()) {
             showAlert("Error", "Please fill in all fields.");
         }
-    }
+    } 
 
     private void validatePriceField(TextField textField) {
         try {
