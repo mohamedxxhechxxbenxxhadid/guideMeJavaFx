@@ -110,5 +110,36 @@ public class ServiceUser implements IService<User> {
             return false;
         }
     }
+    public User getByEmailAndPassword(String email, String password) {
+        String qry = "SELECT * FROM `user` WHERE `email`=? AND `password`=?";
+        try {
+            PreparedStatement pstm = con.prepareStatement(qry);
+            pstm.setString(1, email);
+            pstm.setString(2, password);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id")); // Récupération de l'ID
+                user.setFullname(rs.getString("fullname"));
+                user.setAdress(rs.getString("adress"));
+                user.setPhone_numer(rs.getString("phone_numer"));
+                user.setEmail(rs.getString("email"));
+                user.setIs_activated(rs.getBoolean("is_activated"));
+                user.setIs_verified(rs.getBoolean("is_verified"));
+                // Récupération du rôle
+                String rolesJson = rs.getString("roles");
+                ObjectMapper objectMapper = new ObjectMapper();
+                //   List<UserRole> roles = objectMapper.readValue(rolesJson, new TypeReference<List<UserRole>>() {});
+                //user.setRole(roles);
+
+                return user;
+            }
+        } catch (SQLException /*| JsonProcessingException*/ e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
 }
 

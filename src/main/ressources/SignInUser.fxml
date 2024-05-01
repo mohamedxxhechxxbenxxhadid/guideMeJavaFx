@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controllers.SignInUser"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Button fx:id="btnsignin" layoutX="265.0" layoutY="266.0" mnemonicParsing="false" text="Sign In" />
+        <Button fx:id="btnsignup" layoutX="318.0" layoutY="325.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Sign up" textFill="#1b0cef" underline="true">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Label layoutX="185.0" layoutY="331.0" text="vous n'etes pas incrit ?">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <PasswordField fx:id="tfmdp" layoutX="226.0" layoutY="222.0" />
+        <Label layoutX="143.0" layoutY="225.0" text="Password">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label layoutX="143.0" layoutY="180.0" text="Email">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <TextField fx:id="tfemail" layoutX="226.0" layoutY="177.0" />
+    </children>
+</AnchorPane>

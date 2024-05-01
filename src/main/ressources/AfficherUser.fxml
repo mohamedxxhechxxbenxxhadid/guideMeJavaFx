@@ -10,7 +10,6 @@
    <children>
       <TableView fx:id="lbUsers" layoutX="74.0" layoutY="47.0" prefHeight="306.0" prefWidth="452.0">
         <columns>
-          <TableColumn fx:id="affid" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="affFullname" prefWidth="75.0" text="Fullname" />
             <TableColumn fx:id="affEmail" prefWidth="75.0" text="Email" />
             <TableColumn fx:id="affPhonenumber" prefWidth="75.0" text="Phone Number" />
@@ -19,6 +18,9 @@
         </columns>
       </TableView>
       <TextField fx:id="searchField" layoutX="118.0" layoutY="14.0" promptText="Rechercher..." />
+
        <Button fx:id="deleteButton" layoutX="92.0" layoutY="360.0" mnemonicParsing="false" text="Supprimer" />
+       <Button fx:id="updateButton" layoutX="200.0" layoutY="360.0" mnemonicParsing="false" text="Update" />
+
    </children>
 </AnchorPane>

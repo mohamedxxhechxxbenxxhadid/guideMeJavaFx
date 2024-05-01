@@ -39,8 +39,7 @@ public class AfficherUser implements Initializable {
     @FXML
     private TableColumn<User, String> affEmail;
 
-    @FXML
-    private TableColumn<User, Integer> affid;
+
 
     @FXML
     private TableColumn<User, String> affFullname;
@@ -52,13 +51,16 @@ public class AfficherUser implements Initializable {
     private TableColumn<User, String> affrole;
 
     @FXML
-    private TableColumn<User, Integer> affAdress;
+    private TableColumn<User, String> affAdress;
 
     @FXML
     private TextField searchField;
 
     @FXML
     private Button deleteButton;
+
+    @FXML
+    private Button updateButton;
 
     private ObservableList<User> utilisateursData;
 
@@ -68,7 +70,6 @@ public class AfficherUser implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        affid.setCellValueFactory(new PropertyValueFactory<>("id"));
         affFullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
         affPhonenumber.setCellValueFactory(new PropertyValueFactory<>("phone_numer"));
         affEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -123,6 +124,30 @@ public class AfficherUser implements Initializable {
                     lbUsers.getItems().remove(selectedUser);
                 }
             }
+
+
+        });
+
+        updateButton.setOnAction(event -> {
+            User selectedUser = lbUsers.getSelectionModel().getSelectedItem();
+            if (selectedUser != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
+                    Parent root = loader.load();
+                    UpdateUser controller = loader.getController();
+                    controller.setUserToUpdate(selectedUser);
+
+                    // Remplacer la scène actuelle par la nouvelle scène
+                    Stage stage = (Stage) updateButton.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+
         });
 
 
