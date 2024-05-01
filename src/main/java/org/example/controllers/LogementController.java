@@ -1,5 +1,5 @@
 package org.example.controllers;
-
+import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,9 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.models.Logement;
 import org.example.services.ServiceLogement;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.File;
 import java.io.IOException;
 import org.example.utils.MyDb;
 import java.io.IOException;
@@ -23,6 +27,9 @@ public class LogementController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private File selectedFile;
+    private String imagePath ;
+    FileChooser fileChooser = new FileChooser();
     private ServiceLogement ServiceLogement;
     @FXML
     private ComboBox<String> categorieComboBox;
@@ -30,13 +37,10 @@ public class LogementController {
     private Button LogementScene;
     @FXML
     private TextArea tfDescription;
-
     @FXML
     private TextField tfNom;
-
     @FXML
     private TextField tfPlace;
-
     @FXML
     private TextField tfPrice;
     @FXML
@@ -50,23 +54,61 @@ public class LogementController {
     @FXML
     private TextField searchField;
     @FXML
+    private ImageView imageView;
+
+    @FXML
+    void getImage(MouseEvent event) {
+        // Configurer le FileChooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une image");
+
+        // Afficher la boîte de dialogue de sélection de fichier
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        // Vérifier si un fichier a été sélectionné
+        if (selectedFile != null) {
+            try {
+                // Stocker le chemin de l'image dans la variable de classe
+                imagePath = selectedFile.toURI().toString();
+
+                // Charger l'image dans un objet Image
+                Image image = new Image(imagePath);
+
+                // Afficher l'image dans l'ImageView
+                imageView.setImage(image);
+
+                // Optionnel : redimensionner l'image pour l'adapter à votre ImageView si nécessaire
+                imageView.setFitWidth(100); // Modifier la largeur de l'ImageView selon vos besoins
+                imageView.setFitHeight(100); // Modifier la hauteur de l'ImageView selon vos besoins
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Gérer les exceptions si l'image ne peut pas être chargée
+            }
+        } else {
+            // Si aucun fichier n'a été sélectionné, afficher un message à l'utilisateur
+            System.out.println("Aucune image sélectionnée.");
+        }
+    }
+
+
+    @FXML
     public void initialize() {
         MyDb myDb = MyDb.getInstance();
         ServiceLogement = new ServiceLogement(myDb);
         listViewLogements.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                // Update the text fields with the values of the selected logement
-                tfNom.setText(newValue.getNom());
-                tfDescription.setText(newValue.getDescription());
-                tfPlace.setText(newValue.getPlace());
-                tfPrice.setText(String.valueOf(newValue.getPrix())); // Convert price to string
-
-                // Set the selected category in the combo box
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailedView.fxml"));
                 try {
-                    String categoryName = ServiceLogement.getCategoryName(newValue.getCategorieId());
-                    categorieComboBox.setValue(categoryName);
-                } catch (SQLException e) {
-                    e.printStackTrace(); // Handle exception appropriately
+                    Parent detailedViewParent = loader.load();
+                    DetailedViewController detailedViewController = loader.getController();
+                    detailedViewController.initData(newValue);
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(detailedViewParent));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Gérer les exceptions si la vue détaillée ne peut pas être chargée
                 }
             }
         });
@@ -81,20 +123,23 @@ public class LogementController {
         }
     }
 
+
     @FXML
     void OnSwitchBack(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/dashboard.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
     }
+
     @FXML
     void populateComboBox() throws SQLException {
         List<String> categories = ServiceLogement.getAllCategories();
         categorieComboBox.getItems().addAll(categories);
     }
+
     // Method to clear the form fields after adding a Logement
     private void clearFormFields() {
         categorieComboBox.setValue(null);
@@ -103,6 +148,7 @@ public class LogementController {
         tfPlace.clear();
         tfPrice.clear();
     }
+
     //controle de saisie
     private void setupInputValidation() {
         tfNom.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -127,6 +173,7 @@ public class LogementController {
             showAlert("Error", "Please fill in all fields.");
         }
     }
+
     private void validatePriceField(TextField textField) {
         try {
             int price = Integer.parseInt(textField.getText());
@@ -137,6 +184,7 @@ public class LogementController {
             showAlert("Error", "Invalid input for price. Please enter a valid integer.");
         }
     }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -144,66 +192,87 @@ public class LogementController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
     void addLogement(ActionEvent event) {
-        // Get the values from the input fields
+        // Récupérer le chemin de l'image sélectionnée
+        String imagePath = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+
+        // Récupérer les autres valeurs des champs
         String category = categorieComboBox.getValue();
         String nom = tfNom.getText();
         String description = tfDescription.getText();
         String place = tfPlace.getText();
         String priceText = tfPrice.getText();
 
-        // Check if any of the fields are empty
+        // Vérifier si tous les champs sont remplis
         if (category == null || nom.isEmpty() || description.isEmpty() || place.isEmpty() || priceText.isEmpty()) {
-            // Display an alert message to the user indicating that all fields must be filled
+            // Afficher une alerte à l'utilisateur indiquant que tous les champs doivent être remplis
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Incomplete Information");
+            alert.setTitle("Information incomplète");
             alert.setHeaderText(null);
-            alert.setContentText("Please fill in all fields.");
+            alert.setContentText("Veuillez remplir tous les champs.");
             alert.showAndWait();
-            return; // Exit the method early
+            return; // Quitter la méthode
         }
 
-        // Validate nom and description to ensure they don't contain numbers
+        // Valider le nom et la description pour s'assurer qu'ils ne contiennent pas de chiffres
         if (!isValidInput(nom) || !isValidInput(description)) {
-            // Display an alert message to the user indicating that nom and description should not contain numbers
+            // Afficher une alerte à l'utilisateur indiquant que le nom et la description ne doivent pas contenir de chiffres
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Input");
+            alert.setTitle("Saisie invalide");
             alert.setHeaderText(null);
-            alert.setContentText("Name and description should not contain numbers.");
+            alert.setContentText("Le nom et la description ne doivent pas contenir de chiffres.");
             alert.showAndWait();
-            return; // Exit the method early
+            return; // Quitter la méthode
         }
 
         try {
-            // Parse the price input to an integer
+            // Convertir le prix en entier
             int prix = Integer.parseInt(priceText);
 
-            // Get the category ID corresponding to the selected category name
+            // Obtenir l'identifiant de catégorie correspondant au nom de catégorie sélectionné
             int categorieId = ServiceLogement.getCategorieId(category);
 
-            // Create a new Logement object with the retrieved category ID and other parameters
-            Logement newLogement = new Logement(0,nom, description, place, prix, categorieId);
+            // Créer un nouvel objet Logement avec les valeurs récupérées
+            Logement newLogement = new Logement(0, nom, description, place, prix, categorieId, imagePath);
 
-            // Add the new Logement to the database using the ServiceLogement class
+            // Ajouter le nouveau Logement à la base de données en utilisant la classe ServiceLogement
             ServiceLogement.add(newLogement);
-            System.out.println("Logement added successfully.");
+            System.out.println("Logement ajouté avec succès.");
 
-            // Optionally, clear the form fields after adding the Logement
+            // Optionnellement, effacer les champs du formulaire après avoir ajouté le Logement
             clearFormFields();
         } catch (NumberFormatException e) {
-            // Handle the case where the price input is not a valid number
+            // Gérer le cas où la saisie du prix n'est pas un nombre valide
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Price");
+            alert.setTitle("Prix invalide");
             alert.setHeaderText(null);
-            alert.setContentText("Please enter a valid price.");
+            alert.setContentText("Veuillez saisir un prix valide.");
             alert.showAndWait();
         } catch (SQLException e) {
-            // Handle SQL exceptions
+            // Gérer les exceptions SQL
             e.printStackTrace();
-            // Optionally, display an error message to the user
+            // Optionnellement, afficher un message d'erreur à l'utilisateur
         }
     }
+
+
+    private String selectImageFile() {
+        // Configurer le FileChooser
+        fileChooser.setTitle("Choisir une image");
+
+        // Afficher la boîte de dialogue de sélection de fichier
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        // Vérifier si un fichier a été sélectionné
+        if (selectedFile != null) {
+            return selectedFile.getAbsolutePath(); // Retourner le chemin absolu du fichier sélectionné
+        } else {
+            return null; // Retourner null si aucun fichier n'a été sélectionné
+        }
+    }
+
 
     // Method to validate input string to ensure it doesn't contain numbers
     private boolean isValidInput(String input) {
@@ -212,6 +281,7 @@ public class LogementController {
         // Return false if the input contains any numeric characters, true otherwise
         return !input.matches(regex);
     }
+
     @FXML
     void UpdateLogement(ActionEvent event) {
         // Récupérer les valeurs mises à jour depuis les champs du formulaire
@@ -239,6 +309,8 @@ public class LogementController {
             return;
         }
 
+       // String imagePath = getImagePath(); // Appel de la méthode pour récupérer le chemin de l'image
+
         try {
             // Récupérer l'identifiant de la catégorie à partir du nom de la catégorie
             int categorieId = ServiceLogement.getCategorieId(category);
@@ -252,7 +324,8 @@ public class LogementController {
             int logementId = selectedLogement.getId();
 
             // Créer un nouvel objet Logement avec les valeurs mises à jour
-            Logement updatedLogement = new Logement(logementId, nom, description, place, prix, categorieId);
+            Logement updatedLogement = new Logement(logementId, nom, description, place, prix, categorieId, imagePath);
+
             // Mettre à jour le logement dans la base de données en utilisant le service ServiceLogement
             ServiceLogement.update(updatedLogement);
             System.out.println("Logement updated successfully.");
@@ -261,6 +334,7 @@ public class LogementController {
             // Handle SQL exceptions appropriately
         }
     }
+
 
     @FXML
     void deleteLogement(ActionEvent event) {
@@ -315,6 +389,21 @@ public class LogementController {
         listViewLogements.setItems(filteredItems);
     }
 
+    // Dans votre contrôleur de vue principale
+    @FXML
+    void onItemSelected(MouseEvent event) throws IOException {
+        Logement selectedLogement = listViewLogements.getSelectionModel().getSelectedItem();
+        if (selectedLogement != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailedView.fxml"));
+            Parent detailedViewParent = loader.load();
+            DetailedViewController detailedViewController = loader.getController();
+            detailedViewController.initData(selectedLogement);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(detailedViewParent));
+            stage.show();
+        }
+    }
 
 
 }

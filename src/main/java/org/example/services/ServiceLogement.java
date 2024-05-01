@@ -49,7 +49,7 @@ public class ServiceLogement implements IServices {
     @Override
     public void add(Logement logement) throws SQLException {
         Connection con = myDb.getCon();
-        String query = "INSERT INTO logement (categorie, nom, description, place, prix) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO logement (categorie, nom, description, place, prix, image) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
             preparedStatement.setInt(1, logement.getCategorieId());
@@ -57,6 +57,8 @@ public class ServiceLogement implements IServices {
             preparedStatement.setString(3, logement.getDescription());
             preparedStatement.setString(4, logement.getPlace());
             preparedStatement.setInt(5, logement.getPrix());
+            preparedStatement.setString(6, logement.getImage()); // Ajouter le chemin de l'image
+
 
             // Execute the SQL statement
             preparedStatement.executeUpdate();
@@ -99,7 +101,8 @@ public class ServiceLogement implements IServices {
                         resultSet.getString("description"),
                         resultSet.getString("place"),
                         resultSet.getInt("prix"),
-                        resultSet.getInt("categorie")
+                        resultSet.getInt("categorie"),
+                        resultSet.getString("image")
                 );
                 logements.add(logement);
             }
