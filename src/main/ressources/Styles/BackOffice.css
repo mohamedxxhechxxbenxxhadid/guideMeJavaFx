@@ -1,0 +1,42 @@
+.login_container{
+    -fx-background-color: #EEEEEE;
+}
+
+/*Logo Container Styles*/
+.logo_container{
+    -fx-background-color: #132A13;
+}
+.logo_container Text{
+    -fx-font-size: 2em;
+    -fx-fill: #FFFFFF;
+}
+.menu_container{
+    -fx-padding: 10 10 10 20;
+    -fx-spacing: 20;
+}
+.menu_container Button{
+    -fx-pref-width: 115;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-alignment: center_left;
+    -fx-border-radius: 20; /* coins arrondis */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1); /* ombre plus subtile */
+    -fx-border-color: transparent; /* pas de bordure visible */
+}
+.menu_container Button:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #EEEEEE; /* changement de couleur au survol */
+}
+.alt_menu_btn{
+    -fx-pref-width: 115;
+    -fx-pref-height: 40;
+    -fx-background-color: #132A13;
+    -fx-font-size: 1em;
+    -fx-alignment: center_left;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+.footer{
+    -fx-font-size:10 px;
+}

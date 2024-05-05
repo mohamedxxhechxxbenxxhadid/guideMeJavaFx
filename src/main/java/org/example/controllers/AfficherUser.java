@@ -105,8 +105,8 @@ public class AfficherUser implements Initializable {
         adressCol.setCellValueFactory(new PropertyValueFactory<>("adress"));
 
 
-
-        lbUsers.getColumns().addAll(fullnameCol, emailCol);
+        // HOW TO ADD MORE COLUMNS
+        //lbUsers.getColumns().addAll(fullnameCol, emailCol);
 
         // Initialise le tableau avec les données des utilisateurs
         lbUsers.setItems(utilisateursData);

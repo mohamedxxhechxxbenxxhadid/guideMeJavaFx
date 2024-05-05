@@ -112,4 +112,9 @@ public class User {
                 ", is_activated=" + is_activated +
                 '}';
     }
+
+    public static boolean isValidEmail(String email) {
+        return email.matches("^[a-zA-Z]\\w*@[\\w-]+(\\.[\\w-]+)*$");
+    }
+
 }

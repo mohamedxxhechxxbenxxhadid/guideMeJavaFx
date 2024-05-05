@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="615.0" prefWidth="880.0" styleClass="login_container" stylesheets="@/Styles/BackOffice.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox layoutX="-4.0" layoutY="-3.0" prefHeight="622.0" prefWidth="229.0" styleClass="logo_container">
+            <children>
+                <VBox prefHeight="150.0" prefWidth="253.0">
+                    <children>
+                        <Line endX="150.67868041992188" endY="0.41420525312423706" startX="-100.0" stroke="#f4f2f2" strokeWidth="3.0" VBox.vgrow="ALWAYS" />
+                  <ImageView fitHeight="70.0" fitWidth="190.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../logoback.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN  DASHBOARD" textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="20.0" left="40.0" right="20.0" top="45.0" />
+                            </VBox.margin>
+                        </Text>
+                    </children>
+                </VBox>
+                <VBox prefHeight="390.0" prefWidth="234.0" styleClass="menu_container">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="162.0" styleClass="alt_menu_btn" text="Gestion Utilisateur" textFill="#a41b1b">
+                     <VBox.margin>
+                        <Insets left="40.0" />
+                     </VBox.margin></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" styleClass="alt_menu_btn" text="Gestion logement">
+                     <VBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </VBox.margin></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" styleClass="alt_menu_btn" text="Gestion activité">
+                     <VBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </VBox.margin></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" styleClass="alt_menu_btn" text="Gestion Evenement">
+                     <VBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </VBox.margin></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="162.0" styleClass="alt_menu_btn" text="Gestion Transport ">
+                     <VBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </VBox.margin></Button>
+                        <Line endX="117.69290161132812" endY="-0.41420745849609375" startX="-100.0" startY="-0.4141959249973297" stroke="#f4f2f2" strokeWidth="3.0" />
+                    </children>
+                </VBox>
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="138.0" styleClass="alt_menu_btn" text="Log out">
+               <padding>
+                  <Insets left="80.0" />
+               </padding>
+            </Button>
+            </children></VBox>
+        <HBox fx:id="boxh" layoutX="333.0" layoutY="359.0" prefHeight="179.0" prefWidth="415.0" />
+            <Button layoutX="780.0" layoutY="52.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" styleClass="alt_menu_btn" text="Profil" />
+    </children>
+</AnchorPane>

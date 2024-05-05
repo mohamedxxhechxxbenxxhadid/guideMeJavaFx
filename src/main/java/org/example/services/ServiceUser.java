@@ -141,5 +141,27 @@ public class ServiceUser implements IService<User> {
 
         return null;
     }
+
+    public void updatePassword(String email, String newPassword) {
+        try {
+            // Prepare the SQL update statement
+            String updateQuery = "UPDATE users SET password = ? WHERE email = ?";
+            PreparedStatement preparedStatement = con.prepareStatement(updateQuery);
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, email);
+
+            // Execute the update statement
+            int rowsAffected = preparedStatement.executeUpdate();
+            /*if (rowsAffected > 0) {
+                System.out.println("Password updated successfully for email: " + email);
+            } else {
+                System.out.println("Email not found in the database or password not updated.");
+                // Handle cases where the email is not found or the password is not updated
+            }*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle
+        }
+    }
 }
 

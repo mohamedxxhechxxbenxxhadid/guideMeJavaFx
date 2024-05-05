@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import org.example.models.User;
@@ -29,6 +31,9 @@ public class SignInUser {
 
     @FXML
     private PasswordField tfmdp;
+
+    @FXML
+    private Button ForgetPassword;
 
     @FXML
     public void initialize() {
@@ -89,7 +94,30 @@ public class SignInUser {
                 System.out.println(e.getMessage());
             }
         });
+
+        ForgetPassword.setOnAction(event -> {
+            // Redirection vers la page d'inscription
+            // Ouverture d'une nouvelle fenêtre ou chargement d'une nouvelle vue
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ResetPassword.fxml"));
+                Parent root = loader.load();
+                ResetPassword resetPassword = loader.getController();
+                // Vous pouvez passer l'utilisateur à ajouterPersonneController si nécessaire
+                Scene scene = new Scene(root);
+
+                // Obtention de la fenêtre actuelle (Stage)
+                Stage stage = (Stage) ForgetPassword.getScene().getWindow();
+
+                // Changement de la scène de la fenêtre actuelle
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
+
+
 
 
 }
