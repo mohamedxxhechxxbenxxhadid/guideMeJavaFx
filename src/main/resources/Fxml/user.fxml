@@ -135,7 +135,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Pane prefHeight="45.0" prefWidth="896.0" HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" styleClass="bottom" stylesheets="@../css/styles.css" text="Filter">
                      <font>
                         <Font size="16.0" />
@@ -146,7 +146,7 @@
                   <Insets left="30.0" right="30.0" />
                </padding>
             </HBox>
-            <ScrollPane prefHeight="568.0" prefWidth="200.0" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS">
+            <ScrollPane prefHeight="551.0" prefWidth="1257.0" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS">
                <content>
                   <GridPane fx:id="logementGrid" prefHeight="0.0" prefWidth="0.0" styleClass="home-background" stylesheets="@../css/styles.css">
                     <rowConstraints>

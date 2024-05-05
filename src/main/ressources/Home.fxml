@@ -33,18 +33,14 @@
                            </font>
                         </Text>
                         <ImageView fitHeight="88.0" fitWidth="116.0" layoutX="-5.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@tnlgoo.png" />
-                           </image>
+
                         </ImageView>
                      </children>
                   </AnchorPane>
                   <HBox prefHeight="55.0" prefWidth="229.0">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@book.png" />
-                           </image>
+
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -62,9 +58,7 @@
                   <HBox prefHeight="59.0" prefWidth="239.0">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@reclamation.png" />
-                           </image>
+
                            <HBox.margin>
                               <Insets left="27.0" top="5.0" />
                            </HBox.margin>
@@ -92,9 +86,7 @@
                      <VBox.margin>
                         <Insets left="100.0" top="50.0" />
                      </VBox.margin>
-                     <image>
-                        <Image url="@settings.png" />
-                     </image>
+
                   </ImageView>
                </children>
             </VBox>

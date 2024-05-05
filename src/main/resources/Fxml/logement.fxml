@@ -84,22 +84,24 @@
                         <Font name="System Bold" size="15.0" />
                      </font></Text>
                   <TextField fx:id="tfPlace" layoutX="15.0" layoutY="331.0" />
-                  <Button layoutX="22.0" layoutY="449.0" mnemonicParsing="false" onAction="#addLogement" prefHeight="31.0" prefWidth="73.0" styleClass="bottom" stylesheets="@../css/styles.css" text="ADD" textFill="#edf1f0">
+                  <Button layoutX="15.0" layoutY="418.0" mnemonicParsing="false" onAction="#addLogement" prefHeight="31.0" prefWidth="73.0" styleClass="bottom" stylesheets="@../css/styles.css" text="ADD" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="btnUpdate" layoutX="107.0" layoutY="449.0" mnemonicParsing="false" onAction="#UpdateLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="UPDATE" textFill="#edf1f0">
+                  <Button fx:id="btnUpdate" layoutX="90.0" layoutY="418.0" mnemonicParsing="false" onAction="#UpdateLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="UPDATE" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="refreshButton" layoutX="16.0" layoutY="467.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="29.0" prefWidth="84.0" styleClass="bottom" stylesheets="@../css/styles.css" text="REFRESH" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="refreshButton" layoutX="20.0" layoutY="487.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="34.0" prefWidth="84.0" styleClass="bottom" stylesheets="@../css/styles.css" text="REFRESH" textFill="#edf1f0">
+                  <Button fx:id="btnDelete" layoutX="103.0" layoutY="464.0" mnemonicParsing="false" onAction="#deleteLogement" prefHeight="31.0" prefWidth="80.0" styleClass="bottom" stylesheets="@../css/styles.css" text="DELETE" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
-                     </font></Button>
-                  <Button fx:id="btnDelete" layoutX="106.0" layoutY="489.0" mnemonicParsing="false" onAction="#deleteLogement" prefHeight="31.0" prefWidth="80.0" styleClass="bottom" stylesheets="@../css/styles.css" text="DELETE" textFill="#edf1f0">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
                   <TextField fx:id="searchField" layoutX="24.0" layoutY="534.0" />
                   <Button layoutX="25.0" layoutY="565.0" mnemonicParsing="false" onAction="#SearchLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="Search" textFill="#edf1f0">
                      <font>

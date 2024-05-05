@@ -1,14 +1,30 @@
 package org.example.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.models.Logement;
+import javafx.scene.control.Label;
+import javafx.collections.ObservableList;
+
+import java.io.*;
+import java.util.ArrayList;
 
 public class DetailedViewController {
+    //private String currencyOneBox, currencyTwoBox, apiKey;
+    private String apiKey;
+    private ArrayList<String> currencyList;
+    @FXML
+    private Button convertButton;
 
+    @FXML
+    private ComboBox<String> currencyOneBox;
+    @FXML
+    private Label resultLabel;
+
+    @FXML
+    private ComboBox<String> currencyTwoBox;
     @FXML
     private ImageView imageView;
 
@@ -41,6 +57,45 @@ public class DetailedViewController {
             }
         }
     }
+    public void initialize(){
+        // retrieve api key
+        getApiKey();
+
+        // load logo
+      //  loadLogo();
+
+       /* try{
+            // retrieve and store list of currencies
+            currencyList = loadCurrencyList();
+
+            // store the list in the combo boxes
+            ObservableList<String> options = FXCollections.observableArrayList(currencyList);
+            currencyOneBox.setItems(options);
+            currencyTwoBox.setItems(options);
+
+        }catch(IOException e){
+            System.out.println("Error: Failed to load currency list " + e);
+        }
+*/
+    }
+
+    //public void setCurrencyOne(){currencyOne = currencyOneBox.getValue();}
+   // public void setCurrencyTwo(){currencyTwo = currencyTwoBox.getValue();}
+
+    private void getApiKey() {
+        InputStream inputStream = getClass().getResourceAsStream("/resources/apikey.txt");
+        if (inputStream != null) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                apiKey = reader.readLine();
+            } catch (IOException e) {
+                System.out.println("Error reading API key: " + e.getMessage());
+            }
+        } else {
+            System.out.println("API key resource not found.");
+        }
+    }
+
+
 
 
 }
