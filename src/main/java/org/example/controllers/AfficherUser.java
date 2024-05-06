@@ -95,6 +95,7 @@ public class AfficherUser implements Initializable {
         TableColumn<User, String> fullnameCol = new TableColumn<>("fullname");
         fullnameCol.setCellValueFactory(new PropertyValueFactory<>("fullname"));
 
+
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
 
