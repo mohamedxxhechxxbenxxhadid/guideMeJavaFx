@@ -16,6 +16,7 @@ import org.example.models.Post;
 import org.example.models.Reclamation;
 import org.example.services.ServicePost;
 
+import java.awt.event.InputMethodEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -71,6 +72,7 @@ public class ShowPosts implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+
 
 
 }

@@ -77,6 +77,7 @@ public class ReclamationItemController {
             newStage.setTitle(reclamation.getTitre());
             newStage .setScene(scene);
             newStage.show();
+            aC.stage = newStage ;
 
 
 

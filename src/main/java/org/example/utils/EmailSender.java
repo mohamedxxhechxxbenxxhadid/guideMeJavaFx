@@ -7,6 +7,7 @@ import jakarta.mail.internet.MimeMessage;
 
 public class EmailSender {
     public static void sendEmail(String recipientEmail, String subject, String body) throws MessagingException {
+        System.out.println("i m sendEmail function");
         // Set mail properties for Mailtrap
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "sandbox.smtp.mailtrap.io");

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.models.Reclamation;
 import org.example.utils.EmailSender;
 
@@ -35,8 +36,11 @@ public class AnswearController {
     boolean messageB ;
     boolean objectB ;
 
+    public Stage stage ;
+
     @FXML
     public void sendMail(ActionEvent event) {
+        System.out.println("senMail");
         if (messageId.getText().isBlank() ){
             descriptionLabelId.setVisible(true);
             messageId.textProperty().addListener(((observable, oldValue, newValue) -> {
@@ -55,12 +59,18 @@ public class AnswearController {
                 }
             }));
         }
+        System.out.println("i m in the middle of send mail");
+        System.out.println(objectB && messageB);
         if(objectB== true && messageB == true){
             System.out.println("mail sent 50%");
             try {
                 System.out.println("mail sent 50%");
                 EmailSender.sendEmail(reclamation.getEmail(),messageId.getText(),objectId.getText());
                 System.out.println("mail sent");
+                this.rC.remove(reclamation,rC);
+                this.rIC.DeleteItem(event);
+                stage.close();
+
             }catch (MessagingException e){
                 System.out.println(e.getMessage());
             }
