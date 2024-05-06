@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1198.0" styleClass="gradient-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.dashboardController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="247.0" text="Admin Dashboard" textFill="#edf1f0">
+               <font>
+                  <Font name="Barlow Condensed Medium" size="30.0" />
+               </font>
+            </Label>
+            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="499.0" styleClass="line-color" stylesheets="@../css/styles.css" HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/settings.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="75.0" layoutX="512.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/png-transparent-disney-kung-fu-panda-icon-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="290.0" spacing="20.0" styleClass="container" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../css/styles.css">
+               <children>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/1074766-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Button fx:id="SwitchToHome" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnSwitchToHome" prefHeight="43.0" prefWidth="270.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Home" textFill="#edf1f0">
+               <font>
+                  <Font name="Barlow Condensed Medium" size="28.0" />
+               </font>
+            </Button>
+            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="499.0" styleClass="line-color" stylesheets="@../css/styles.css" />
+            <HBox layoutX="20.0" layoutY="121.0" prefHeight="60.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="SwitchToCategorie" mnemonicParsing="false" onAction="#OnSwitchToCategorie" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Categoriesb" textFill="#edf1f0">
+                     <font>
+                        <Font name="Barlow Condensed Medium" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="SwitchToLogement" mnemonicParsing="false" onAction="#OnSwitchToLogement" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
+                     <font>
+                        <Font name="Barlow Condensed Medium" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
