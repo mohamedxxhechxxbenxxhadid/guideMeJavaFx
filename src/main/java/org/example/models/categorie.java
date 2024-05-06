@@ -33,6 +33,7 @@ public class categorie {
                 ", type='" + type + '\'' +
                 '}';
     }
+
 }
 
 
