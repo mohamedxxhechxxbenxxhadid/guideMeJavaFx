@@ -17,21 +17,3 @@
    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.2),10.0, 0.0, 0.0, 10.0); /* Add shadow effect */
    /* Add any other styling properties as needed */
 }
-.home-background{
-   -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #005D9E, #0080FF , #0080FF);
-
-}
-.border-buttom{
-   -fx-border-width: 0 0 2 0;
-   -fx-border-color: #676767;
-}
-.bottom {
-   -fx-background-color: #4B7EB6;
-   -fx-background-radius: 50;
-}
-.gradient{
-   -fx-background-color: linear-gradient(to top, #676767, transparent );
-}
-.shadow{
-   -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10 , 0 , 0 , 0.1 );
-}

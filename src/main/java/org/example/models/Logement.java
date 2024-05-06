@@ -8,19 +8,14 @@ public class Logement {
     private String place;
     private int prix;
     private int categorieId;
-    private String image;
-
-
 
     // Constructor
-    public Logement(int id,String nom, String description, String place, int prix, int categorieId, String image) {
-        this.id = id;
+    public Logement(String nom, String description, String place, int prix, int categorieId) {
         this.nom = nom;
         this.description = description;
         this.place = place;
         this.prix = prix;
         this.categorieId = categorieId;
-        this.image = image;
     }
 
     public int getId() {
@@ -41,7 +36,6 @@ public class Logement {
     public int getCategorieId() {
         return categorieId;
     }
-    public void setCategorieId(int categorieId) {this.categorieId = categorieId;}
     public String getNom() {
         return nom;
     }
@@ -73,21 +67,16 @@ public class Logement {
     public void setPrix(int prix) {
         this.prix = prix;
     }
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     @Override
     public String toString() {
-        return "Nom: " + nom + "\n" +
-                "Description: " + description + "\n" +
-                "Place: " + place + "\n" +
-                "Prix: " + prix;
+        return "Logement{" +
+                "id=" + id +
+                ", categorie=" + categorie +
+                ", nom='" + nom + '\'' +
+                ", description='" + description + '\'' +
+                ", place='" + place + '\'' +
+                ", prix=" + prix +
+                '}';
     }
-
-
 }
