@@ -30,6 +30,8 @@ import org.example.services.ServicePostImage;
 import org.example.services.ServiceUser;
 import org.example.test.MainFx;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -144,15 +146,44 @@ public class PostDetailsController implements Initializable {
         postDescriptionId.setText(this.post.getDescription());
         ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
         if(!postImages.isEmpty()){
-            InputStream blobImage = postImages.get(0).getImage_blob();
+            if(!postImages.get(0).getUrl().equals("Null")){
+                try {
+                    String s = postImages.get(0).getUrl();
+                    File pic=new File( s) ;
+                    InputStream in = new FileInputStream(pic);
+                    Image image = new Image(in);
+                    ImageView img = new ImageView();
+                    img.setFitHeight(373);
+                    img.setFitWidth(565);
+                    img.setImage(image);
+                    imageContainerId.getChildren().clear();
+                    imageContainerId.getChildren().add(0,img);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }else{
+                InputStream blobImage = postImages.get(0).getImage_blob();
+                Image image = new Image(blobImage);
+                ImageView img = new ImageView();
+                img.setFitHeight(373);
+                img.setFitWidth(565);
+                img.setImage(image);
+                imageContainerId.getChildren().clear();
+                imageContainerId.getChildren().add(0,img);
+            }
+            /*InputStream blobImage = postImages.get(0).getImage_blob();
             currentImage = 0 ;
             Image image = new Image(blobImage);
             img.setFitHeight(373);
             img.setFitWidth(565);
             img.setImage(image);
-            imageContainerId.getChildren().add(0,img);
+            imageContainerId.getChildren().clear();
+            imageContainerId.getChildren().add(0,img);*/
             for (PostImage postImage : postImages){
                 images.add(new Image(postImage.getImage_blob()));
+                System.out.println(postImages.size());
             }
         }else {
             previousImage.setDisable(true);
@@ -239,7 +270,26 @@ public class PostDetailsController implements Initializable {
             System.out.println("there is no more picture postDetailsController");
         }else{
             currentImage++;
-            img.setImage(images.get(currentImage));
+            try {
+                ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
+                String s = firstPostImage.get(currentImage).getUrl();
+                File pic=new File( s) ;
+                InputStream in = new FileInputStream(pic);
+                Image image = new Image(in);
+                ImageView img = new ImageView();
+                img.setFitHeight(373);
+                img.setFitWidth(565);
+                img.setImage(image);
+                imageContainerId.getChildren().clear();
+                imageContainerId.getChildren().add(0,img);
+                //Image image = new Image(firstPostImage.get(0).getImage_blob());
+                //img.setImage(image);
+                System.out.println("there is no more picture postDetailsController");
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -248,15 +298,49 @@ public class PostDetailsController implements Initializable {
         currentImage--;
         if(currentImage <=0  ){
             try {
+
                 ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
-                Image image = new Image(firstPostImage.get(0).getImage_blob());
+                String s = firstPostImage.get(0).getUrl();
+                File pic=new File( s) ;
+                InputStream in = new FileInputStream(pic);
+                Image image = new Image(in);
+                ImageView img = new ImageView();
+                img.setFitHeight(373);
+                img.setFitWidth(565);
                 img.setImage(image);
+                imageContainerId.getChildren().clear();
+                imageContainerId.getChildren().add(0,img);
+                //Image image = new Image(firstPostImage.get(0).getImage_blob());
+                //img.setImage(image);
                 System.out.println("there is no more picture postDetailsController");
             }catch (SQLException e){
                 System.out.println(e.getMessage());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
             }
+
         }else {
-            img.setImage(images.get(currentImage));
+            //img.setImage(images.get(currentImage));
+            try {
+                ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
+                String s = firstPostImage.get(currentImage).getUrl();
+                File pic=new File( s) ;
+                InputStream in = new FileInputStream(pic);
+                Image image = new Image(in);
+                ImageView img = new ImageView();
+                img.setFitHeight(373);
+                img.setFitWidth(565);
+                img.setImage(image);
+                imageContainerId.getChildren().clear();
+                imageContainerId.getChildren().add(0,img);
+                //Image image = new Image(firstPostImage.get(0).getImage_blob());
+                //img.setImage(image);
+                System.out.println("there is no more picture postDetailsController");
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -296,20 +380,24 @@ public class PostDetailsController implements Initializable {
                     imagesHbox.getChildren().add(imageBox);
                     System.out.println("111111111111111111111111111111111111111111111");
                     if(update == true){
+                        BufferedImage bImage = ImageIO.read(file);
+                        File output = new File("src/main/resources/images/"+file.getName()); // Replace "output.jpg" with the desired output file path
+                        ImageIO.write(bImage, getFileExtension(file.getName()), output);
                         PostImage p111 = new PostImage();
                         p111.setPost(this.updatedComment);
                         p111.setImage_blob(in);
-                        p111.setUrl(null);
+                        p111.setUrl("src/main/resources/images/"+file.getName());
                         postImagesAdd.add(p111);
-                        System.out.println("111111111111111111111111111111111111111111111");
                     }
                     if(updatePost == true){
+                        BufferedImage bImage = ImageIO.read(file);
+                        File output = new File("src/main/resources/images/"+file.getName()); // Replace "output.jpg" with the desired output file path
+                        ImageIO.write(bImage, getFileExtension(file.getName()), output);
                         PostImage p111 = new PostImage();
                         p111.setPost(this.post);
                         p111.setImage_blob(in);
-                        p111.setUrl(null);
+                        p111.setUrl("src/main/resources/images/"+file.getName());
                         postImagesAdd.add(p111);
-                        System.out.println("111111111111111111111111111111111111111111111");
                     }
                 }
 

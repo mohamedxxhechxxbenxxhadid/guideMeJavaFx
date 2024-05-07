@@ -27,6 +27,8 @@ import org.example.services.ServicePostImage;
 import org.example.services.ServiceUser;
 import org.example.utils.SentimentAnalysis;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -61,6 +63,7 @@ public class AjouterPostController  {
 
     private boolean loading=false ;
 
+    public ArrayList<BufferedImage> bufferedImages ;
     public void savePost(javafx.event.ActionEvent actionEvent) {
         if (titleId.getText().isBlank()){
             textLabelId.setVisible(true);
@@ -116,17 +119,29 @@ public class AjouterPostController  {
                     ServicePostImage sPI = new ServicePostImage();
                     try {
                         InputStream in = new FileInputStream(file);
+                        try {
+                            BufferedImage image = ImageIO.read(file);
+                            File output = new File("src/main/resources/images/"+file.getName()); // Replace "output.jpg" with the desired output file path
+                            ImageIO.write(image, getFileExtension(file.getName()), output);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         PostImage postImage = new PostImage();
                         postImage.setImage_blob(in);
                         postImage.setPost(post);
+                        postImage.setUrl("src/main/resources/images/"+file.getName());
                         sPI.add(postImage);
+
                         System.out.println("file"+in);
                     }catch (FileNotFoundException e){
                         System.out.println(e.getMessage());
                     }catch (SQLException e){
                         System.out.println(e.getMessage());
                     }
+
+
                 }
+
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
             try{

@@ -12,9 +12,9 @@ public class PostImage {
     public PostImage(){
 
     }
-    public PostImage(Integer id, Post post,InputStream image_blob) {
+    public PostImage(Integer id, Post post,String url,InputStream image_blob) {
         this.id = id;
-        this.url = null;
+        this.url = url;
         this.post = post;
         this.image_blob = image_blob ;
     }
@@ -23,6 +23,7 @@ public class PostImage {
         this.post = post;
         this.image_blob = image_blob ;
     }
+
 
     public Integer getId() {
         return id;

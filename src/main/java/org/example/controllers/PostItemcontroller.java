@@ -20,6 +20,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class PostItemcontroller {
@@ -51,13 +52,33 @@ public class PostItemcontroller {
         postDateId.setText(post.getCreatedAt().toString());
         ArrayList<PostImage> postImages  = new ArrayList<>(post.getPostImages()) ;
         if(!postImages.isEmpty()){
-            InputStream blobImage = postImages.get(0).getImage_blob();
-            Image image = new Image(blobImage);
-            ImageView img = new ImageView();
-            img.setFitWidth(450);
-            img.setFitHeight(300);
-            img.setImage(image);
-            paneId.getChildren().add(0,img);
+            if(!postImages.get(0).getUrl().equals("Null")){
+                try {
+                    String s = postImages.get(0).getUrl();
+                    File pic=new File( s) ;
+                    InputStream in = new FileInputStream(pic);
+                    Image image = new Image(in);
+                    ImageView img = new ImageView();
+                    img.setFitWidth(450);
+                    img.setFitHeight(300);
+                    img.setImage(image);
+                    paneId.getChildren().add(0,img);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }else{
+                InputStream blobImage = postImages.get(0).getImage_blob();
+                Image image = new Image(blobImage);
+                ImageView img = new ImageView();
+                img.setFitWidth(450);
+                img.setFitHeight(300);
+                img.setImage(image);
+                paneId.getChildren().add(0,img);
+            }
+
+
         }else {
             try{
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
@@ -67,7 +88,8 @@ public class PostItemcontroller {
                 img.setFitWidth(450);
                 img.setFitHeight(300);
                 img.setImage(image);
-                paneId.getChildren().add(0,img);            }catch (URISyntaxException| FileNotFoundException e ){
+                paneId.getChildren().add(0,img);
+            }catch (URISyntaxException| FileNotFoundException e ){
                 System.out.println(e.getMessage());
             }
         }

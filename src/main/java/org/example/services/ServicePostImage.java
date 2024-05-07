@@ -22,7 +22,7 @@ public class ServicePostImage implements IServices<PostImage> {
         String req = "INSERT INTO `postimage` (`post_id`, `url`, `blobimage`) VALUES (?, ?, ?)";
         PreparedStatement pst = con.prepareStatement(req);
         pst.setInt(1, postImage.getPost().getId());
-        pst.setString(2, "Null"); // Assuming 'url' is a string column and you want to insert 'Null'
+        pst.setString(2, postImage.getUrl()); // Assuming 'url' is a string column and you want to insert 'Null'
         pst.setBlob(3, postImage.getImage_blob());
         pst.executeUpdate();
 
@@ -57,8 +57,9 @@ public class ServicePostImage implements IServices<PostImage> {
         while (res.next()){
             int id = res.getInt(1);
             int postid =res.getInt(2);
+            String url = res.getString(3) ;
             InputStream imageblob =res.getBlob(4).getBinaryStream();
-            PostImage p = new PostImage(id,sP.findPostById(postid),imageblob);
+            PostImage p = new PostImage(id,sP.findPostById(postid),url,imageblob);
             postimages.add(p);
         }
         return postimages;
@@ -74,12 +75,13 @@ public class ServicePostImage implements IServices<PostImage> {
         while (res.next()){
             int id = res.getInt(1);
             int postid =res.getInt(2);
+            String url = res.getString(3) ;
             InputStream imageblob =res.getBlob(4).getBinaryStream();
-            return new PostImage(id,sP.findPostById(postid),imageblob);
+            return new PostImage(id,sP.findPostById(postid),url,imageblob);
         }
         return null;
     }
-    public List<PostImage> getPostImagesByPostId(int post) throws SQLException {
+    /*public List<PostImage> getPostImagesByPostId(int post) throws SQLException {
         List<PostImage> postimages = new ArrayList<>();
         ServicePost sP = new ServicePost();
         String req = "select * from postimage where post_id=?";
@@ -92,6 +94,24 @@ public class ServicePostImage implements IServices<PostImage> {
             int postid =res.getInt(2);
             InputStream imageblob =res.getBlob(4).getBinaryStream();
             PostImage p = new PostImage(id,sP.findPostById(postid),imageblob);
+            postimages.add(p);
+        }
+        return postimages;
+    }*/
+    public List<PostImage> getPostImagesByPostId(int post) throws SQLException {
+        List<PostImage> postimages = new ArrayList<>();
+        ServicePost sP = new ServicePost();
+        String req = "select * from postimage where post_id=?";
+        ste = con.createStatement();
+        PreparedStatement pre = con.prepareStatement(req);
+        pre.setInt(1,post);
+        ResultSet res = pre.executeQuery();
+        while (res.next()){
+            int id = res.getInt(1);
+            int postid =res.getInt(2);
+            String url = res.getString(3) ;
+            InputStream imageblob =res.getBlob(4).getBinaryStream();
+            PostImage p = new PostImage(id,sP.findPostById(postid),url,imageblob);
             postimages.add(p);
         }
         return postimages;
