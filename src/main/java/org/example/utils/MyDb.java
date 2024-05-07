@@ -16,6 +16,7 @@ public class MyDb {
         return con;
     }
 
+
     //3 creer une variable static pour stocker l'instance
     public static MyDb instance;
 
