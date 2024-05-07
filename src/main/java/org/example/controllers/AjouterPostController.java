@@ -33,6 +33,8 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AjouterPostController  {
 
@@ -94,7 +96,7 @@ public class AjouterPostController  {
             }
             Post post = new Post();
             post.setTitle(titleId.getText());
-            post.setDescription(descriptionId.getText());
+            post.setDescription(censorBadWords(descriptionId.getText()));
             post.setBigPost(true);
             post.setApproved(false);
             post.setUpVoteNum(0);
@@ -240,6 +242,26 @@ public class AjouterPostController  {
             disableAll();
         }
     }
+    public  String censorBadWords(String input) {
+        // List of bad words to censor
+        String[] badWords = {"fuck", "Fuck", "ass","Ass"};
 
+        // Build a regex pattern to match any of the bad words
+        String regex = "\\b(" + String.join("|", badWords) + ")\\b";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+
+        // Replace bad words with asterisks
+        Matcher matcher = pattern.matcher(input);
+        StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(result, repeat("*", matcher.group().length()));
+        }
+        matcher.appendTail(result);
+
+        return result.toString();
+    }
+    public  String repeat(String str, int n) {
+        return new String(new char[n]).replace("\0", str);
+    }
 
 }
