@@ -125,6 +125,7 @@ public class UpdateUser {
                     new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
             );
 
+
             // Show file chooser dialog
             File selectedFile = fileChooser.showOpenDialog(stage);
             if (selectedFile != null) {
