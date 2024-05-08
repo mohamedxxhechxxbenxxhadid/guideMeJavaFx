@@ -143,7 +143,7 @@ public class ResetPassword {
         String mailHost = "smtp.gmail.com";
         int mailPort = 587;
         String mailUsername = "benkhalifamalek29@gmail.com";
-        String mailPassword = "icju gwzm unuz udks";
+        String mailPassword = "bsfp czsc zbym izgr";
 
         // Configurer les propriétés du serveur de messagerie
         Properties properties = new Properties();

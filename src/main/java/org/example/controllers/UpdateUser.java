@@ -38,6 +38,9 @@ public class UpdateUser {
     private TextField tfAdress;
 
     @FXML
+    private TextField tfImageUrl;
+
+    @FXML
     private PasswordField tfPassword;
 
     @FXML
@@ -77,9 +80,10 @@ public class UpdateUser {
         tfnumtel.setText(user.getPhone_numer());
         tfFulname.setText(user.getFullname());
         tfEmail.setText(user.getEmail());
-
+        tfImageUrl.setText(user.getImage());
+        if(user.getImage()!=null){
         Image image = new Image(user.getImage());
-        imageView.setImage(image);
+        imageView.setImage(image);}
 
 
         //tfRole.setValue(user.getRole());
@@ -96,7 +100,8 @@ public class UpdateUser {
         user.setEmail(tfEmail.getText());
         user.setPassword(tfPassword.getText());
         System.out.println(imageUrl);
-        user.setImage(imageUrl);
+        if(imageUrl!=null){user.setImage(imageUrl);}
+        else{user.setImage(tfImageUrl.getText());}
 
 
         //    user.setRole(tfRole.getValue());

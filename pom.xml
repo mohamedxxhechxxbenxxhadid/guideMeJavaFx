@@ -66,6 +66,11 @@
             <version>1.6.2</version> <!-- Or the latest version available -->
         </dependency>
         <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version> <!-- Or the latest version available -->
+        </dependency>
+        <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-convert</artifactId>
             <version>2.2.3</version>
