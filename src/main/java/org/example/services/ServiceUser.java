@@ -7,6 +7,7 @@ import org.example.interfaces.IService;
 import org.example.models.User;
 import org.example.models.UserRole;
 import org.example.utils.MyDb;
+import org.example.models.Logement;
 
 import java.io.IOException;
 import java.sql.*;
@@ -22,10 +23,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 public class ServiceUser implements IService<User> {
 
     private Connection con ;
+    public Statement ste;
 
     public ServiceUser(){
         con = MyDb.getInstance().getCon();
     }
+
     @Override
     public void add(User user) {
         String qry = "INSERT INTO `user`(`email`, `roles`, `password`, `fullname`, `adress`, `phone_numer`, `is_verified`, `is_activated`,`image`) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -196,5 +199,25 @@ public class ServiceUser implements IService<User> {
 
 
 
+    public User findUserById(int userId) throws  SQLException{
+        String req = "select * from user where id = "+userId;
+        ste = con.createStatement();
+        ResultSet res =ste.executeQuery(req);
+        while (res.next()){
+            int id = res.getInt(1);
+            String email  =res.getString(2);
+            String password =res.getString(4);
+            String fullname =res.getString(5);
+            String adress =res.getString(6);
+            String phoneNumber =res.getString(7);
+            String role = res.getString(3) ;
+            boolean  verif =res.getBoolean(8);
+            boolean actif =res.getBoolean(9);
+
+            return new User(id,fullname,adress,phoneNumber,email,password, role ,verif,actif);
+        }
+        return null ;
+    }
 }
+
 

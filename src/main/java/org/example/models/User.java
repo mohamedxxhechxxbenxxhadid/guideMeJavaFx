@@ -28,6 +28,33 @@ public class User {
         this.is_activated = is_activated;
     }
 
+    public User(int id, String fullname, String adress, String phone_numer, String email, String password, String role, boolean is_verified, boolean is_activated) {
+        this.id = id;
+        this.fullname = fullname;
+        this.adress = adress;
+        this.phone_numer = phone_numer;
+        this.email = email;
+        this.password = password;
+        if(role.equals(UserRole.ROLE_ADMIN)){
+            this.role = UserRole.ROLE_ADMIN;
+        }else{
+            this.role = UserRole.ROLE_USER ;
+        }
+        this.is_verified = is_verified;
+        this.is_activated = is_activated;
+    }
+
+    public User( String fullname, String adress, String phone_numer, String email, String password, UserRole role, boolean is_verified, boolean is_activated) {
+        this.fullname = fullname;
+        this.adress = adress;
+        this.phone_numer = phone_numer;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.is_verified = is_verified;
+        this.is_activated = is_activated;
+    }
+
     public int getId() {
         return id;
     }

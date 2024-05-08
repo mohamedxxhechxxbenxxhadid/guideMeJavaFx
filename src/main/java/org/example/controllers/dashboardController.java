@@ -68,7 +68,7 @@ public class dashboardController {
     @FXML
     void OnSwitchToHome(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Fxml/user.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Home.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

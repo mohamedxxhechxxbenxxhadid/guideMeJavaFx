@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="831.0" prefWidth="1272.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.PostDetailsController">
+   <children>
+      <Label fx:id="postCreatorId" layoutX="80.0" layoutY="14.0" prefHeight="30.0" prefWidth="72.0" text="userName" />
+      <Label fx:id="postCreatedId" layoutX="929.0" layoutY="10.0" prefHeight="38.0" prefWidth="325.0" text="Label" />
+      <Label fx:id="postTitleId" layoutX="80.0" layoutY="453.0" prefHeight="38.0" prefWidth="159.0" text="Label" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff8b" height="341.0" layoutX="70.0" layoutY="480.0" stroke="TRANSPARENT" strokeType="INSIDE" width="509.0" />
+      <Text fx:id="postDescriptionId" layoutX="79.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="491.0" />
+      <ImageView fx:id="postImageId" fitHeight="60.0" fitWidth="90.0" layoutX="349.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="nextImage" layoutX="439.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToNextImage" text="&gt;" />
+      <Button fx:id="previousImage" layoutX="101.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToPreviousImage" text="&lt;" />
+      <ScrollPane layoutX="677.0" layoutY="64.0" prefHeight="391.0" prefWidth="541.0">
+         <content>
+            <GridPane fx:id="commentContainerId" prefHeight="2.0" prefWidth="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <AnchorPane fx:id="imageContainerId" layoutX="35.0" layoutY="44.0" prefHeight="373.0" prefWidth="565.0" />
+      <TextArea fx:id="Description" layoutX="677.0" layoutY="544.0" prefHeight="74.0" prefWidth="541.0" promptText="Add a comment" />
+      <ScrollPane layoutX="677.0" layoutY="651.0" prefHeight="102.0" prefWidth="541.0">
+         <content>
+            <HBox fx:id="imagesHbox" prefHeight="99.0" prefWidth="535.0" style="-fx-background-color: white;" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="uploadId" layoutX="677.0" layoutY="801.0" mnemonicParsing="false" onAction="#UploadImage" prefHeight="16.0" prefWidth="72.0" text="upload">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveId" layoutX="905.0" layoutY="821.0" mnemonicParsing="false" onAction="#saveComment" prefHeight="16.0" prefWidth="90.0" text="Add comment">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="updateId" layoutX="903.0" layoutY="792.0" mnemonicParsing="false" onAction="#updateCommentGui" prefHeight="16.0" prefWidth="90.0" text="update" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="returnToCommentId" layoutX="1015.0" layoutY="791.0" mnemonicParsing="false" onAction="#returnToComment" text="x" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <TextField fx:id="titleEditFieldId" layoutX="677.0" layoutY="494.0" prefHeight="24.0" prefWidth="541.0" style="-fx-background-color: white;" visible="false" />
+      <Button fx:id="deleteButtonPostId" layoutX="1191.0" layoutY="17.0" mnemonicParsing="false" onAction="#deletePost" style="-fx-background-color: red;" text="X" />
+      <Button fx:id="editPostButton" layoutX="48.0" layoutY="829.0" mnemonicParsing="false" onAction="#editPostFunction" text="Edit Post" />
+      <Label fx:id="blankDescriptionId" layoutX="686.0" layoutY="628.0" prefHeight="16.0" prefWidth="292.0" text="This field should not be blank" textFill="RED" visible="false" />
+      <Button fx:id="donePostId" layoutX="903.0" layoutY="819.0" mnemonicParsing="false" onAction="#updatePost" prefHeight="24.0" prefWidth="96.0" text="done" visible="false" />
+      <Label fx:id="blankTitleId" layoutX="679.0" layoutY="518.0" prefHeight="16.0" prefWidth="501.0" text="This Field should not be empty" textFill="RED" visible="false" />
+   </children>
+</AnchorPane>

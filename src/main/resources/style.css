@@ -1,0 +1,16 @@
+.shadow-effect {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 1, 1, 1, 4);
+}
+.roundedEdges{
+    -fx-border-radius: 50
+}
+.gradient{
+    -fx-background-color: linear-gradient(to top,#222222,transparent);
+}
+.shadow{
+    -fx-effect:dropShadow(three-pass-box,rgba(0,0,0.1),10,0,0,10);
+}
+.back{
+    -fx-background-Image:url('./pict1.png');
+    -fx-background-size:cover;
+}
