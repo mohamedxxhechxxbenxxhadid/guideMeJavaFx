@@ -2,6 +2,7 @@ package org.example.services;
 
 import org.example.interfaces.IServices;
 import org.example.models.User;
+import org.example.models.UserRole;
 import org.example.utils.MyDb;
 
 import java.sql.Connection;
@@ -48,10 +49,11 @@ public class ServiceUser implements IServices<User> {
             String fullname =res.getString(5);
             String adress =res.getString(6);
             String phoneNumber =res.getString(7);
+            String role = res.getString(3) ;
             boolean  verif =res.getBoolean(8);
             boolean actif =res.getBoolean(9);
 
-            return new User(id,email,password,fullname,adress,phoneNumber,verif,actif);
+            return new User(id,fullname,adress,phoneNumber,email,password, UserRole.ROLE_ADMIN,verif,actif);
         }
         return null ;
     }

@@ -1,67 +1,72 @@
 package org.example.models;
 
-import java.util.Arrays;
+
 
 public class User {
-    private int id;
-    private String email;
-    private String[] roles;
-    private String password;
-    private String fullName;
-    private String address;
-    private String phoneNumber;
-    private boolean isVerified;
-    private boolean isActivated;
-    private String image;
 
-    // Constructors
+    private int id;
+    private String fullname, adress, phone_numer, email, password;
+    private UserRole role;
+    private boolean is_verified = false;
+    private boolean is_activated = true;
+
+
     public User() {
     }
 
-    public User(String email, String[] roles, String password, String fullName, String address,
-                String phoneNumber, boolean isVerified, boolean isActivated, String image) {
-        this.email = email;
-        this.roles = roles;
-        this.password = password;
-        this.fullName = fullName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.isVerified = isVerified;
-        this.isActivated = isActivated;
-        this.image = image;
-    }
-    public User(int id ,String email, String password, String fullName, String address,
-                String phoneNumber, boolean isVerified, boolean isActivated) {
-        this.id = id ;
+    public User(int id, String fullname, String adress, String phone_numer, String email, String password, UserRole role, boolean is_verified, boolean is_activated) {
+        this.id = id;
+        this.fullname = fullname;
+        this.adress = adress;
+        this.phone_numer = phone_numer;
         this.email = email;
         this.password = password;
-        this.fullName = fullName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.isVerified = isVerified;
-        this.isActivated = isActivated;
-    }
-    public User(int id ,String email, String[] roles, String password, String fullName, String address,
-                String phoneNumber, boolean isVerified, boolean isActivated, String image) {
-        this.id = id ;
-        this.email = email;
-        this.roles = roles;
-        this.password = password;
-        this.fullName = fullName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.isVerified = isVerified;
-        this.isActivated = isActivated;
-        this.image = image;
+        this.role = role;
+        this.is_verified = is_verified;
+        this.is_activated = is_activated;
     }
 
-    // Getters and setters
+    public User( String fullname, String adress, String phone_numer, String email, String password, UserRole role, boolean is_verified, boolean is_activated) {
+        this.fullname = fullname;
+        this.adress = adress;
+        this.phone_numer = phone_numer;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.is_verified = is_verified;
+        this.is_activated = is_activated;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getPhone_numer() {
+        return phone_numer;
+    }
+
+    public void setPhone_numer(String phone_numer) {
+        this.phone_numer = phone_numer;
     }
 
     public String getEmail() {
@@ -72,14 +77,6 @@ public class User {
         this.email = email;
     }
 
-    public String[] getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String[] roles) {
-        this.roles = roles;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -88,67 +85,47 @@ public class User {
         this.password = password;
     }
 
-    public String getFullName() {
-        return fullName;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
-    public String getAddress() {
-        return address;
+    public boolean isIs_verified() {
+        return is_verified;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setIs_verified(boolean is_verified) {
+        this.is_verified = is_verified;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public boolean isIs_activated() {
+        return is_activated;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public boolean isVerified() {
-        return isVerified;
-    }
-
-    public void setVerified(boolean verified) {
-        isVerified = verified;
-    }
-
-    public boolean isActivated() {
-        return isActivated;
-    }
-
-    public void setActivated(boolean activated) {
-        isActivated = activated;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setIs_activated(boolean is_activated) {
+        this.is_activated = is_activated;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", fullname='" + fullname + '\'' +
+                ", adress='" + adress + '\'' +
+                ", phone_numer='" + phone_numer + '\'' +
                 ", email='" + email + '\'' +
-                ", roles=" + Arrays.toString(roles) +
                 ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", isVerified=" + isVerified +
-                ", isActivated=" + isActivated +
-                ", image='" + image + '\'' +
+                ", role=" + role +
+                ", is_verified=" + is_verified +
+                ", is_activated=" + is_activated +
                 '}';
     }
+
+    public static boolean isValidEmail(String email) {
+        return email.matches("^[a-zA-Z]\\w*@[\\w-]+(\\.[\\w-]+)*$");
+    }
+
 }
