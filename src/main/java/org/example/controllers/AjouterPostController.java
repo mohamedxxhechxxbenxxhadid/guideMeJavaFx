@@ -25,6 +25,7 @@ import org.example.models.User;
 import org.example.services.ServicePost;
 import org.example.services.ServicePostImage;
 import org.example.services.ServiceUser;
+import org.example.utils.Chat;
 import org.example.utils.SentimentAnalysis;
 
 import javax.imageio.ImageIO;
@@ -103,9 +104,21 @@ public class AjouterPostController  {
             post.setDownVoteNum(0);
             post.setCreator(u);
             post.setCreatedAt();
+            Post chatComment = new Post();
+            chatComment.setTitle("c");
+            chatComment.setDescription(Chat.sendMessage(post.getTitle()));
+            chatComment.setBigPost(false);
+            chatComment.setApproved(true);
+            chatComment.setUpVoteNum(0);
+            chatComment.setDownVoteNum(0);
+            chatComment.setCreator(u);
+            chatComment.setCreatedAt();
             ServicePost sP = new ServicePost();
             try{
                 sP.add(post);
+                post = sP.getTheLastPost();
+                chatComment.setPost(post);
+                sP.add(chatComment);
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
@@ -206,7 +219,9 @@ public class AjouterPostController  {
         ImagesHbox.getChildren().remove(imageBox);
         arrayImages.remove(file);
     }
+    public void removeBadWords(){
 
+    }
     public static String getFileExtension(String fullName) {
         String fileName = new File(fullName).getName();
         int dotIndex = fileName.lastIndexOf('.');
@@ -243,14 +258,11 @@ public class AjouterPostController  {
         }
     }
     public  String censorBadWords(String input) {
-        // List of bad words to censor
-        String[] badWords = {"fuck", "Fuck", "ass","Ass"};
+        String[] badWords = {"fuck", "Fuck", "ass","Ass","nigga","Nigga","Asshole","asshole","bitch","Bitch"};
 
-        // Build a regex pattern to match any of the bad words
         String regex = "\\b(" + String.join("|", badWords) + ")\\b";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
-        // Replace bad words with asterisks
         Matcher matcher = pattern.matcher(input);
         StringBuffer result = new StringBuffer();
         while (matcher.find()) {

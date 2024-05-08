@@ -29,6 +29,7 @@ import org.example.services.ServicePost;
 import org.example.services.ServicePostImage;
 import org.example.services.ServiceUser;
 import org.example.test.MainFx;
+import org.example.utils.Chat;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
