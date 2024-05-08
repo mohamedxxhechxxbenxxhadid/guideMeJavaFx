@@ -9,9 +9,6 @@ public class Logement {
     private int prix;
     private int categorieId;
     private String image;
-
-
-
     // Constructor
     public Logement(int id,String nom, String description, String place, int prix, int categorieId, String image) {
         this.id = id;
@@ -76,11 +73,9 @@ public class Logement {
     public String getImage() {
         return image;
     }
-
     public void setImage(String image) {
         this.image = image;
     }
-
     @Override
     public String toString() {
         return "Nom: " + nom + "\n" +
@@ -88,6 +83,4 @@ public class Logement {
                 "Place: " + place + "\n" +
                 "Prix: " + prix;
     }
-
-
 }
