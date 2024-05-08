@@ -48,6 +48,9 @@ public class AjouterReclamationController {
     @FXML
     private Label titleLabelId;
 
+    @FXML
+    private Label notification;
+
     boolean nameB = true;
     boolean phoneB = true ;
     boolean emailB = true ;
@@ -131,15 +134,17 @@ public class AjouterReclamationController {
     }
 
     public void AfficherReclamation() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-        try {
-            Parent root = loader.load();
-            HomeController hC = loader.getController();
-            phoneId.getScene().setRoot(root);
-            hC.changeToShowReclamationFunction();
+        notification.setVisible(true);
+        sleepForSeconds(2);
+        notification.setVisible(false);
 
-        } catch (IOException e) {
-            System.out.println("affiche"+e.getMessage());
+    }
+    public static void sleepForSeconds(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000); // Convert seconds to milliseconds
+        } catch (InterruptedException e) {
+            // Handle interruption if needed
+            e.printStackTrace();
         }
     }
     public  boolean validateNumber(String input) {

@@ -63,30 +63,43 @@
                <children>
                   <Button fx:id="SwitchToCategorie" mnemonicParsing="false" onAction="#OnSwitchToCategorie" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Categoriesb" textFill="#edf1f0">
                      <font>
-                        <Font name="Barlow Condensed Medium" size="28.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
             <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="SwitchToLogement" mnemonicParsing="false" onAction="#OnSwitchToLogement" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
+                  <Button fx:id="SwitchToLogement" mnemonicParsing="false" onAction="#OnSwitchToLogement" prefHeight="38.0" prefWidth="270.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
                      <font>
-                        <Font name="Barlow Condensed Medium" size="28.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0">
+            <Button fx:id="SwitchToUser" mnemonicParsing="false" onAction="#OnSwitchToUser" prefHeight="49.0" prefWidth="270.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Gestion user" textFill="#edf1f0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="60.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="SwitchToUser" mnemonicParsing="false" onAction="#OnSwitchToUser" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Gestion user" textFill="#edf1f0">
+                  <Button fx:id="SwitchToPost" mnemonicParsing="false" onAction="#OnSwitchToPosts" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Posts" textFill="#edf1f0">
                      <font>
-                        <Font name="Barlow Condensed Medium" size="28.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0" />
+            <HBox prefHeight="60.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="SwitchToReclamations" mnemonicParsing="false" onAction="#OnSwitchToReclamations" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Reclamations" textFill="#edf1f0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>

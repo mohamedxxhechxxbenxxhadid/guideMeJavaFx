@@ -78,6 +78,34 @@ public class dashboardController {
         }
     }
 
+    @FXML
+    void OnSwitchToPosts(ActionEvent event) {
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/backOfficePostController.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("not working");
+        }
+    }
+
+    @FXML
+    void OnSwitchToReclamations(ActionEvent event) {
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/showreclamation.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("not working");
+        }
+    }
+
     public void initData(User user) {
     }
 }

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -11,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 import org.example.models.Post;
 import org.example.models.Reclamation;
 
@@ -99,30 +101,19 @@ public class HomeController implements Initializable {
         }
     }
     public void changeToShowReclamationFunction() {
-        try{
-            Parent fxml = FXMLLoader.load(getClass().getResource("/showreclamation.fxml"));
-            fxml.prefWidth(contentArea.getWidth());
-            fxml.prefHeight(contentArea.getHeight());
-            contentArea.getChildren().removeAll();
-            contentArea.getChildren().setAll(fxml);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("not working");
-        }
+        
 
     }
     @FXML
-    public void changeToBackShowPosts() {
-        try{
-            Parent fxml = FXMLLoader.load(getClass().getResource("/backOfficePostController.fxml"));
-            fxml.prefWidth(contentArea.getWidth());
-            fxml.prefHeight(contentArea.getHeight());
-            contentArea.getChildren().removeAll();
-            contentArea.getChildren().setAll(fxml);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("not working");
+    public void changeToBackShowPosts(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxml/dashboard.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 }

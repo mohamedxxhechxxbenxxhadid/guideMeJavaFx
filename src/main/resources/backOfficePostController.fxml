@@ -20,5 +20,6 @@
          </columns>
       </TableView>
       <Button fx:id="approveButtonId" layoutX="779.0" layoutY="762.0" mnemonicParsing="false" onAction="#approvePost" prefHeight="24.0" prefWidth="192.0" text="approve" textFill="#14521a" />
+      <Button fx:id="logementScene" layoutX="23.0" layoutY="750.0" mnemonicParsing="false" onAction="#OnSwitchBack" text="Back" />
    </children>
 </AnchorPane>

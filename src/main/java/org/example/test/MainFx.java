@@ -25,7 +25,7 @@ public class MainFx extends Application {
                 System.out.println(e.getMessage());
             }
 
-            primaryStage.setTitle("Gestion Personne");
+            primaryStage.setTitle("du boom");
             primaryStage.setScene(scene);
             primaryStage.show();
 

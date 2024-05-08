@@ -17,6 +17,16 @@
             <Image url="@top-view-chat-bubbles-with-telephone-receiver-copy-space.jpg" />
          </image>
       </ImageView>
+      <Label fx:id="notification1" layoutX="887.0" layoutY="24.0" prefHeight="69.0" prefWidth="257.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Reclamation sent" textAlignment="CENTER" textFill="#4d945a">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="notification" layoutX="877.0" layoutY="14.0" prefHeight="69.0" prefWidth="257.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Reclamation sent" textAlignment="CENTER" textFill="#4d945a" visible="false">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
       <Text layoutX="111.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Get In Touch With Us">
          <font>
             <Font size="32.0" />
