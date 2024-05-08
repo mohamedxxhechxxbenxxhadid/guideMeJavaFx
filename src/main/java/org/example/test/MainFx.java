@@ -6,20 +6,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.controllers.CategorieController;
 
+import java.io.IOException;
+
 
 public class MainFx extends Application {
     @Override
-    public void start( Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/dashboard.fxml"));
-     primaryStage.setTitle("Admin Dashboard");
-        primaryStage.setScene(new Scene(root,  1198 ,  700));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 }

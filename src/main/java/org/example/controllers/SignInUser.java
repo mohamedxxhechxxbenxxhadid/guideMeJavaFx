@@ -63,12 +63,12 @@ public class SignInUser {
 
                     if (ROLE_ADMIN.equals(user.getRole())){
                         // Redirection vers le tableau de bord (Dashboard) pour l'administrateur
-                        loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+                        loader = new FXMLLoader(getClass().getResource("/Fxml/dashboard.fxml"));
                         root = loader.load();
                         // Ajouter ici toute logique spécifique à l'administrateur si nécessaire
                     } else {
                         // Redirection vers la page d'accueil (Home) pour les autres utilisateurs
-                        loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+                        loader = new FXMLLoader(getClass().getResource("/Fxml/user.fxml"));
                         root = loader.load();
                         // Ajouter ici toute logique spécifique aux utilisateurs ordinaires si nécessaire
                     }
