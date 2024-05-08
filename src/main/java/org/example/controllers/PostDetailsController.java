@@ -456,7 +456,7 @@ public class PostDetailsController implements Initializable {
             ServiceUser sU = new ServiceUser();
             User u = new User() ;
             try{
-                u = sU.findUserById(1);
+                u = sU.findUserById(17);
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
