@@ -48,7 +48,7 @@ public class PostItemcontroller {
     public void  setData(Post post){
         this.post = post ;
         postTitleId.setText(post.getTitle());
-        creatorId.setText(post.getCreator().getFullName());
+        creatorId.setText(post.getCreator().getFullname());
         postDateId.setText(post.getCreatedAt().toString());
         ArrayList<PostImage> postImages  = new ArrayList<>(post.getPostImages()) ;
         if(!postImages.isEmpty()){

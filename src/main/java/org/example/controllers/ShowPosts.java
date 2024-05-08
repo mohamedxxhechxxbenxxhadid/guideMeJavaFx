@@ -56,7 +56,9 @@ public class ShowPosts implements Initializable {
         try{
             posts = sP.afficher() ;
             postObservableList = FXCollections.observableList(posts);
+            System.out.println(posts.size());
             for (Post post : posts){
+                System.out.println("i m in posts boucle");
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/postitem.fxml"));
                 Pane anchorPane = fxmlLoader.load();

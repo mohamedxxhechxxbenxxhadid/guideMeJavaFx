@@ -91,7 +91,7 @@ public class AjouterPostController  {
             ServiceUser sU = new ServiceUser();
             User u = new User() ;
             try{
-                u = sU.findUserById(1);
+                u = sU.findUserById(17);
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
@@ -116,9 +116,6 @@ public class AjouterPostController  {
             ServicePost sP = new ServicePost();
             try{
                 sP.add(post);
-                post = sP.getTheLastPost();
-                chatComment.setPost(post);
-                sP.add(chatComment);
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
@@ -155,6 +152,13 @@ public class AjouterPostController  {
                     }
 
 
+                }
+                try {
+                    post = sP.getTheLastPost();
+                    chatComment.setPost(post);
+                    sP.add(chatComment);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
 
             }

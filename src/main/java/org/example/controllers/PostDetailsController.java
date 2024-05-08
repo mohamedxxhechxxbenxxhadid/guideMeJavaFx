@@ -142,7 +142,7 @@ public class PostDetailsController implements Initializable {
             System.out.println("============"+e.getMessage());
         }
         postTitleId.setText(this.post.getTitle());
-        postCreatorId.setText(this.post.getCreator().getFullName());
+        postCreatorId.setText(this.post.getCreator().getFullname());
         postCreatedId.setText(this.post.getCreatedAt().toString());
         postDescriptionId.setText(this.post.getDescription());
         ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;

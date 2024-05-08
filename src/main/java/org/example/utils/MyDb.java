@@ -7,7 +7,7 @@ public class MyDb {
 
     public final String USERNAME = "root";
     public final String PWD = "";
-    public final String URL = "jdbc:mysql://localhost:3306/pidevSymfony11";
+    public final String URL = "jdbc:mysql://localhost:3306/pidevjavafx";
 
     private Connection con;
 

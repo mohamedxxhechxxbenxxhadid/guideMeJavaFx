@@ -36,7 +36,6 @@ public class ServicePost implements IServices<Post> {
         pst.setTimestamp(9, Timestamp.valueOf(post.getCreatedAt()));
 
         pst.executeUpdate();
-
     }
 
     @Override
@@ -80,6 +79,7 @@ public class ServicePost implements IServices<Post> {
         ResultSet res =ste.executeQuery(req);
         User creator ;
         while (res.next()){
+            System.out.println("11111");
             int postid =res.getInt(2);
             int creatorid = res.getInt(3);
             if (creatorid != 0 ){

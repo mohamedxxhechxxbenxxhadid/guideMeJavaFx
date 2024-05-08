@@ -47,7 +47,7 @@ public class CommentItemController {
         this.post = post ;
         this.pDC = postDetailsController ;
         descriptionId.setText(post.getDescription());
-        usernameId.setText(post.getCreator().getFullName());
+        usernameId.setText(post.getCreator().getFullname());
         if(this.post.getPostImages()!= null){
             ArrayList<PostImage> postImages  = new ArrayList<>(this.post.getPostImages()) ;
             if(postImages.isEmpty()){
