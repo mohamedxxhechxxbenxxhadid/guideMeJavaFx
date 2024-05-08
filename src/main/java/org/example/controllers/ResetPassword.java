@@ -139,7 +139,7 @@ public class ResetPassword {
         String code = generateRandomCode();
         resetCodes.put(userMail,code);
 
-        // Paramètres de configuration pour Gmail
+        // Paramètres de configuration pouMar Gmail
         String mailHost = "smtp.gmail.com";
         int mailPort = 587;
         String mailUsername = "benkhalifamalek29@gmail.com";
