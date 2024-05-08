@@ -2,6 +2,7 @@ package org.example.controllers;
 
 
 import javafx.event.ActionEvent;
+
 import javafx.scene.input.MouseEvent;
 
 import javafx.fxml.FXML;
@@ -169,77 +170,72 @@ public class UserController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-
-    // Method to update displayed content with filtered logements
+            // Method to update displayed content with filtered logements
 // Method to update displayed content with filtered logements
-    private void updateDisplay(List<Logement> filteredLogements) {
-        // Clear existing content from the grid pane
-        logementGrid.getChildren().clear();
+            private void updateDisplay (List < Logement > filteredLogements) {
+                // Clear existing content from the grid pane
+                logementGrid.getChildren().clear();
 
-        // Add filtered logements to the grid pane
-        int column = 0;
-        int row = 0;
+                // Add filtered logements to the grid pane
+                int column = 0;
+                int row = 0;
 
-        // Reset grid gaps to ensure proper spacing
-        logementGrid.setHgap(10); // Adjust as needed
-        logementGrid.setVgap(10); // Adjust as needed
+                // Reset grid gaps to ensure proper spacing
+                logementGrid.setHgap(10); // Adjust as needed
+                logementGrid.setVgap(10); // Adjust as needed
 
-        for (Logement logement : filteredLogements) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Logement2.fxml"));
-            try {
-                Pane pane = fxmlLoader.load();
-                Logement2Controller logement2Controller = fxmlLoader.getController();
-                logement2Controller.setData(logement); // Pass Logement object here
+                for (Logement logement : filteredLogements) {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Logement2.fxml"));
+                    try {
+                        Pane pane = fxmlLoader.load();
+                        Logement2Controller logement2Controller = fxmlLoader.getController();
+                        logement2Controller.setData(logement); // Pass Logement object here
 
-                // Add the pane to the grid pane
-                logementGrid.add(pane, column, row);
+                        // Add the pane to the grid pane
+                        logementGrid.add(pane, column, row);
 
-                // Increment column index
-                column++;
+                        // Increment column index
+                        column++;
 
-                // Check if we need to move to the next row
-                if (column == 3) {
-                    column = 0;
-                    row++;
+                        // Check if we need to move to the next row
+                        if (column == 3) {
+                            column = 0;
+                            row++;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            }
+
+            @FXML
+            private void handleImageClick (MouseEvent event){
+                // Handle image click event
+                System.out.println("Image clicked");
+
+                try {
+                    // Load the FXML file for the new page
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/LogementUser.fxml"));
+                    Parent root = fxmlLoader.load();
+
+                    // Create a new scene with the loaded FXML content
+                    Scene scene = new Scene(root);
+
+                    // Get the stage information
+                    Stage stage = (Stage) logementGrid.getScene().getWindow();
+
+                    // Set the new scene on the stage
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
-
-    @FXML
-    private void handleImageClick(MouseEvent event) {
-        // Handle image click event
-        System.out.println("Image clicked");
-
-        try {
-            // Load the FXML file for the new page
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/LogementUser.fxml"));
-            Parent root = fxmlLoader.load();
-
-            // Create a new scene with the loaded FXML content
-            Scene scene = new Scene(root);
-
-            // Get the stage information
-            Stage stage = (Stage) logementGrid.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-
 
 
 
