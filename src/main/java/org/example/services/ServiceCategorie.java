@@ -30,7 +30,7 @@ public class ServiceCategorie implements IServices <categorie> {
         }
     }
 
-    @Override
+
     public void add(Logement logement) throws SQLException {
 
     }

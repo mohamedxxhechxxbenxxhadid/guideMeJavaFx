@@ -46,7 +46,7 @@ public class ServiceLogement implements IServices {
     }
 
 
-    @Override
+
     public void add(Logement logement) throws SQLException {
         Connection con = myDb.getCon();
         String query = "INSERT INTO logement (categorie, nom, description, place, prix, image) VALUES (?, ?, ?, ?, ?, ?)";

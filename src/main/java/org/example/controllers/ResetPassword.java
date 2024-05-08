@@ -171,7 +171,7 @@ public class ResetPassword {
             message.setText("Click the link below to reset your password:\n"+ code);
 
             // Send the message
-            Transport.send(message);
+            //Transport.send(message);
 
             showAlert("Password reset email sent to " + userMail);
         } catch (Exception e) {

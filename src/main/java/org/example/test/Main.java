@@ -1,16 +1,20 @@
 package org.example.test;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 import java.util.prefs.Preferences;
 import java.io.IOException;
 
 public class Main extends Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+
         launch(args);
     }
 
@@ -18,6 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/dashboard.fxml"));
         try {
+
             Parent root = loader.load();
             Scene scene = new Scene(root );
 
