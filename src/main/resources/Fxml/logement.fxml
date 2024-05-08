@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1198.0" styleClass="gradient-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LogementController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="logementScene" mnemonicParsing="false" onAction="#OnSwitchBack" text="Back" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="390.0" text="Admin Dashboard" textFill="#edf1f0">
+               <font>
+                  <Font name="Barlow Condensed Medium" size="30.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <ImageView fitHeight="63.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="53.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="290.0" spacing="20.0" styleClass="container" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
+                     <font>
+                        <Font name="Barlow Condensed Medium" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Text fill="#edf1f0" layoutX="17.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Text>
+                  <ComboBox fx:id="categorieComboBox" layoutX="15.0" layoutY="25.0" onAction="#populateComboBox" prefWidth="150.0" />
+                  <Text fill="#edf1f0" layoutX="14.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du Logement" wrappingWidth="151.13671875">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Text>
+                  <Text fill="#edf1f0" layoutX="18.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Text>
+                  <TextArea fx:id="tfDescription" layoutX="16.0" layoutY="146.0" prefHeight="95.0" prefWidth="152.0" />
+                  <TextField fx:id="tfNom" layoutX="15.0" layoutY="80.0" />
+                  <Text fill="#edf1f0" layoutX="17.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="44.306640625">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Text>
+                  <TextField fx:id="tfPrice" layoutX="17.0" layoutY="271.0" prefHeight="25.0" prefWidth="144.0" />
+                  <Text fill="#edf1f0" layoutX="14.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Text>
+                  <TextField fx:id="tfPlace" layoutX="15.0" layoutY="331.0" />
+                  <Button layoutX="15.0" layoutY="418.0" mnemonicParsing="false" onAction="#addLogement" prefHeight="31.0" prefWidth="73.0" styleClass="bottom" stylesheets="@../css/styles.css" text="ADD" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
+                  <Button fx:id="btnUpdate" layoutX="90.0" layoutY="418.0" mnemonicParsing="false" onAction="#UpdateLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="UPDATE" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="refreshButton" layoutX="16.0" layoutY="467.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="29.0" prefWidth="84.0" styleClass="bottom" stylesheets="@../css/styles.css" text="REFRESH" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
+                  <Button fx:id="btnDelete" layoutX="103.0" layoutY="464.0" mnemonicParsing="false" onAction="#deleteLogement" prefHeight="31.0" prefWidth="80.0" styleClass="bottom" stylesheets="@../css/styles.css" text="DELETE" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="searchField" layoutX="24.0" layoutY="534.0" />
+                  <Button layoutX="25.0" layoutY="565.0" mnemonicParsing="false" onAction="#SearchLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="Search" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
+                  <Button layoutX="16.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#getImage" prefHeight="32.0" prefWidth="143.0" styleClass="bottom" stylesheets="@../css/styles.css" text="Choose File" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Pane>
+            <ImageView fx:id="imageView" fitHeight="129.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets top="320.0" />
+               </HBox.margin>
+            </ImageView>
+            <ListView fx:id="listViewLogements" editable="true" onMouseClicked="#onItemSelected" prefHeight="539.0" prefWidth="462.0" stylesheets="@../css/styles.css">
+               <HBox.margin>
+                  <Insets left="100.0" top="10.0" />
+               </HBox.margin></ListView>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

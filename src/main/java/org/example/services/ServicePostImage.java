@@ -3,6 +3,7 @@ package org.example.services;
 import org.example.interfaces.IServices;
 import org.example.models.PostImage;
 import org.example.utils.MyDb;
+import org.example.models.Logement;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -17,6 +18,10 @@ public class ServicePostImage implements IServices<PostImage> {
         con= MyDb.getInstance().getCon();
     }
 
+    @Override
+    public void add(Logement logement) throws SQLException {
+
+    }
     @Override
     public void add(PostImage postImage) throws SQLException {
         String req = "INSERT INTO `postimage` (`post_id`, `url`, `blobimage`) VALUES (?, ?, ?)";

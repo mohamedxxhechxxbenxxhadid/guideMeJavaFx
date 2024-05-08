@@ -7,6 +7,7 @@ import org.example.utils.MyDb;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.example.models.Logement;
 
 public class ServiceVote implements IServices<Vote> {
     public Connection con;
@@ -27,6 +28,10 @@ public class ServiceVote implements IServices<Vote> {
 
     }
 
+    @Override
+    public void add(Logement logement) throws SQLException {
+
+    }
     @Override
     public void update(Vote vote) throws SQLException {
         String req = "UPDATE vote SET post_id=?, up=?, down=? ,user=? WHERE  id=?";

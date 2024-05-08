@@ -39,5 +39,7 @@ public class MyDb {
         return instance;
     }
 
-
+  /*  public MyDb() {
+        // Constructor logic
+    } */
 }

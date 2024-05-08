@@ -4,6 +4,7 @@ import org.example.interfaces.IServices;
 import org.example.models.Post;
 import org.example.models.User;
 import org.example.utils.MyDb;
+import org.example.models.Logement;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -16,6 +17,10 @@ public class ServicePost implements IServices<Post> {
 
     public ServicePost(){
         con= MyDb.getInstance().getCon();
+    }
+    @Override
+    public void add(Logement logement) throws SQLException {
+
     }
     @Override
     public void add(Post post) throws SQLException {

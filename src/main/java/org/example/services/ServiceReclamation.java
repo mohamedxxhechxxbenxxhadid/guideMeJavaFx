@@ -8,6 +8,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.example.models.Logement;
 
 public class ServiceReclamation implements IServices<Reclamation> {
     public Connection con;
@@ -22,6 +23,10 @@ public class ServiceReclamation implements IServices<Reclamation> {
         ste.executeUpdate(req);
     }
 
+    @Override
+    public void add(Logement logement) throws SQLException {
+
+    }
     @Override
     public void update(Reclamation reclamation) throws SQLException {
         String req = "UPDATE reclamation SET name=?, phon_number=?, email=?, titre=?, message=? WHERE id=?";
