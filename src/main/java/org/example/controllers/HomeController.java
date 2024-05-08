@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import org.example.models.Post;
 import org.example.models.Reclamation;
+import org.example.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,14 @@ public class HomeController implements Initializable {
     @FXML
     private StackPane contentArea;
 
+    private User user;
+
+    public void initData(User user) {
+        System.out.println(user);
+        this.user = user;
+    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +52,7 @@ public class HomeController implements Initializable {
     @FXML
     public void changeToPostsFunction(ActionEvent event) {
         try{
+
             Parent fxml = FXMLLoader.load(getClass().getResource("/showposts.fxml"));
             fxml.prefWidth(contentArea.getWidth());
             fxml.prefHeight(contentArea.getHeight());
@@ -52,6 +62,25 @@ public class HomeController implements Initializable {
             System.out.println(e.getMessage());
             System.out.println("not working");
         }
+
+    }
+    @FXML
+    public void changeToProfile(ActionEvent event) {
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
+            Parent root = loader.load();
+            UpdateUser controller = loader.getController();
+            controller.setUserToUpdate(user);
+            root.prefWidth(contentArea.getWidth());
+            root.prefHeight(contentArea.getHeight());
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(root);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("not working");
+        }
+        //System.out.println(user.getEmail());
 
     }
     @FXML
@@ -116,4 +145,6 @@ public class HomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 }

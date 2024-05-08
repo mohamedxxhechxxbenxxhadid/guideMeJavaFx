@@ -68,8 +68,10 @@ public class SignInUser {
                         // Ajouter ici toute logique spécifique à l'administrateur si nécessaire
                     } else {
                         // Redirection vers la page d'accueil (Home) pour les autres utilisateurs
-                        loader = new FXMLLoader(getClass().getResource("/Fxml/user.fxml"));
+                        loader = new FXMLLoader(getClass().getResource("/Home.fxml/"));
                         root = loader.load();
+                        HomeController homeController = loader.getController();
+                        homeController.initData(user);
                         // Ajouter ici toute logique spécifique aux utilisateurs ordinaires si nécessaire
                     }
 
