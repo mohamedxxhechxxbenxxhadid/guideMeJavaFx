@@ -1,11 +1,12 @@
 package org.example.models;
 
 
+import javafx.scene.image.Image;
 
 public class User {
 
     private int id;
-    private String fullname, adress, phone_numer, email, password;
+    private String fullname, adress, phone_numer, email, password, image;
     private UserRole role;
     private boolean is_verified = false;
     private boolean is_activated = true;
@@ -14,9 +15,10 @@ public class User {
     public User() {
     }
 
-    public User(int id, String fullname, String adress, String phone_numer, String email, String password, UserRole role, boolean is_verified, boolean is_activated) {
+    public User(int id, String fullname, String adress, String phone_numer, String email, String password, UserRole role, boolean is_verified, boolean is_activated, String image) {
         this.id = id;
         this.fullname = fullname;
+        this.image= image;
         this.adress = adress;
         this.phone_numer = phone_numer;
         this.email = email;
@@ -56,6 +58,14 @@ public class User {
 
     public void setPhone_numer(String phone_numer) {
         this.phone_numer = phone_numer;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getEmail() {
@@ -98,6 +108,11 @@ public class User {
         this.is_activated = is_activated;
     }
 
+
+    public static boolean isValidEmail(String email) {
+        return email.matches("^[a-zA-Z]\\w*@[\\w-]+(\\.[\\w-]+)*$");
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -107,14 +122,10 @@ public class User {
                 ", phone_numer='" + phone_numer + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
                 ", role=" + role +
                 ", is_verified=" + is_verified +
                 ", is_activated=" + is_activated +
                 '}';
     }
-
-    public static boolean isValidEmail(String email) {
-        return email.matches("^[a-zA-Z]\\w*@[\\w-]+(\\.[\\w-]+)*$");
-    }
-
 }

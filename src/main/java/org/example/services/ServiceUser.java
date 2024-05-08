@@ -8,9 +8,13 @@ import org.example.models.User;
 import org.example.models.UserRole;
 import org.example.utils.MyDb;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Collections;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -24,7 +28,7 @@ public class ServiceUser implements IService<User> {
     }
     @Override
     public void add(User user) {
-        String qry = "INSERT INTO `user`(`email`, `roles`, `password`, `fullname`, `adress`, `phone_numer`, `is_verified`, `is_activated`) VALUES (?,?,?,?,?,?,?,?)";
+        String qry = "INSERT INTO `user`(`email`, `roles`, `password`, `fullname`, `adress`, `phone_numer`, `is_verified`, `is_activated`,`image`) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pstm = con.prepareStatement(qry);
 
@@ -36,6 +40,7 @@ public class ServiceUser implements IService<User> {
             pstm.setString(6, user.getPhone_numer());
             pstm.setBoolean(7, user.isIs_verified());
             pstm.setBoolean(8, user.isIs_activated());
+            pstm.setString(9, user.getImage());
 
 
 
@@ -56,12 +61,16 @@ public class ServiceUser implements IService<User> {
                 User user = new User();
                 user.setId(rs.getInt("id")); // Récupération de l'ID
                 user.setFullname(rs.getString("fullname"));
+
                 user.setPassword(rs.getString("password"));
                 user.setPhone_numer(rs.getString("phone_numer"));
                 user.setEmail(rs.getString("email"));
+                user.setAdress(rs.getString("adress"));
+                user.setImage(rs.getString("image"));
+
                 user.setIs_activated(rs.getBoolean("is_activated"));
                 user.setIs_verified(rs.getBoolean("is_verified"));
-               /* String rolesJson = rs.getString("roles");
+                /*String rolesJson = rs.getString("roles");
                 ObjectMapper objectMapper = new ObjectMapper();
                 List<UserRole> roles = objectMapper.readValue(rolesJson, new TypeReference<List<UserRole>>() {});
                 user.setRole(roles);*/
@@ -78,7 +87,7 @@ public class ServiceUser implements IService<User> {
 
     @Override
     public void update(User user) {
-        String qry ="UPDATE `user` SET `fullname`=?,  `phone_numer`=?, `email`=?,`adress`=? WHERE `id`=?";
+        String qry ="UPDATE `user` SET `fullname`=?,  `phone_numer`=?, `email`=?,`adress`=?,`image`=? WHERE `id`=?";
         try {
             PreparedStatement pstm = con.prepareStatement(qry);
 
@@ -86,8 +95,9 @@ public class ServiceUser implements IService<User> {
             pstm.setString(2, user.getPhone_numer());
             pstm.setString(3, user.getEmail());
             pstm.setString(4, user.getAdress());
+            pstm.setString(5, user.getImage());
             //pstm.setBoolean(5, user.isIs_activated());  add attribut
-            pstm.setInt(5, user.getId());
+            pstm.setInt(6, user.getId());
 
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -128,10 +138,14 @@ public class ServiceUser implements IService<User> {
                 user.setIs_activated(rs.getBoolean("is_activated"));
                 user.setIs_verified(rs.getBoolean("is_verified"));
                 // Récupération du rôle
+                // Convert JSON string to array or list of UserRole enums
+                // For now, let's assume roles are stored as comma-separated strings
                 String rolesJson = rs.getString("roles");
-                ObjectMapper objectMapper = new ObjectMapper();
-                //   List<UserRole> roles = objectMapper.readValue(rolesJson, new TypeReference<List<UserRole>>() {});
-                //user.setRole(roles);
+                List<UserRole> roles = parseRolesFromJson(rolesJson);
+                // For simplicity, assuming a user has only one role
+                if (!roles.isEmpty()) {
+                   user.setRole( roles.get(0));
+                }
 
                 return user;
             }
@@ -140,6 +154,21 @@ public class ServiceUser implements IService<User> {
         }
 
         return null;
+    }
+
+    private List<UserRole> parseRolesFromJson(String rolesJson) {
+        try {
+            // Trim quotes and whitespace, and split by commas to handle individual role strings
+            String[] roleStrings = rolesJson.replaceAll("^\"|\"$", "").split(",");
+            List<UserRole> roles = new ArrayList<>();
+            for (String roleString : roleStrings) {
+                roles.add(UserRole.valueOf(roleString.trim()));
+            }
+            return roles;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     public void updatePassword(String email, String newPassword) {
@@ -163,5 +192,9 @@ public class ServiceUser implements IService<User> {
             // Handle
         }
     }
+
+
+
+
 }
 

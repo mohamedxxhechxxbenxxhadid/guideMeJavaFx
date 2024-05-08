@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.example.models.User;
 
 import java.io.IOException;
 
@@ -21,11 +22,26 @@ public class dashboardController {
     private Button SwitchToHome;
     @FXML
     private Button SwitchToLogement;
+
+    @FXML
+    private Button SwitchToUser;
     //switch from dashboard to categorie
     @FXML
     void OnSwitchToCategorie(ActionEvent event)  {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/Fxml/categorie.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void OnSwitchToUser(ActionEvent event)  {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherUser.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -62,4 +78,6 @@ public class dashboardController {
         }
     }
 
+    public void initData(User user) {
+    }
 }

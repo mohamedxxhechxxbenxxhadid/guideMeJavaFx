@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,14 +25,23 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import org.example.models.Logement;
+
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 public class AfficherUser implements Initializable {
+
+    private Stage stage;
+    private Scene scene;
 
     @FXML
     private TableView<User> lbUsers;
@@ -62,7 +72,12 @@ public class AfficherUser implements Initializable {
     @FXML
     private Button updateButton;
 
+    @FXML
+    private Button addUserButton;
+
+
     private ObservableList<User> utilisateursData;
+
 
 
 
@@ -129,6 +144,9 @@ public class AfficherUser implements Initializable {
 
         });
 
+
+
+
         updateButton.setOnAction(event -> {
             User selectedUser = lbUsers.getSelectionModel().getSelectedItem();
             if (selectedUser != null) {
@@ -151,6 +169,30 @@ public class AfficherUser implements Initializable {
 
         });
 
+        addUserButton.setOnAction(event -> {
+
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/AjouterUser.fxml"));
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+        });
+
+
+    }
+    @FXML
+    void OnSwitchBack(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/dashboard.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
     }
     public void setUsersData(ObservableList<User> users) {

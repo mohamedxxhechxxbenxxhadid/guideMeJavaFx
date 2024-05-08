@@ -14,8 +14,10 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import org.example.models.User;
+import org.example.models.UserRole;
 import org.example.services.ServiceUser;
 
+import static org.example.models.UserRole.ROLE_ADMIN;
 
 
 public class SignInUser {
@@ -49,13 +51,36 @@ public class SignInUser {
 
             if (user != null) {
                 // Authentification réussie
-                // Redirection vers la page AjouterPersonne après l'authentification réussie
+                // Assuming you have a method to get the user's role
+
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
-                    Parent root = loader.load();
-                    AjouterUser ajoutUser = loader.getController();
-                    // Vous pouvez passer l'utilisateur à ajouterPersonneController si nécessaire
-                    Scene scene = new Scene(root);
+                    FXMLLoader loader;
+                    Parent root;
+                    Scene scene;
+
+                    System.out.println(user.getRole());
+                    System.out.println(user.getAdress());
+
+                    if (ROLE_ADMIN.equals(user.getRole())){
+                        // Redirection vers le tableau de bord (Dashboard) pour l'administrateur
+                        loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+                        root = loader.load();
+                        // Ajouter ici toute logique spécifique à l'administrateur si nécessaire
+                    } else {
+                        // Redirection vers la page d'accueil (Home) pour les autres utilisateurs
+                        loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+                        root = loader.load();
+                        // Ajouter ici toute logique spécifique aux utilisateurs ordinaires si nécessaire
+                    }
+
+                    // Configuration du contrôleur si nécessaire
+                    // Exemple pour récupérer le contrôleur du Dashboard (à adapter selon votre besoin)
+                    if (ROLE_ADMIN.equals(user.getRole())) {
+                        dashboardController dashboardController = loader.getController();
+                        dashboardController.initData(user); // Passer l'utilisateur connecté au contrôleur du tableau de bord
+                    }
+
+                    scene = new Scene(root);
 
                     // Obtention de la fenêtre actuelle (Stage)
                     Stage stage = (Stage) btnsignin.getScene().getWindow();
@@ -72,6 +97,7 @@ public class SignInUser {
                 System.out.println("Echec de l'authentification. Vérifiez vos identifiants.");
             }
         });
+
 
         // Action du bouton d'inscription
         btnsignup.setOnAction(event -> {

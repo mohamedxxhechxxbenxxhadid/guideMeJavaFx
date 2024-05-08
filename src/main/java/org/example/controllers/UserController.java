@@ -1,13 +1,19 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 import org.example.models.Logement;
+import org.example.models.User;
 import org.example.services.ServiceLogement;
 import org.example.utils.MyDb;
 import javafx.scene.layout.Region;
@@ -16,9 +22,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
+
 public class UserController implements Initializable {
+    private Stage stage;
+    private Scene scene;
+    private User user;
 
     @FXML
     private GridPane logementGrid;
@@ -28,6 +39,7 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+
             // Instantiate the ServiceLogement service using your MyDb instance
             serviceLogement = new ServiceLogement(MyDb.getInstance());
 
@@ -79,5 +91,27 @@ public class UserController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
+    public void setUser(User user) {
+        this.user = user;
+        System.out.println(user.getFullname());
+    }
+
+    @FXML
+    void OnSwitchToUpdate(ActionEvent event)  {
+        try {
+
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/UpdateUser.fxml")));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

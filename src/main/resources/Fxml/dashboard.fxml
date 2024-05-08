@@ -57,6 +57,7 @@
                   <Font name="Barlow Condensed Medium" size="28.0" />
                </font>
             </Button>
+
             <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="499.0" styleClass="line-color" stylesheets="@../css/styles.css" />
             <HBox layoutX="20.0" layoutY="121.0" prefHeight="60.0" prefWidth="200.0">
                <children>
@@ -70,6 +71,15 @@
             <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0">
                <children>
                   <Button fx:id="SwitchToLogement" mnemonicParsing="false" onAction="#OnSwitchToLogement" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
+                     <font>
+                        <Font name="Barlow Condensed Medium" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="241.0" prefHeight="60.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="SwitchToUser" mnemonicParsing="false" onAction="#OnSwitchToUser" prefHeight="68.0" prefWidth="272.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Gestion user" textFill="#edf1f0">
                      <font>
                         <Font name="Barlow Condensed Medium" size="28.0" />
                      </font>
