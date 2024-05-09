@@ -31,7 +31,10 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Pane prefHeight="125.0" prefWidth="160.0" HBox.hgrow="ALWAYS" />
+                  <Pane prefHeight="114.0" prefWidth="142.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Pane>
                </children>
             </HBox>
             <VBox alignment="CENTER" prefHeight="125.0" prefWidth="124.0">
@@ -48,69 +51,15 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0">
-               <children>
-                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8-monter-dans-le-bus-50.png" />
-                     </image>
-                  </ImageView>
-                  <Label prefHeight="40.0" prefWidth="80.0" text="Transports" textFill="#0080ff">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="534.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0">
-               <children>
-                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8-bavarder-48.png" />
-                     </image>
-                  </ImageView>
-                  <Label prefHeight="40.0" prefWidth="98.0" text="Reclamations" textFill="#0080ff">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="658.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0">
-               <children>
-                  <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8-evénement-accepté-provisoirement-50.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="80.0" text="Events" textFill="#0080ff">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
+            <VBox alignment="CENTER" layoutX="658.0" layoutY="10.0" prefHeight="125.0" prefWidth="124.0" />
 
-            <VBox alignment="CENTER" layoutX="1074.0" layoutY="10.0" prefHeight="125.0" prefWidth="31.0">
-               <children>
-                  <Circle fill="#0080ff" radius="4.0" stroke="#0080ff" strokeType="INSIDE" />
-               </children>
-            </VBox>
-            <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true" />
-            <Button mnemonicParsing="false" onAction="#OnSwitchToUpdate" prefHeight="26.0" prefWidth="113.0" text="ToProfile" />
-            <ImageView fx:id="UserIcon" fitHeight="83.0" fitWidth="93.0" onMouseClicked="#OnSwitchToUpdate" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/profileuser.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="30.0" top="30.0" />
-               </HBox.margin>
-            </ImageView>
+            <VBox alignment="CENTER" layoutX="1074.0" layoutY="10.0" prefHeight="125.0" prefWidth="31.0" />
+            <ImageView fitHeight="120.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true" />
 
-            <Pane prefHeight="125.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+            <Pane prefHeight="154.0" prefWidth="294.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField fx:id="searchField" layoutX="48.0" layoutY="49.0" />
-                  <VBox alignment="CENTER" layoutX="211.0" layoutY="-1.0" prefHeight="126.0" prefWidth="36.0">
+                  <TextField fx:id="searchField" layoutX="48.0" layoutY="58.0" prefHeight="28.0" prefWidth="149.0" />
+                  <VBox alignment="CENTER" layoutX="211.0" layoutY="-1.0" prefHeight="148.0" prefWidth="36.0">
                      <children>
                         <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -121,7 +70,7 @@
                      </children>
                   </VBox>
                </children></Pane>
-            <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="125.0" prefWidth="31.0">
+            <VBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="137.0" prefWidth="33.0">
                <children>
                   <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -129,6 +78,16 @@
                      </image>
                   </ImageView>
                   <Circle fill="#0080ff" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="1132.0" layoutY="10.0" prefHeight="150.0" prefWidth="161.0">
+               <children>
+                  <ImageView fx:id="UserIcon" fitHeight="57.0" fitWidth="37.0" onMouseClicked="#OnSwitchToUpdate" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profileuser.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#OnSwitchToUpdate" prefHeight="24.0" prefWidth="113.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="ToProfile" />
                </children>
             </VBox>
 

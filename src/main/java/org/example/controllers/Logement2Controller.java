@@ -38,13 +38,14 @@ public class Logement2Controller {
         if (imagePath != null && !imagePath.isEmpty()) {
             File imageFile = new File(imagePath);
             Image imageObject = new Image(imageFile.toURI().toString());
-            imageView.setImage(imageObject);
+            imageView.setImage(imageObject); // NullPointerException may occur here
         } else {
             // Handle the case where the image path is null or empty
             // For example, you could set a default image
             // imageView.setImage(defaultImage);
         }
     }
+
     @FXML
     private void handleImageClick(ActionEvent event) {
         // Handle image click event

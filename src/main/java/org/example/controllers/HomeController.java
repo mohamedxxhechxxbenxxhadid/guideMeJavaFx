@@ -29,6 +29,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button changeToReclamation;
+    @FXML
+    private Button changeToLogement;
 
     @FXML
     private VBox generalId;
@@ -147,4 +149,16 @@ public class HomeController implements Initializable {
     }
 
 
+    @FXML
+    void changeToLogement(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxml/user.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
