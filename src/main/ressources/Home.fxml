@@ -86,6 +86,11 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
+                  <Button fx:id="changeToProfileId" mnemonicParsing="false" onAction="#changeToProfile" prefHeight="43.0" prefWidth="235.0" style="-fx-background-color: white;" text="profile" textFill="#0073ed">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
                   <Separator prefHeight="24.0" prefWidth="284.0" />
                   <Button fx:id="backId" mnemonicParsing="false" onAction="#changeToBackShowPosts" prefHeight="60.0" prefWidth="206.0" style="-fx-background-radius: 20; -fx-background-color: #0073ed;" text="Go To back" textFill="#dadada">
                      <VBox.margin>
@@ -101,6 +106,15 @@
                      </VBox.margin>
 
                   </ImageView>
+                  <HBox prefHeight="59.0" prefWidth="239.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="27.0" top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

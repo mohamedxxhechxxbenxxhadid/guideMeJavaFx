@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="878.0" prefWidth="1200.0" style="-fx-background-color: #dadada;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ShowPosts">
+<AnchorPane prefHeight="641.0" prefWidth="1200.0" style="-fx-background-color: #dadada;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ShowPosts">
    <children>
       <HBox prefHeight="75.0" prefWidth="1113.0">
          <children>
@@ -37,8 +37,15 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="460.0" layoutY="440.0" prefHeight="335.0" prefWidth="694.0" />
-      <ScrollPane layoutX="10.0" layoutY="76.0" prefHeight="736.0" prefWidth="1187.0" style="-fx-background-color: #dadada;">
+      <HBox alignment="CENTER" layoutX="166.0" layoutY="546.0" prefHeight="90.0" prefWidth="694.0">
+         <children>
+            <Button fx:id="buttonAddPost" mnemonicParsing="false" onAction="#goToAddPost" prefHeight="37.0" prefWidth="236.0" text="write you own story ">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children></HBox>
+      <ScrollPane layoutX="10.0" layoutY="76.0" prefHeight="470.0" prefWidth="1187.0" style="-fx-background-color: #dadada;">
          <content>
             <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #dadada;">
                <columnConstraints>
@@ -47,10 +54,5 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button fx:id="buttonAddPost" layoutX="486.0" layoutY="823.0" mnemonicParsing="false" onAction="#goToAddPost" prefHeight="37.0" prefWidth="236.0" text="write you own story ">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

@@ -33,6 +33,8 @@ public class HomeController implements Initializable {
     private Button changeToLogement;
 
     @FXML
+    private Button changeToProfileId;
+    @FXML
     private VBox generalId;
 
     @FXML
