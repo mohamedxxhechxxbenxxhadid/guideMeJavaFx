@@ -2,9 +2,12 @@ package org.example.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.models.Logement;
 import javafx.scene.image.Image;
@@ -16,7 +19,8 @@ public class Logement2Controller {
 
     @FXML
     private Label nomHotel;
-
+    @FXML
+    private Pane pane;
     @FXML
     private Label prix;
     @FXML
@@ -45,21 +49,25 @@ public class Logement2Controller {
             // imageView.setImage(defaultImage);
         }
     }
-
     @FXML
-    private void handleImageClick(ActionEvent event) {
-        // Handle image click event
-        System.out.println("Image clicked!");
+    private void handlePaneClick(MouseEvent event) {
+        // You can put your logic here to handle the click event
         try {
             // Load the FXML file for the new page
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/LogementUser.fxml"));
             Parent root = fxmlLoader.load();
 
+            // Access the controller of the new FXML file
+            LogementUserController controller = fxmlLoader.getController();
+
+            // Pass the data to the controller and initialize it
+            controller.initData(logement); // Assuming 'logement' is available in this context
+
             // Create a new scene with the loaded FXML content
             Scene scene = new Scene(root);
 
             // Get the stage information
-            Stage stage = (Stage) imageView.getScene().getWindow();
+            Stage stage = new Stage();
 
             // Set the new scene on the stage
             stage.setScene(scene);
@@ -68,5 +76,11 @@ public class Logement2Controller {
             e.printStackTrace();
         }
     }
-    }
+
+}
+
+
+
+
+
 

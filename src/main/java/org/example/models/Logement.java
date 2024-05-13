@@ -1,5 +1,7 @@
 package org.example.models;
 
+import com.itextpdf.layout.element.Cell;
+
 public class Logement {
     private int id;
     private categorie categorie;
@@ -62,13 +64,11 @@ public class Logement {
     public void setPlace(String place) {
         this.place = place;
     }
-
-    public int getPrix() {
-        return prix;
-    }
-
     public void setPrix(int prix) {
         this.prix = prix;
+    }
+    public int getPrix() {
+        return prix;
     }
     public String getImage() {
         return image;

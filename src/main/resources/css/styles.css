@@ -35,3 +35,13 @@
 .shadow{
    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10 , 0 , 0 , 0.1 );
 }
+.custom-combobox {
+   -fx-background-color: #0080FF;
+   -fx-text-fill: #9CC2D5;
+   -fx-border-color: #0080FF;
+   -fx-border-width: 1px;
+}
+.back-bottom {
+   -fx-background-color: #0080FF;
+   -fx-background-radius: 50;
+}

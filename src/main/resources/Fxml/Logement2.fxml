@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" styleClass="shadow" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.Logement2Controller">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handlePaneClick" prefHeight="250.0" prefWidth="400.0" styleClass="shadow" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.Logement2Controller">
    <children>
       <ImageView fx:id="imageView" fitHeight="240.0" fitWidth="400.0" layoutX="-5.0" pickOnBounds="true" preserveRatio="true" />
       <HBox layoutY="1.0" prefHeight="250.0" prefWidth="400.0" styleClass="gradient" stylesheets="@../css/styles.css">

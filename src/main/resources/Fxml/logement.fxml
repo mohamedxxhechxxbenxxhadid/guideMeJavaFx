@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,7 +20,14 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logementScene" mnemonicParsing="false" onAction="#OnSwitchBack" text="Back" />
+            <Button fx:id="logementScene" mnemonicParsing="false" onAction="#OnSwitchBack" prefHeight="42.0" prefWidth="86.0" styleClass="back-bottom" stylesheets="@../css/styles.css" textFill="#edf1f0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/undo.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="390.0" text="Admin Dashboard" textFill="#edf1f0">
                <font>
                   <Font name="Barlow Condensed Medium" size="30.0" />
@@ -42,15 +50,12 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
-                     <font>
-                        <Font name="Barlow Condensed Medium" size="28.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            <Button mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Logementsb" textFill="#edf1f0">
+               <font>
+                  <Font name="Barlow Condensed Medium" size="28.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
          </children>
       </VBox>
    </left>
@@ -63,7 +68,7 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Text>
-                  <ComboBox fx:id="categorieComboBox" layoutX="15.0" layoutY="25.0" onAction="#populateComboBox" prefWidth="150.0" />
+                  <ComboBox fx:id="categorieComboBox" layoutX="15.0" layoutY="25.0" onAction="#populateComboBox" prefHeight="25.0" prefWidth="185.0" styleClass="custom-combobox" stylesheets="@../css/styles.css" />
                   <Text fill="#edf1f0" layoutX="14.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du Logement" wrappingWidth="151.13671875">
                      <font>
                         <Font name="System Bold" size="15.0" />
@@ -72,57 +77,59 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Text>
-                  <TextArea fx:id="tfDescription" layoutX="16.0" layoutY="146.0" prefHeight="95.0" prefWidth="152.0" />
-                  <TextField fx:id="tfNom" layoutX="15.0" layoutY="80.0" />
+                  <TextArea fx:id="tfDescription" layoutX="16.0" layoutY="146.0" prefHeight="95.0" prefWidth="186.0" promptText="Donner une description pour votre logement" />
+                  <TextField fx:id="tfNom" layoutX="15.0" layoutY="80.0" prefHeight="25.0" prefWidth="186.0" promptText="Entrer le nom du logement" />
                   <Text fill="#edf1f0" layoutX="17.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="44.306640625">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Text>
-                  <TextField fx:id="tfPrice" layoutX="17.0" layoutY="271.0" prefHeight="25.0" prefWidth="144.0" />
+                  <TextField fx:id="tfPrice" layoutX="17.0" layoutY="271.0" prefHeight="25.0" prefWidth="185.0" promptText="Entrer le prix par personne" />
                   <Text fill="#edf1f0" layoutX="14.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Text>
-                  <TextField fx:id="tfPlace" layoutX="15.0" layoutY="331.0" />
-                  <Button layoutX="15.0" layoutY="418.0" mnemonicParsing="false" onAction="#addLogement" prefHeight="31.0" prefWidth="73.0" styleClass="bottom" stylesheets="@../css/styles.css" text="ADD" textFill="#edf1f0">
+                  <TextField fx:id="tfPlace" layoutX="15.0" layoutY="331.0" prefHeight="25.0" prefWidth="189.0" promptText="nb de places" />
+                  <Button layoutX="15.0" layoutY="418.0" mnemonicParsing="false" onAction="#addLogement" prefHeight="31.0" prefWidth="89.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="ADD" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="btnUpdate" layoutX="90.0" layoutY="418.0" mnemonicParsing="false" onAction="#UpdateLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="UPDATE" textFill="#edf1f0">
+                  <Button fx:id="btnUpdate" layoutX="114.0" layoutY="418.0" mnemonicParsing="false" onAction="#UpdateLogement" prefHeight="31.0" prefWidth="87.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="UPDATE" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="refreshButton" layoutX="16.0" layoutY="467.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="29.0" prefWidth="84.0" styleClass="bottom" stylesheets="@../css/styles.css" text="REFRESH" textFill="#edf1f0">
+                  <Button fx:id="refreshButton" layoutX="16.0" layoutY="467.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="31.0" prefWidth="92.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="REFRESH" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="btnDelete" layoutX="103.0" layoutY="464.0" mnemonicParsing="false" onAction="#deleteLogement" prefHeight="31.0" prefWidth="80.0" styleClass="bottom" stylesheets="@../css/styles.css" text="DELETE" textFill="#edf1f0">
+                  <Button fx:id="btnDelete" layoutX="119.0" layoutY="464.0" mnemonicParsing="false" onAction="#deleteLogement" prefHeight="31.0" prefWidth="84.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="DELETE" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="searchField" layoutX="24.0" layoutY="534.0" />
-                  <Button layoutX="25.0" layoutY="565.0" mnemonicParsing="false" onAction="#SearchLogement" styleClass="bottom" stylesheets="@../css/styles.css" text="Search" textFill="#edf1f0">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font></Button>
-                  <Button layoutX="16.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#getImage" prefHeight="32.0" prefWidth="143.0" styleClass="bottom" stylesheets="@../css/styles.css" text="Choose File" textFill="#edf1f0">
+                  <TextField fx:id="searchField" layoutX="24.0" layoutY="496.0" prefHeight="25.0" prefWidth="174.0" promptText="search for .." />
+                  <Button layoutX="18.0" layoutY="531.0" mnemonicParsing="false" onAction="#SearchLogement" prefHeight="25.0" prefWidth="181.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Search" textFill="#edf1f0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
+                  <Button layoutX="16.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#getImage" prefHeight="28.0" prefWidth="186.0" styleClass="transparent-button" stylesheets="@../css/styles.css" text="Choose File" textFill="#edf1f0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="generatePdfButton" layoutX="38.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleGeneratePdfButton" prefHeight="25.0" prefWidth="155.0" text="Button" />
                </children>
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
             </Pane>
-            <ImageView fx:id="imageView" fitHeight="129.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageView" fitHeight="130.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
-                  <Insets top="320.0" />
+                  <Insets left="35.0" top="310.0" />
                </HBox.margin>
             </ImageView>
-            <ListView fx:id="listViewLogements" editable="true" onMouseClicked="#onItemSelected" prefHeight="539.0" prefWidth="462.0" stylesheets="@../css/styles.css">
+            <ListView fx:id="listViewLogements" editable="true" onMouseClicked="#onItemSelected" prefHeight="539.0" prefWidth="462.0" styleClass="gradient-background" stylesheets="@../css/styles.css">
                <HBox.margin>
                   <Insets left="100.0" top="10.0" />
                </HBox.margin></ListView>

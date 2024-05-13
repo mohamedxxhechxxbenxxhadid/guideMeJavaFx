@@ -1,4 +1,11 @@
 package org.example.controllers;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import org.example.models.Logement;
 import org.example.services.ServiceLogement;
 import javafx.scene.image.Image;
@@ -55,6 +64,8 @@ public class LogementController {
     private TextField searchField;
     @FXML
     private ImageView imageView;
+    @FXML
+    private Button generatePdfButton;
 
     @FXML
     void getImage(MouseEvent event) {
@@ -239,7 +250,17 @@ public class LogementController {
 
             // Ajouter le nouveau Logement à la base de données en utilisant la classe ServiceLogement
             ServiceLogement.add(newLogement);
-            System.out.println("Logement ajouté avec succès.");
+            //---------notif start
+            Notifications notification = Notifications.create()
+                    .title("Logement")
+                    .text("Your Logging was  Added  successfully  ")
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT)
+                    .graphic(null) // No graphic
+                    .hideCloseButton(); // Hide close button
+            // Apply the CSS styling directly
+            notification.show();
+            //---------notif end
 
             // Optionnellement, effacer les champs du formulaire après avoir ajouté le Logement
             clearFormFields();
@@ -404,6 +425,56 @@ public class LogementController {
             stage.show();
         }
     }
+    @FXML
+    void handleGeneratePdfButton(ActionEvent event) {
+        try (PdfWriter writer = new PdfWriter("recettes.pdf");
+             PdfDocument pdf = new PdfDocument(writer);
+             Document document = new Document(pdf)) {
+            Paragraph title = new Paragraph("Liste des recettes")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(18)
+                    .setBold();
+            document.add(title);
+            Paragraph description = new Paragraph("Ce tableau des recettes est une structure organisée qui stocke les détails essentiels de chaque recette. Chaque ligne représente une recette individuelle, avec des colonnes pour le nom, la description, la catégorie et la date. Il facilite la gestion et la recherche des recettes " +
+                    "en fournissant un aperçu rapide de chaque plat disponible dans le système.")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(10);
+            document.add(description);
 
 
-}
+            Table table = new Table(2);
+            table.addCell("name");
+            table.addCell("description");
+
+
+
+            // Récupération des données des recettes depuis la TableView
+            ObservableList<Logement> recetteObservableList1 = listViewLogements.getItems();
+            for (Logement logement : recetteObservableList1) {
+                table.addCell(logement.getNom());
+                table.addCell(logement.getDescription());
+
+            }
+
+            document.add(table);
+
+
+            //---------notif start
+            Notifications notification = Notifications.create()
+                    .title("Recipe")
+                    .text("Pdf was downloaded successfully  ")
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT)
+                    .graphic(null) // No graphic
+                    .hideCloseButton(); // Hide close button
+            // Apply the CSS styling directly
+            notification.show();
+            //---------notif end
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    }
+
+

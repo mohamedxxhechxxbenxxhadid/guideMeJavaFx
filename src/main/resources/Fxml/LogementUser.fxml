@@ -139,7 +139,6 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Pane prefHeight="45.0" prefWidth="896.0" HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" styleClass="bottom" stylesheets="@../css/styles.css" text="Filter">
                      <font>
                         <Font size="16.0" />
@@ -153,4 +152,14 @@
          </children>
       </VBox>
    </center>
+   <left>
+      <Pane prefHeight="184.0" prefWidth="879.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="289.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="nameLabel" layoutX="440.0" layoutY="33.0" prefHeight="35.0" prefWidth="163.0" text="Label" />
+            <Label fx:id="descriptionLabel" layoutX="440.0" layoutY="98.0" prefHeight="141.0" prefWidth="172.0" text="Label" />
+            <Label fx:id="priceLabel" layoutX="440.0" layoutY="259.0" prefHeight="29.0" prefWidth="148.0" text="Label" />
+         </children>
+      </Pane>
+   </left>
 </BorderPane>

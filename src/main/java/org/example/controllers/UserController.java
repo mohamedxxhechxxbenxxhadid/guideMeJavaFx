@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -162,13 +163,11 @@ public class UserController implements Initializable {
     @FXML
     void OnSwitchToUpdate(ActionEvent event) {
         try {
-
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/UpdateUser.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -233,10 +232,12 @@ public class UserController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
 
 
