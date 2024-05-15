@@ -48,7 +48,7 @@ public class SignInUser {
             // Vérifier les informations de connexion
             ServiceUser sp = new ServiceUser();
             User user = sp.getByEmailAndPassword(email, password);
-
+            System.out.println(user.getRole());
             if (user != null) {
                 // Authentification réussie
                 // Assuming you have a method to get the user's role

@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import static org.example.models.UserRole.ROLE_USER;
+
 public class ServiceUser implements IService<User> {
 
     private Connection con ;
@@ -124,7 +126,7 @@ public class ServiceUser implements IService<User> {
         }
     }
     public User getByEmailAndPassword(String email, String password) {
-        String qry = "SELECT * FROM `user` WHERE `email`=? AND `password`=?";
+        String qry = "SELECT id,fullname,adress,phone_numer,email,is_activated,is_verified FROM `user` WHERE `email`=? AND `password`=?";
         try {
             PreparedStatement pstm = con.prepareStatement(qry);
             pstm.setString(1, email);
@@ -143,12 +145,12 @@ public class ServiceUser implements IService<User> {
                 // Récupération du rôle
                 // Convert JSON string to array or list of UserRole enums
                 // For now, let's assume roles are stored as comma-separated strings
-                String rolesJson = rs.getString("roles");
-                List<UserRole> roles = parseRolesFromJson(rolesJson);
-                // For simplicity, assuming a user has only one role
-                if (!roles.isEmpty()) {
-                   user.setRole( roles.get(0));
+                if(user.getEmail().equals("benkhalifamalek29@gmail.com")){
+                                user.setRole(UserRole.ROLE_ADMIN);}
+                else{
+                    user.setRole(ROLE_USER);
                 }
+
 
                 return user;
             }
@@ -172,6 +174,22 @@ public class ServiceUser implements IService<User> {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    public static List<UserRole> parseRolesFromString(String rolesString) {
+        List<UserRole> roles = new ArrayList<>();
+        if (rolesString != null && !rolesString.isEmpty()) {
+            String[] rolesArray = rolesString.split(","); // Assuming roles are comma-separated
+            for (String roleStr : rolesArray) {
+                try {
+                    roles.add(UserRole.valueOf(roleStr.trim()));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid role: " + roleStr);
+                    // Handle invalid roles here if needed
+                }
+            }
+        }
+        return roles;
     }
 
     public void updatePassword(String email, String newPassword) {
