@@ -63,7 +63,10 @@ public class ServicePostImage implements IServices<PostImage> {
             int id = res.getInt(1);
             int postid =res.getInt(2);
             String url = res.getString(3) ;
-            InputStream imageblob =res.getBlob(4).getBinaryStream();
+            if( res.getBlob(4) != null){
+                InputStream imageblob =res.getBlob(4).getBinaryStream();
+            }
+            InputStream imageblob = null ;
             PostImage p = new PostImage(id,sP.findPostById(postid),url,imageblob);
             postimages.add(p);
         }
@@ -81,7 +84,11 @@ public class ServicePostImage implements IServices<PostImage> {
             int id = res.getInt(1);
             int postid =res.getInt(2);
             String url = res.getString(3) ;
-            InputStream imageblob =res.getBlob(4).getBinaryStream();
+            System.out.println("22222222222222");
+            if( res.getBlob(4) != null){
+                InputStream imageblob =res.getBlob(4).getBinaryStream();
+            }
+            InputStream imageblob = null ;
             return new PostImage(id,sP.findPostById(postid),url,imageblob);
         }
         return null;
@@ -115,7 +122,10 @@ public class ServicePostImage implements IServices<PostImage> {
             int id = res.getInt(1);
             int postid =res.getInt(2);
             String url = res.getString(3) ;
-            InputStream imageblob =res.getBlob(4).getBinaryStream();
+            if( res.getBlob(4) != null){
+                InputStream imageblob =res.getBlob(4).getBinaryStream();
+            }
+            InputStream imageblob = null ;
             PostImage p = new PostImage(id,sP.findPostById(postid),url,imageblob);
             postimages.add(p);
         }

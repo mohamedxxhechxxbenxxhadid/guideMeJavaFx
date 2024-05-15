@@ -55,7 +55,7 @@ public class PostItemcontroller {
             if(!postImages.get(0).getUrl().equals("Null")){
                 try {
                     String s = postImages.get(0).getUrl();
-                    File pic=new File( s) ;
+                    File pic=new File( "/opt/lampp/htdocs/uploads/postimages/"+s) ;
                     InputStream in = new FileInputStream(pic);
                     Image image = new Image(in);
                     ImageView img = new ImageView();
