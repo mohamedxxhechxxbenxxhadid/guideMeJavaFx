@@ -133,7 +133,7 @@ public class AjouterPostController  {
                         InputStream in = new FileInputStream(file);
                         try {
                             BufferedImage image = ImageIO.read(file);
-                            File output = new File("src/main/resources/images/"+file.getName()); // Replace "output.jpg" with the desired output file path
+                            File output = new File("/opt/lampp/htdocs/uploads/postimages/"+file.getName()); // Replace "output.jpg" with the desired output file path
                             ImageIO.write(image, getFileExtension(file.getName()), output);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -141,7 +141,7 @@ public class AjouterPostController  {
                         PostImage postImage = new PostImage();
                         postImage.setImage_blob(in);
                         postImage.setPost(post);
-                        postImage.setUrl("src/main/resources/images/"+file.getName());
+                        postImage.setUrl(file.getName());
                         sPI.add(postImage);
 
                         System.out.println("file"+in);
@@ -262,7 +262,7 @@ public class AjouterPostController  {
         }
     }
     public  String censorBadWords(String input) {
-        String[] badWords = {"fuck", "Fuck", "ass","Ass","nigga","Nigga","Asshole","asshole","bitch","Bitch"};
+        String[] badWords = {"fuck","fucking","Fucking","Dumb","dumb" ,"Fuck", "ass","Ass","nigga","Nigga","Asshole","asshole","bitch","Bitch"};
 
         String regex = "\\b(" + String.join("|", badWords) + ")\\b";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);

@@ -52,7 +52,11 @@ public class ServicePost implements IServices<Post> {
         }else {
             pst.setInt(1,post.getPost().getId());
         }
-        pst.setInt(2, post.getCreator().getId());
+        if(post.getCreator()!= null){
+            pst.setInt(2, post.getCreator().getId());
+        }else{
+            pst.setInt(2, 17);
+        }
         pst.setString(3, post.getTitle());
         pst.setString(4, post.getDescription());
         pst.setBoolean(5, post.getApproved());
@@ -90,7 +94,7 @@ public class ServicePost implements IServices<Post> {
             if (creatorid != 0 ){
                 creator = sUser.findUserById(creatorid);
             }else{
-                creator = null ;
+                creator = sUser.findUserById(17);
             }
             int id = res.getInt(1);
             String title  =res.getString(4);
@@ -161,7 +165,7 @@ public class ServicePost implements IServices<Post> {
                 while (res.next()) {
                     int postid = res.getInt(2);
                     int creatorid = res.getInt(3);
-                    User creator = null;
+                    User creator = sUser.findUserById(17);
                     if (creatorid != 0) {
                         creator = sUser.findUserById(creatorid);
                     }
@@ -207,7 +211,7 @@ public class ServicePost implements IServices<Post> {
             if (creatorId != 0){
                 user=sUser.findUserById(creatorId);
             }else{
-                user=null;
+                user=sUser.findUserById(17);
             }
             // Create a Post object and add it to the list
             return new Post(id,title, description,comments ,approved, bigPost, upVoteNum, downVoteNum, createdAt,user);
@@ -242,7 +246,7 @@ public class ServicePost implements IServices<Post> {
             if (creatorId != 0){
                 user=sUser.findUserById(creatorId);
             }else{
-                user=null;
+                user=sUser.findUserById(17);
             }
             // Create a Post object and add it to the list
             return new Post(id,title, description,comments ,approved, bigPost, upVoteNum, downVoteNum, createdAt,user);

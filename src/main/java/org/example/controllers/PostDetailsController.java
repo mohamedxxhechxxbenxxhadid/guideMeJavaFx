@@ -122,7 +122,9 @@ public class PostDetailsController implements Initializable {
     ArrayList<PostImage> postImagesDelete = new ArrayList<PostImage>() ;
     ObservableList<Post> commentList =  FXCollections.observableList(comments); ;
     boolean  followList = false ;
-    ArrayList<Image> images = new ArrayList<Image>();
+    //ArrayList<Image> images = new ArrayList<Image>();
+    ArrayList<String> images = new ArrayList<String>();
+
     ServicePost sP = new ServicePost();
     ServicePostImage sPI = new ServicePostImage();
     boolean updatePost = false ;
@@ -139,7 +141,7 @@ public class PostDetailsController implements Initializable {
             this.post = sP.findPostById(post.getId()) ;
             this.post.setPostImages(sPI.getPostImagesByPostId(post.getId()));
         }catch (SQLException e){
-            System.out.println("============"+e.getMessage());
+            System.out.println(e.getMessage());
         }
         postTitleId.setText(this.post.getTitle());
         postCreatorId.setText(this.post.getCreator().getFullname());
@@ -149,8 +151,9 @@ public class PostDetailsController implements Initializable {
         if(!postImages.isEmpty()){
             if(!postImages.get(0).getUrl().equals("Null")){
                 try {
+                    System.out.println("000000000000000000000");
                     String s = postImages.get(0).getUrl();
-                    File pic=new File( s) ;
+                    File pic=new File("/opt/lampp/htdocs/uploads/postimages/"+ s) ;
                     InputStream in = new FileInputStream(pic);
                     Image image = new Image(in);
                     ImageView img = new ImageView();
@@ -174,22 +177,16 @@ public class PostDetailsController implements Initializable {
                 imageContainerId.getChildren().clear();
                 imageContainerId.getChildren().add(0,img);
             }
-            /*InputStream blobImage = postImages.get(0).getImage_blob();
-            currentImage = 0 ;
-            Image image = new Image(blobImage);
-            img.setFitHeight(373);
-            img.setFitWidth(565);
-            img.setImage(image);
-            imageContainerId.getChildren().clear();
-            imageContainerId.getChildren().add(0,img);*/
             for (PostImage postImage : postImages){
-                images.add(new Image(postImage.getImage_blob()));
+                System.out.println(postImage.getImage_blob());
+                images.add(postImage.getUrl());
                 System.out.println(postImages.size());
             }
         }else {
             previousImage.setDisable(true);
             nextImage.setDisable(true);
             try{
+                System.out.println("error is here2222");
                 File pic=new File(  MainFx.class.getResource( "/pic1.png" ).toURI()  );
                 InputStream in = new FileInputStream(pic);
                 Image image = new Image(in);
@@ -204,6 +201,7 @@ public class PostDetailsController implements Initializable {
         if(this.post.getComments().isEmpty()){
             System.out.println("no comments"+commentList.size());
         }else{
+            System.out.println("error is here333");
             comments = new ArrayList<>(this.post.getComments()) ;
             commentList = FXCollections.observableList(comments);
             int column = 0 ;
@@ -220,6 +218,8 @@ public class PostDetailsController implements Initializable {
                     cIR.setData(comments.get(i),this);
 
                     commentContainerId.add(anchorPane,column,row++);
+                    System.out.println("error is here444");
+
                 }catch (IOException | SQLException e){
                     System.out.println(e.getMessage());
                 }
@@ -275,7 +275,7 @@ public class PostDetailsController implements Initializable {
                 ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
                 String s = firstPostImage.get(currentImage).getUrl();
                 File pic=new File( s) ;
-                InputStream in = new FileInputStream(pic);
+                InputStream in = new FileInputStream("/opt/lampp/htdocs/uploads/postimages/"+pic);
                 Image image = new Image(in);
                 ImageView img = new ImageView();
                 img.setFitHeight(373);
@@ -303,7 +303,7 @@ public class PostDetailsController implements Initializable {
                 ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
                 String s = firstPostImage.get(0).getUrl();
                 File pic=new File( s) ;
-                InputStream in = new FileInputStream(pic);
+                InputStream in = new FileInputStream("/opt/lampp/htdocs/uploads/postimages/"+pic);
                 Image image = new Image(in);
                 ImageView img = new ImageView();
                 img.setFitHeight(373);
@@ -325,7 +325,7 @@ public class PostDetailsController implements Initializable {
             try {
                 ArrayList<PostImage> firstPostImage = new ArrayList<>(sPI.getPostImagesByPostId(this.post.getId()));
                 String s = firstPostImage.get(currentImage).getUrl();
-                File pic=new File( s) ;
+                File pic=new File("/opt/lampp/htdocs/uploads/postimages/"+ s) ;
                 InputStream in = new FileInputStream(pic);
                 Image image = new Image(in);
                 ImageView img = new ImageView();
@@ -379,25 +379,24 @@ public class PostDetailsController implements Initializable {
                     imageButton.setId(file.toString());
                     imageButton.setOnMouseClicked(event -> this.removePicture(event,imagesHbox,imageBox,file));
                     imagesHbox.getChildren().add(imageBox);
-                    System.out.println("111111111111111111111111111111111111111111111");
                     if(update == true){
                         BufferedImage bImage = ImageIO.read(file);
-                        File output = new File("src/main/resources/images/"+file.getName()); // Replace "output.jpg" with the desired output file path
+                        File output = new File("/opt/lampp/htdocs/uploads/postimages/"+file.getName()); // Replace "output.jpg" with the desired output file path
                         ImageIO.write(bImage, getFileExtension(file.getName()), output);
                         PostImage p111 = new PostImage();
                         p111.setPost(this.updatedComment);
                         p111.setImage_blob(in);
-                        p111.setUrl("src/main/resources/images/"+file.getName());
+                        p111.setUrl(file.getName());
                         postImagesAdd.add(p111);
                     }
                     if(updatePost == true){
                         BufferedImage bImage = ImageIO.read(file);
-                        File output = new File("src/main/resources/images/"+file.getName()); // Replace "output.jpg" with the desired output file path
+                        File output = new File("/opt/lampp/htdocs/uploads/postimages/"+file.getName()); // Replace "output.jpg" with the desired output file path
                         ImageIO.write(bImage, getFileExtension(file.getName()), output);
                         PostImage p111 = new PostImage();
                         p111.setPost(this.post);
                         p111.setImage_blob(in);
-                        p111.setUrl("src/main/resources/images/"+file.getName());
+                        p111.setUrl(file.getName());
                         postImagesAdd.add(p111);
                     }
                 }
@@ -491,6 +490,7 @@ public class PostDetailsController implements Initializable {
                         PostImage postImage = new PostImage();
                         postImage.setImage_blob(in);
                         postImage.setPost(comment);
+                        postImage.setUrl(file.getName());
                         sPI.add(postImage);
                     }catch (FileNotFoundException e){
                         System.out.println(e.getMessage());
@@ -755,8 +755,9 @@ public class PostDetailsController implements Initializable {
                         imageBox.setPrefWidth(140);
                         imageBox.setPrefHeight(140);
                         ImageView imageShown = new ImageView();
-                        InputStream blobImage = postImage.getImage_blob();
-                        Image image = new Image(blobImage);
+                        File pic=new File("/opt/lampp/htdocs/uploads/postimages/"+ postImage.getUrl()) ;
+                        InputStream in = new FileInputStream(pic);
+                        Image image = new Image(in);
                         imageShown.setImage(image);
                         imageShown.setFitWidth(100);
                         imageShown.setFitHeight(100);
