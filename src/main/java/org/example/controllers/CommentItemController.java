@@ -13,6 +13,8 @@ import org.example.models.PostImage;
 import javafx.event.ActionEvent;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -54,13 +56,19 @@ public class CommentItemController {
                 System.out.println("Comment with no pictures");
             }else {
                 for (PostImage postImage : postImages){
-                    InputStream blobImage = postImage.getImage_blob();
-                    Image image = new Image(blobImage);
-                    ImageView img = new ImageView();
-                    img.setFitHeight(100);
-                    img.setFitWidth(100);
-                    img.setImage(image);
-                    commentBox.getChildren().add(img);
+                    try{
+                        File pic=new File("/opt/lampp/htdocs/uploads/postimages/"+ postImage.getUrl()) ;
+                        InputStream in = new FileInputStream(pic);
+                        Image image = new Image(in);
+                        ImageView img = new ImageView();
+                        img.setFitHeight(100);
+                        img.setFitWidth(100);
+                        img.setImage(image);
+                        commentBox.getChildren().add(img);
+                    }catch (FileNotFoundException e){
+                        System.out.println(e.getMessage());
+                    }
+
                 }
             }
         }
